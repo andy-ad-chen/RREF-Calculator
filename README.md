@@ -8,6 +8,8 @@ I would like to create an application in which users can enter a matrix, and whe
 
 Being a physics and maths student, this type of project interests me since it involves both mathematics and physical applications, as well as invoking computation which can be tedious to do but is well-suited to automation.
 
+## User Stories
+
 * As a user, I want to be able to create a matrix and add it to a collection of matrices, and I would like to specify the number of rows, the number of columns, and the entries of the matrix. I also want to be able to add a note and a name for the matrix.
 * As a user, I want to be able to remove a matrix from a collection.
 * As a user, I want to be able to view a list of all the matrices' names in a collection.
