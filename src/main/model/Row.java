@@ -7,13 +7,12 @@ public class Row {
     public ArrayList<Float> rowVals;
     public int columnNum;
 
-
-    // REQUIRES: cols = rowVals.size()
+    // REQUIRES: cols = rowVals.size() > 0
     // EFFECTS: Builds an empty row of same length as column number
     public Row(int cols, ArrayList<Float> vals) {
         columnNum = 0;
         rowVals = new ArrayList<>();
-        //stub
+        // stub
     }
 
     // REQUIRES: two rows are of same length
@@ -25,9 +24,18 @@ public class Row {
 
     // MODIFIES: this
     // EFFECTS: scales the values of this row
-    public void scaleRow(float scale, Row scaledRow) {
+    public void scaleRow(float scale) {
         // stub
     }
 
+    // EFFECTS: gets columns number
+    public int getCol() {
+        return 0;
+    }
+
+    // EFFECTS: gets array of values making up row
+    public ArrayList<Float> getRow() {
+        return this.rowVals;
+    }
 
 }

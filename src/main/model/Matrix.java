@@ -6,13 +6,14 @@ import java.util.ArrayList;
 public class Matrix {
     private String name; // give each matrix a name
     private String desc; // give each matrix a description
-    public Boolean invertible; // give each matrix an invertibility
-    public ArrayList<Row> matrixRows; // list of matrix rows
-    public int columnNum; // number of columns OR number of elements in each row
-    public ArrayList<Row> redrefRows; // list of matrix rows in redref
+    private Boolean invertible; // give each matrix an invertibility
+    private ArrayList<Row> matrixRows; // list of matrix rows
+    private int columnNum; // number of columns OR number of elements in each row
+    private ArrayList<Row> redrefRows; // list of matrix rows in redref
 
-    // REQUIRES name and desc are both non-zero length strings, matrixRows.size() =
-    // cols
+    // REQUIRES name and desc are both non-zero length strings,
+    // matrixRows.size() = cols > 0,
+    // rows is not empty.
     // EFFECTS: builds a matrix
     public Matrix(ArrayList<Row> rows, int cols, String name, String desc) {
         matrixRows = new ArrayList<>();
