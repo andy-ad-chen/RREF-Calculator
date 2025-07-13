@@ -25,6 +25,8 @@ public class MatrixTest {
     private ArrayList<Float> listFloatTypicalSumFirstSecondRow = new ArrayList<>();
     private ArrayList<Float> zeroList = new ArrayList<>();
 
+    private ArrayList<Float> oneByOneList = new ArrayList<>();
+
     private ArrayList<Float> listIdentity1 = new ArrayList<>();
     private ArrayList<Float> listIdentity2 = new ArrayList<>();
     private ArrayList<Float> listIdentity3 = new ArrayList<>();
@@ -45,6 +47,8 @@ public class MatrixTest {
     private Row typicalCaseSummed;
     private Row zeroRow;
 
+    private Row oneByOneRow;
+
     private Row identity1;
     private Row identity2;
     private Row identity3;
@@ -63,7 +67,6 @@ public class MatrixTest {
         listFloatTypical3.add(0.0f);
         listFloatTypical3.add(0.0f);
 
-
         listFloatTypical1RedRef.add(1.0f);
         listFloatTypical1RedRef.add(2.0f);
         listFloatTypical1RedRef.add(0.0f);
@@ -75,7 +78,6 @@ public class MatrixTest {
         listFloatTypical3RedRef.add(0.0f);
         listFloatTypical3RedRef.add(0.0f);
         listFloatTypical3RedRef.add(0.0f);
-
 
         listFloatTypicalScaled.add(2.0f);
         listFloatTypicalScaled.add(4.0f);
@@ -99,6 +101,8 @@ public class MatrixTest {
         zeroList.add(0f);
         zeroList.add(0f);
 
+        oneByOneList.add(1.0f);
+
         typicalCaseRow1 = new Row(3, listFloatTypical1);
         typicalCaseRow2 = new Row(3, listFloatTypical1);
         typicalCaseRow3 = new Row(3, listFloatTypical3);
@@ -117,6 +121,8 @@ public class MatrixTest {
 
         zeroRow = new Row(3, zeroList);
 
+        oneByOneRow = new Row(1, oneByOneList);
+
         typicalTestVals.add(typicalCaseRow1);
         typicalTestVals.add(typicalCaseRow2);
         typicalTestVals.add(typicalCaseRow3);
@@ -133,8 +139,10 @@ public class MatrixTest {
         zeroVals.add(zeroRow);
         zeroVals.add(zeroRow);
 
+        baseVals.add(oneByOneRow);
+
         testMatrix = new Matrix(typicalTestVals, 3, "myMatrix", "this is a matrix desc");
-        baseMatrix = new Matrix(baseVals, 0, "name", "desc");
+        baseMatrix = new Matrix(baseVals, 1, "name", "desc");
         identityMatrix = new Matrix(identityVals, 3, "identity", "this is the identity Matrix 3x3");
         zeroMatrix = new Matrix(zeroVals, 3, "zero", "this is the zero Matrix 3x3");
     }
@@ -147,74 +155,86 @@ public class MatrixTest {
         assertEquals("myMatrix", testMatrix.getMatrixName());
         assertEquals("this is a matrix desc", testMatrix.getMatrixDesc());
     }
+
     @Test
     void testConstructorZeroMatrix() {
 
         assertEquals(baseVals, baseMatrix.getRows());
-        assertEquals(0, testMatrix.getCols());
-        assertEquals("myMatrix", baseMatrix.getMatrixName());
-        assertEquals("this is a matrix desc", baseMatrix.getMatrixDesc());
+        assertEquals(1, testMatrix.getCols());
+        assertEquals("name", baseMatrix.getMatrixName());
+        assertEquals("desc", baseMatrix.getMatrixDesc());
     }
+
     @Test
     void testScaleRowZero() {
         assertFalse(zeroRow == testMatrix.getRow(0));
         testMatrix.scaleRow(0f, 0);
         assertTrue(zeroRow == testMatrix.getRow(0));
     }
+
     @Test
     void testScaleRowByOne() {
         assertTrue(typicalCaseRow1 == testMatrix.getRow(0));
         testMatrix.scaleRow(1f, 0);
         assertTrue(typicalCaseRow1 == testMatrix.getRow(0));
     }
+
     @Test
     void testScaleRowByTwo() {
         assertFalse(typicalCaseScaled == testMatrix.getRow(0));
         testMatrix.scaleRow(2f, 0);
         assertTrue(typicalCaseScaled == testMatrix.getRow(0));
     }
+
     @Test
     void testSumRowOneTwo() {
         assertFalse(typicalCaseSummed == testMatrix.getRow(0));
         testMatrix.sumRow(0, 1);
         assertTrue(typicalCaseSummed == testMatrix.getRow(0));
     }
+
     @Test
     void testSumRowOneOne() {
         assertFalse(typicalCaseScaled == testMatrix.getRow(0));
         testMatrix.sumRow(0, 0);
         assertTrue(typicalCaseScaled == testMatrix.getRow(0));
     }
+
     @Test
     void testCheckInvertForNonInvertible() {
-        assertFalse(testMatrix.getInvertible() );
-    }
-    @Test
-    void testCheckInvertForInvertible() {
-        assertTrue(identityMatrix.getInvertible() );
-    }
-    @Test
-    void testCheckInvertForBase() {
-        assertFalse(baseMatrix.getInvertible() );
-    }
-    @Test
-    void testCheckInvertForZero() {
-        assertFalse(zeroMatrix.getInvertible() );
+        assertFalse(testMatrix.getInvertible());
     }
 
+    @Test
+    void testCheckInvertForInvertible() {
+        assertTrue(identityMatrix.getInvertible());
+    }
+
+    @Test
+    void testCheckInvertForBase() {
+        assertTrue(baseMatrix.getInvertible());
+    }
+
+    @Test
+    void testCheckInvertForZero() {
+        assertFalse(zeroMatrix.getInvertible());
+    }
 
     @Test
     void testComputeRedRefForTest() {
         assertEquals(redRefVals, testMatrix.getMatrixRows());
     }
+
     @Test
     void testComputeRedRefForIdentity() {
         assertEquals(identityMatrix.getRedRefRows(), identityMatrix.getMatrixRows());
     }
+
     @Test
     void testComputeRedRefForZero() {
         assertEquals(zeroMatrix.getRedRefRows(), zeroMatrix.getMatrixRows());
     }
+
     @Test
     void testComputeRedRefForBase() {
         assertEquals(baseMatrix.getRedRefRows(), baseMatrix.getMatrixRows());
