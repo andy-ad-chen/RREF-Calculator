@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
 public class Matrix {
-    public String name; // give each matrix a name
-    public String desc; // give each matrix a description
+    private String name; // give each matrix a name
+    private String desc; // give each matrix a description
     public Boolean invertible; // give each matrix an invertibility
     public ArrayList<Row> matrixRows; // list of matrix rows
     public int columnNum; // number of columns OR number of elements in each row
@@ -92,7 +92,7 @@ public class Matrix {
         return false;
         // stub
     }
-// COULD BE REDUNANT: code funtionality into the checkInvert
+    // COULD BE REDUNANT: code funtionality into the checkInvert
 
     // MODIFIES: this
     // EFFECTS: change name of matrix
@@ -117,4 +117,23 @@ public class Matrix {
         return "desc";
         // stub
     }
+
+    // EFFECTS: gets list of rows of a matrix
+    public ArrayList<Row> getMatrixRows() {
+        return new ArrayList<>();
+        // stub
+    }
+
+    // EFFECTS: gets list of rows of a matrix's rref
+    public ArrayList<Row> getRedRefRows() {
+        return new ArrayList<>();
+        // stub
+    }
+
+    // EFFECTS: gets invertibility of matrix
+    public Boolean getInvertible() {
+        return true;
+        // stub
+    }
+
 }
