@@ -24,30 +24,31 @@ public class Matrix {
         // stub
     }
 
+    // REQUIRES: 0 <= rowIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
     public void scaleRow(float scale, int rowIndex) {
         // stub
     }
 
-    // REQUIRES: 0 <= firstIndex < columnNum - 1
-    // REQUIRES: 0 <= secondIndex < columnNum - 1
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: swaps 2 rows
     public void swapRow(int firstIndex, int secondIndex) {
         // stub
     }
 
-    // REQUIRES: 0 <= firstIndex < columnNum - 1
-    // REQUIRES: 0 <= secondIndex < columnNum - 1
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: sum the values in the first row by the second row
     public void sumRow(int firstIndex, int secondIndex) {
         // stub
     }
 
-    // REQUIRES: 0 <= firstIndex < columnNum - 1
-    // REQUIRES: 0 <= secondIndex < columnNum - 1
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: subtracts the values in the first row by the second row
     public void subtractRow(int firstIndex, int secondIndex) {
@@ -63,6 +64,13 @@ public class Matrix {
     // EFFECTS: gets list of rows of matrix
     public ArrayList<Row> getRows() {
         return this.matrixRows;
+        // stub
+    }
+
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // EFFECTS: gets a row of matrix
+    public Row getRow(int index) {
+        return matrixRows.get(0);
         // stub
     }
 
@@ -84,10 +92,11 @@ public class Matrix {
         return false;
         // stub
     }
+// COULD BE REDUNANT: code funtionality into the checkInvert
 
     // MODIFIES: this
     // EFFECTS: change name of matrix
-    public void changeMatrixName() {
+    public void changeMatrixName(String name) {
         // stub
     }
 
@@ -99,7 +108,7 @@ public class Matrix {
 
     // MODIFIES: this
     // EFFECTS: change description of matrix
-    public void changeMatrixDesc() {
+    public void changeMatrixDesc(String desc) {
         // stub
     }
 
