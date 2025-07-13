@@ -11,15 +11,17 @@ public class Matrix {
     public int columnNum; // number of columns OR number of elements in each row
     public ArrayList<Row> redrefRows; // list of matrix rows in redref
 
-    // REQUIRES name and desc are both non-zero length strings
-    // EFFECTS: builds an empty matrix
-    public Matrix() {
+    // REQUIRES name and desc are both non-zero length strings, matrixRows.size() =
+    // cols
+    // EFFECTS: builds a matrix
+    public Matrix(ArrayList<Row> rows, int cols, String name, String desc) {
         matrixRows = new ArrayList<>();
         redrefRows = new ArrayList<>();
-        columnNum = 0;
-        name = "name of matrix";
-        desc = "this is the description of some matrix";
+        columnNum = cols;
+        this.name = "a name";
+        this.desc = "a desc";
         invertible = false;
+        // stub
     }
 
     // MODIFIES: this
@@ -52,6 +54,18 @@ public class Matrix {
         // stub
     }
 
+    // EFFECTS: gets col number of matrix
+    public int getCols() {
+        return 0;
+        // stub
+    }
+
+    // EFFECTS: gets list of rows of matrix
+    public ArrayList<Row> getRows() {
+        return this.matrixRows;
+        // stub
+    }
+
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
@@ -77,9 +91,21 @@ public class Matrix {
         // stub
     }
 
+    // EFFECTS: gets name of matrix
+    public String getMatrixName() {
+        return "name";
+        // stub
+    }
+
     // MODIFIES: this
     // EFFECTS: change description of matrix
     public void changeMatrixDesc() {
+        // stub
+    }
+
+    // EFFECTS: gets desc of matrix
+    public String getMatrixDesc() {
+        return "desc";
         // stub
     }
 }

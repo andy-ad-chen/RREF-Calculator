@@ -7,10 +7,13 @@ public class Row {
     public ArrayList<Float> rowVals;
     public int columnNum;
 
+
+    // REQUIRES: cols = rowVals.size()
     // EFFECTS: Builds an empty row of same length as column number
-    public Row() {
+    public Row(int cols, ArrayList<Float> vals) {
         columnNum = 0;
         rowVals = new ArrayList<>();
+        //stub
     }
 
     // REQUIRES: two rows are of same length

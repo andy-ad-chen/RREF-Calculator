@@ -29,21 +29,21 @@ public class MatrixList {
         // stub
     }
 
-    // REQUIRES: 0 <= index < getSize(matrices) - 1
+    // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: removes the correct index of the matrix of this list of matrices
     public void removeMatrix() {
         // stub
     }
 
-    // REQUIRES: 0 <= index < getSize(matrices) - 1
+    // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: change matrix name of specified index
     public void changeMatrixName() {
         // stub
     }
 
-    // REQUIRES: 0 <= index < getSize(matrices) - 1
+    // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: change matrix description of specified index
     public void changeMatrixDesc() {
