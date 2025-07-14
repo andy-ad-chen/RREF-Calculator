@@ -2,10 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-// Represents a row in the matrix; this is a list of float values. Their length is restricted to the number of columns of the matrix.
+// Represents a row in the matrix; this is a list of float values.
+// Their length is restricted to the number of columns of the matrix.
 public class Row {
-    public ArrayList<Float> rowVals;
-    public int columnNum;
+    private ArrayList<Float> rowVals;
+    private int columnNum;
 
     // REQUIRES: cols = rowVals.size() > 0
     // EFFECTS: Builds an empty row of same length as column number
@@ -29,7 +30,7 @@ public class Row {
     // MODIFIES: this
     // EFFECTS: scales the values of this row
     public void scaleRow(float scale) {
-        for (int i = 0; i < this.columnNum; i ++) {
+        for (int i = 0; i < this.columnNum; i++) {
             float val = scale * this.rowVals.get(i);
             this.rowVals.set(i, val);
         }
@@ -40,13 +41,12 @@ public class Row {
         Boolean zeroRow;
         zeroRow = true;
         for (float f : this.rowVals) {
-            if (f != 0.0f) {
+            if (f != 0.0f || f != -0.0f) {
                 zeroRow = false;
             }
         }
         return zeroRow;
     }
-
 
     // EFFECTS: gets columns number
     public int getCol() {

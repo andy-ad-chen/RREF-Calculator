@@ -1,10 +1,6 @@
 package ui;
 
-import java.util.ArrayList;
 
-import model.Matrix;
-import model.Row;
-import model.MatrixList;
 
 public class Main {
     public static void main(String[] args) {

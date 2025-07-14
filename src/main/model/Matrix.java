@@ -1,6 +1,6 @@
 package model;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
@@ -41,23 +41,6 @@ public class Matrix {
         Row a = this.matrixRows.get(firstIndex);
         Row b = this.matrixRows.get(secondIndex);
         a.sumRow(b);
-    }
-
-    // THESE two above functions are not useful in computing RREF; only the swap row
-    // in RREF
-    // and the subtract Row with factor is needed.
-
-    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
-    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
-    // MODIFIES: this
-    // EFFECTS: swaps 2 rows in the RREF matrix
-    public void swapRowRedRef(int firstIndex, int secondIndex) {
-        Row firstRow = this.redrefRows.get(firstIndex);
-        Row secondRow = this.redrefRows.get(secondIndex);
-        Row firstRowClone = new Row(firstRow.getCol(), new ArrayList<Float>(firstRow.getFloatArray()));
-        Row secondRowClone = new Row(secondRow.getCol(), new ArrayList<Float>(secondRow.getFloatArray()));
-        this.redrefRows.set(firstIndex, secondRowClone);
-        this.redrefRows.set(secondIndex, firstRowClone);
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
@@ -143,8 +126,7 @@ public class Matrix {
         for (int i = 0; i < heightNumber; i++) {
             Row row = redrefRows.get(i);
             if (row.getFloatArray().get(k) != 0.0f) {
-                if (alreadyPassed.contains(i)) {
-                } else {
+                if (!alreadyPassed.contains(i)) {
                     scaleRow((1 / row.getFloatArray().get(k)), i);
                     annihilator(i, heightNumber, k);
                     alreadyPassed.add(i);
@@ -157,8 +139,7 @@ public class Matrix {
     // redrefRows.size()
     public void annihilator(int index, int length, int k) {
         for (int j = 0; j < length; j++) {
-            if (j == index) {
-            } else {
+            if (!(j == index)) {
                 subtractRowRedRef(j, index, -redrefRows.get(j).getFloatArray().get(k));
             }
         }
@@ -176,8 +157,6 @@ public class Matrix {
     public void stairCaseShaper() {
     }
 
-    
-
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
         ArrayList<Row> returnVal = new ArrayList<>();
@@ -194,25 +173,22 @@ public class Matrix {
         computeRedRef();
         if (redrefRows.size() == this.columnNum) {
             this.invertible = !hasZeroRows();
-            if (this.columnNum == 1) {
-                if (redrefRows.get(0).getFloatArray().get(0) == 1) {
-                    this.invertible = true;
-                }
-            }
         }
     }
 
-    // EFFECTS: produce true if the matrix has zero rows.
+    // EFFECTS: produce true if the matrix has "zero" rows.
     public Boolean hasZeroRows() {
         Boolean zeroRow;
-        zeroRow = true;
+        zeroRow = false;
         for (Row i : this.redrefRows) {
-            if (i.zeroRow() == false) {
-                zeroRow = false;
+            if (i.zeroRow() == true) {
+                zeroRow = true;
             }
         }
         return zeroRow;
     }
+
+
 
     // MODIFIES: this
     // EFFECTS: change name of matrix

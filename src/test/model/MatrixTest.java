@@ -216,6 +216,7 @@ public class MatrixTest {
 
     @Test
     void testCheckInvertForNonInvertible() {
+        testMatrix.checkInvert();
         assertFalse(testMatrix.getInvertible());
     }
 
@@ -275,7 +276,6 @@ public class MatrixTest {
                     zeroMatrix.getRedRefRows().get(i).getFloatArray());
         }
     }
-
 
     @Test
     void testComputeRedRefForBase() {

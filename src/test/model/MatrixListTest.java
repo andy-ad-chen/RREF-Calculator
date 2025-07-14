@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.ArrayList;
 
 public class MatrixListTest {
 
     private Matrix baseMatrix1;
     private Matrix baseMatrix2;
-    private Matrix baseMatrix3;
     private ArrayList<Float> oneByOneList = new ArrayList<>();
     private Row oneByOneRow;
     private ArrayList<Row> baseVals = new ArrayList<>();
@@ -25,7 +25,6 @@ public class MatrixListTest {
         baseVals.add(oneByOneRow);
         baseMatrix1 = new Matrix(baseVals, 1, "name1", "desc1");
         baseMatrix2 = new Matrix(baseVals, 1, "name2", "desc2");
-        baseMatrix3 = new Matrix(baseVals, 1, "name3", "desc3");
 
         testList = new MatrixList();
     }
@@ -69,7 +68,7 @@ public class MatrixListTest {
         ArrayList<Matrix> matrices = testList.getMatrices();
         testList.addMatrix(baseMatrix1);
         assertTrue(matrices.contains(baseMatrix1));
-        testList.removeMatrix(baseMatrix1, 0);
+        testList.removeMatrix(0);
         assertFalse(matrices.contains(baseMatrix1));
     }
 
@@ -79,11 +78,12 @@ public class MatrixListTest {
         testList.addMatrix(baseMatrix1);
         testList.addMatrix(baseMatrix1);
         assertTrue(matrices.contains(baseMatrix1));
-        testList.removeMatrix(baseMatrix1, 0);
+        testList.removeMatrix(0);
         assertTrue(matrices.contains(baseMatrix1));
-        testList.removeMatrix(baseMatrix1, 0);
+        testList.removeMatrix(0);
         assertFalse(matrices.contains(baseMatrix1));
     }
+
 
     @Test
     void testChangeNameOne() {

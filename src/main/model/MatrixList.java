@@ -16,11 +16,6 @@ public class MatrixList {
         return this.matrices;
     }
 
-    // EFFECTS: returns the list of matrices' names
-    public ArrayList<String> getMatricesNames() {
-        return new ArrayList<>();
-    }
-
     // MODIFIES: this
     // EFFECTS: adds a matrix to this list of matrices
     public void addMatrix(Matrix m) {
@@ -30,7 +25,7 @@ public class MatrixList {
     // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: removes the correct index of the matrix of this list of matrices
-    public void removeMatrix(Matrix m, int index) {
+    public void removeMatrix(int index) {
         matrices.remove(index);
     }
 
