@@ -35,6 +35,19 @@ public class Row {
         }
     }
 
+    // EFFECTS: produce true if Row is all 0
+    public Boolean zeroRow() {
+        Boolean zeroRow;
+        zeroRow = true;
+        for (float f : this.rowVals) {
+            if (f != 0.0f) {
+                zeroRow = false;
+            }
+        }
+        return zeroRow;
+    }
+
+
     // EFFECTS: gets columns number
     public int getCol() {
         return this.columnNum;
