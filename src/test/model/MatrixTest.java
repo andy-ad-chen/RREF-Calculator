@@ -104,15 +104,15 @@ public class MatrixTest {
         oneByOneList.add(1.0f);
 
         typicalCaseRow1 = new Row(3, listFloatTypical1);
-        typicalCaseRow2 = new Row(3, listFloatTypical1);
+        typicalCaseRow2 = new Row(3, listFloatTypical2);
         typicalCaseRow3 = new Row(3, listFloatTypical3);
 
         typicalCaseRow1RedRef = new Row(3, listFloatTypical1RedRef);
-        typicalCaseRow2RedRef = new Row(3, listFloatTypical1RedRef);
+        typicalCaseRow2RedRef = new Row(3, listFloatTypical2RedRef);
         typicalCaseRow3RedRef = new Row(3, listFloatTypical3RedRef);
 
         identity1 = new Row(3, listIdentity1);
-        identity2 = new Row(3, listIdentity1);
+        identity2 = new Row(3, listIdentity2);
         identity3 = new Row(3, listIdentity3);
 
         typicalCaseScaled = new Row(3, listFloatTypicalScaled);
@@ -167,44 +167,53 @@ public class MatrixTest {
 
     @Test
     void testScaleRowZero() {
-        assertNotEquals(zeroRow, testMatrix.getRow(0));
+        assertNotEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
         testMatrix.scaleRow(0f, 0);
         assertEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
-    // @Test
-    // void testScaleRowZero() {
-    //     assertNotEquals(zeroRow, testMatrix.getRow(0));
-    //     testMatrix.scaleRow(0f, 0);
-    //     assertEquals(zeroRow, testMatrix.getRow(0));
-    // }
+//  @Test
+//  void testScaleRowZero() {
+//      assertNotEquals(zeroRow, testMatrix.getRow(0));
+//      testMatrix.scaleRow(0f, 0);
+//      assertEquals(zeroRow, testMatrix.getRow(0));
+//  }
+
+
 
     @Test
     void testScaleRowByOne() {
-        assertEquals(typicalCaseRow1, testMatrix.getRow(0));
+        assertEquals(typicalCaseRow1.getFloatArray(), testMatrix.getRow(0).getFloatArray());
         testMatrix.scaleRow(1f, 0);
-        assertEquals(typicalCaseRow1, testMatrix.getRow(0));
+        assertEquals(typicalCaseRow1.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
     @Test
     void testScaleRowByTwo() {
-        assertFalse(typicalCaseScaled == testMatrix.getRow(0));
+        assertNotEquals(typicalCaseScaled.getFloatArray(), testMatrix.getRow(0).getFloatArray());
         testMatrix.scaleRow(2f, 0);
-        assertEquals(typicalCaseScaled, testMatrix.getRow(0));
+        assertEquals(typicalCaseScaled.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
     @Test
     void testSumRowOneTwo() {
-        assertFalse(typicalCaseSummed == testMatrix.getRow(0));
+        assertNotEquals(typicalCaseSummed.getFloatArray(), testMatrix.getRow(0).getFloatArray());
         testMatrix.sumRow(0, 1);
-        assertTrue(typicalCaseSummed == testMatrix.getRow(0));
+        assertEquals(typicalCaseSummed.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
     @Test
     void testSumRowOneOne() {
-        assertFalse(typicalCaseScaled == testMatrix.getRow(0));
+        assertNotEquals(typicalCaseScaled.getFloatArray(), testMatrix.getRow(0).getFloatArray());
         testMatrix.sumRow(0, 0);
-        assertTrue(typicalCaseScaled == testMatrix.getRow(0));
+        assertEquals(typicalCaseScaled.getFloatArray(), testMatrix.getRow(0).getFloatArray());
+    }
+
+    @Test
+    void testSubtractRowOneOne() {
+        assertNotEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
+        testMatrix.subtractRow(0, 0);
+        assertEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
     @Test
@@ -249,36 +258,36 @@ public class MatrixTest {
 
     @Test
     void testChangeMatrixName() {
-        assertFalse(testMatrix.getMatrixName() == "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "asdf");
         testMatrix.changeMatrixName("asdf");
-        assertTrue(testMatrix.getMatrixName() == "asdf");
+        assertEquals(testMatrix.getMatrixName(), "asdf");
     }
 
     @Test
     void testChangeMatrixNameTwice() {
-        assertFalse(testMatrix.getMatrixName() == "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "asdf");
         testMatrix.changeMatrixName("asdf");
-        assertTrue(testMatrix.getMatrixName() == "asdf");
-        assertFalse(testMatrix.getMatrixName() == "yourmom");
+        assertEquals(testMatrix.getMatrixName(), "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "yourmom");
         testMatrix.changeMatrixName("yourmom");
-        assertTrue(testMatrix.getMatrixName() == "yourmom");
+        assertEquals(testMatrix.getMatrixName(), "yourmom");
     }
 
     @Test
     void testChangeMatrixDesc() {
-        assertFalse(testMatrix.getMatrixDesc() == "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "asdf");
         testMatrix.changeMatrixDesc("asdf");
-        assertTrue(testMatrix.getMatrixDesc() == "asdf");
+        assertEquals(testMatrix.getMatrixName(),"asdf");
     }
 
     @Test
     void testChangeMatrixDescTwice() {
-        assertFalse(testMatrix.getMatrixDesc() == "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "asdf");
         testMatrix.changeMatrixDesc("asdf");
-        assertTrue(testMatrix.getMatrixDesc() == "asdf");
-        assertFalse(testMatrix.getMatrixDesc() == "yourmom");
+        assertEquals(testMatrix.getMatrixName(), "asdf");
+        assertNotEquals(testMatrix.getMatrixName(), "yourmom");
         testMatrix.changeMatrixDesc("yourmom");
-        assertTrue(testMatrix.getMatrixDesc() == "yourmom");
+        assertEquals(testMatrix.getMatrixName(), "yourmom");
     }
 
 }

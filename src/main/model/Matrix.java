@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
@@ -45,7 +46,9 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: sum the values in the first row by the second row
     public void sumRow(int firstIndex, int secondIndex) {
-        // stub
+        Row a = this.matrixRows.get(firstIndex);
+        Row b = this.matrixRows.get(secondIndex);
+        a.sumRow(b);
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
@@ -53,8 +56,16 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: subtracts the values in the first row by the second row
     public void subtractRow(int firstIndex, int secondIndex) {
-        // stub
+
+        Row a = this.matrixRows.get(secondIndex);
+        Row b = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+        // create a deepy copy to ensure same-row shenanigans don't bug our codew
+        b.scaleRow(-1);
+        this.matrixRows.get(firstIndex).sumRow(b);
     }
+
+
+
 
     // EFFECTS: gets col number of matrix
     public int getCols() {
@@ -97,7 +108,7 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: change name of matrix
     public void changeMatrixName(String name) {
-        // stub
+        this.name = name;
     }
 
     // EFFECTS: gets name of matrix
@@ -108,7 +119,7 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: change description of matrix
     public void changeMatrixDesc(String desc) {
-        // stub
+        this.desc = desc;
     }
 
     // EFFECTS: gets desc of matrix

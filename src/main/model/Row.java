@@ -21,7 +21,8 @@ public class Row {
         for (int i = 0; i < this.columnNum; i++) {
             float firstRowVal = this.rowVals.get(i);
             float secondRowVal = secondRow.getFloatArray().get(i);
-            this.rowVals.set(i, firstRowVal + secondRowVal);
+            float a = firstRowVal + secondRowVal;
+            this.rowVals.set(i, a);
         }
     }
 

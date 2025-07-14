@@ -66,10 +66,10 @@ public class RowTest {
     @Test
     void testConstructor() {
         assertFalse(testRow1.getCol() == 5);
-        assertFalse(testRow1.getFloatArray() == testRow2Vals);
+        assertNotEquals(testRow1.getFloatArray(), testRow2Vals);
         testRow1 = new Row(5, testRow2Vals);
         assertTrue(testRow1.getCol() == 5);
-        assertTrue(testRow1.getFloatArray() == testRow2Vals);
+        assertEquals(testRow1.getFloatArray(), testRow2Vals);
     }
 
     @Test
