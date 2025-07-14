@@ -75,9 +75,9 @@ public class MatrixTest {
         listFloatTypical2RedRef.add(1.0f);
         listFloatTypical2RedRef.add(2.0f);
 
-        listFloatTypical3RedRef.add(-0.0f);
-        listFloatTypical3RedRef.add(-0.0f);
-        listFloatTypical3RedRef.add(-0.0f);
+        listFloatTypical3RedRef.add(0.0f);
+        listFloatTypical3RedRef.add(0.0f);
+        listFloatTypical3RedRef.add(0.0f);
 
         listFloatTypicalScaled.add(2.0f);
         listFloatTypicalScaled.add(4.0f);

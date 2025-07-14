@@ -126,40 +126,42 @@ public class Matrix {
      * 
      */
 
-
-     
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
     public void computeRedRef() {
+        ArrayList<Integer> alreadyPassed = new ArrayList<>();
         this.redrefRows = deepClone();
         int widthNumber = columnNum;
-        int heightNumber = redrefRows.size();
+        int heightNumber = matrixRows.size();
         for (int k = 0; k < widthNumber; k++) {
-            rowCycleFinder(heightNumber, k);
+            rowCycleFinder(heightNumber, k, alreadyPassed);
         }
     }
 
-    public void rowCycleFinder(int heightNumber, int k) {
+    public void rowCycleFinder(int heightNumber, int k, ArrayList<Integer> alreadyPassed) {
         for (int i = 0; i < heightNumber; i++) {
             Row row = redrefRows.get(i);
-            if (row.getFloatArray().get(k) != 0) {
-                // swapRowRedRef(i, k);
-                scaleRow(1 / row.getFloatArray().get(k), k);
-                annihilator(i, heightNumber);
+            if (row.getFloatArray().get(k) != 0.0f) {
+                if (alreadyPassed.contains(i)) {
+                } else {
+                    // swapRowRedRef(i, k);
+                    scaleRow((1 / row.getFloatArray().get(k)), i);
+                    annihilator(i, heightNumber, k);
+                    alreadyPassed.add(i);
+                }
             }
         }
     }
 
-
-
-
     // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
     // redrefRows.size()
 
-    public void annihilator(int index, int length) {
+    public void annihilator(int index, int length, int k) {
         for (int j = 0; j < length; j++) {
             if (j == index) {
+                continue;
+            } else if (redrefRows.get(j).getFloatArray().get(index) == 0.0f) {
                 continue;
             } else {
                 subtractRowRedRef(j, index, -redrefRows.get(j).getFloatArray().get(index));
