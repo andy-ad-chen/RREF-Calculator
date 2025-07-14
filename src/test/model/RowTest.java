@@ -66,15 +66,15 @@ public class RowTest {
     @Test
     void testConstructor() {
         assertFalse(testRow1.getCol() == 5);
-        assertFalse(testRow1.getRow() == testRow2Vals);
+        assertFalse(testRow1.getFloatArray() == testRow2Vals);
         testRow1 = new Row(5, testRow2Vals);
         assertTrue(testRow1.getCol() == 5);
-        assertTrue(testRow1.getRow() == testRow2Vals);
+        assertTrue(testRow1.getFloatArray() == testRow2Vals);
     }
 
     @Test
     void testSumRow() {
-        ArrayList<Float> a = testRow2.getRow();
+        ArrayList<Float> a = testRow2.getFloatArray();
         assertNotEquals(testRowSummedVals, a);
         testRow2.sumRow(testRow3);
         assertEquals(testRowSummedVals, a);
@@ -83,7 +83,7 @@ public class RowTest {
 
     @Test
     void testScaleRow() {
-        ArrayList<Float> a = testRow1.getRow();
+        ArrayList<Float> a = testRow1.getFloatArray();
         assertNotEquals(testRow1ValsScaled, a);
         testRow1.scaleRow(2.0f);
         assertEquals(testRow1ValsScaled, a);

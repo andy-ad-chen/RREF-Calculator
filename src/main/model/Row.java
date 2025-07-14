@@ -20,7 +20,7 @@ public class Row {
     public void sumRow(Row secondRow) {
         for (int i = 0; i < this.columnNum; i++) {
             float firstRowVal = this.rowVals.get(i);
-            float secondRowVal = secondRow.getRow().get(i);
+            float secondRowVal = secondRow.getFloatArray().get(i);
             this.rowVals.set(i, firstRowVal + secondRowVal);
         }
     }
@@ -40,7 +40,7 @@ public class Row {
     }
 
     // EFFECTS: gets array of values making up row
-    public ArrayList<Float> getRow() {
+    public ArrayList<Float> getFloatArray() {
         return this.rowVals;
     }
 

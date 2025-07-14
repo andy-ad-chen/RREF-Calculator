@@ -16,20 +16,20 @@ public class Matrix {
     // rows is not empty.
     // EFFECTS: builds a matrix
     public Matrix(ArrayList<Row> rows, int cols, String name, String desc) {
-        matrixRows = new ArrayList<>();
+        matrixRows = rows;
         redrefRows = new ArrayList<>();
         columnNum = cols;
-        this.name = "a name";
-        this.desc = "a desc";
+        this.name = name;
+        this.desc = desc;
         invertible = false;
-        // stub
     }
 
     // REQUIRES: 0 <= rowIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
     public void scaleRow(float scale, int rowIndex) {
-        // stub
+        Row a = this.matrixRows.get(rowIndex);
+        a.scaleRow(scale);
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
@@ -58,8 +58,7 @@ public class Matrix {
 
     // EFFECTS: gets col number of matrix
     public int getCols() {
-        return 0;
-        // stub
+        return this.columnNum;
     }
 
     // EFFECTS: gets list of rows of matrix
@@ -103,8 +102,7 @@ public class Matrix {
 
     // EFFECTS: gets name of matrix
     public String getMatrixName() {
-        return "name";
-        // stub
+        return this.name;
     }
 
     // MODIFIES: this
@@ -115,26 +113,22 @@ public class Matrix {
 
     // EFFECTS: gets desc of matrix
     public String getMatrixDesc() {
-        return "desc";
-        // stub
+        return this.desc;
     }
 
     // EFFECTS: gets list of rows of a matrix
     public ArrayList<Row> getMatrixRows() {
-        return new ArrayList<>();
-        // stub
+        return this.matrixRows;
     }
 
     // EFFECTS: gets list of rows of a matrix's rref
     public ArrayList<Row> getRedRefRows() {
-        return new ArrayList<>();
-        // stub
+        return this.redrefRows;
     }
 
     // EFFECTS: gets invertibility of matrix
     public Boolean getInvertible() {
-        return true;
-        // stub
+        return this.invertible;
     }
 
 }

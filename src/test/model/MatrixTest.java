@@ -160,30 +160,37 @@ public class MatrixTest {
     void testConstructorZeroMatrix() {
 
         assertEquals(baseVals, baseMatrix.getRows());
-        assertEquals(1, testMatrix.getCols());
+        assertEquals(1, baseMatrix.getCols());
         assertEquals("name", baseMatrix.getMatrixName());
         assertEquals("desc", baseMatrix.getMatrixDesc());
     }
 
     @Test
     void testScaleRowZero() {
-        assertFalse(zeroRow == testMatrix.getRow(0));
+        assertNotEquals(zeroRow, testMatrix.getRow(0));
         testMatrix.scaleRow(0f, 0);
-        assertTrue(zeroRow == testMatrix.getRow(0));
+        assertEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
+
+    // @Test
+    // void testScaleRowZero() {
+    //     assertNotEquals(zeroRow, testMatrix.getRow(0));
+    //     testMatrix.scaleRow(0f, 0);
+    //     assertEquals(zeroRow, testMatrix.getRow(0));
+    // }
 
     @Test
     void testScaleRowByOne() {
-        assertTrue(typicalCaseRow1 == testMatrix.getRow(0));
+        assertEquals(typicalCaseRow1, testMatrix.getRow(0));
         testMatrix.scaleRow(1f, 0);
-        assertTrue(typicalCaseRow1 == testMatrix.getRow(0));
+        assertEquals(typicalCaseRow1, testMatrix.getRow(0));
     }
 
     @Test
     void testScaleRowByTwo() {
         assertFalse(typicalCaseScaled == testMatrix.getRow(0));
         testMatrix.scaleRow(2f, 0);
-        assertTrue(typicalCaseScaled == testMatrix.getRow(0));
+        assertEquals(typicalCaseScaled, testMatrix.getRow(0));
     }
 
     @Test
