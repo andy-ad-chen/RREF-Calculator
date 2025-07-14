@@ -16,17 +16,20 @@ public class Main {
          ArrayList<Float> listFloatTypical3 = new ArrayList<>();
          ArrayList<Row> typicalTestVals = new ArrayList<>();
          listFloatTypical1.add(1.0f);
-         listFloatTypical1.add(0.0f);
-         listFloatTypical1.add(0.0f);
-         listFloatTypical1.add(0.0f);
-         listFloatTypical2.add(5.0f);
-         listFloatTypical2.add(0.0f);
+         listFloatTypical1.add(3.0f);
+         listFloatTypical1.add(5.0f);
+   
+
+         listFloatTypical2.add(10.0f);
          listFloatTypical2.add(1.0f);
-         listFloatTypical2.add(7.0f);
-         listFloatTypical3.add(0.0f);
-         listFloatTypical3.add(0.0f);
+         listFloatTypical2.add(1.0f);
+    
+
+         listFloatTypical3.add(1.0f);
+         listFloatTypical3.add(1.0f);
          listFloatTypical3.add(9.0f);
-         listFloatTypical3.add(0.0f);
+ 
+
          Row typicalCaseRow1;
          Row typicalCaseRow2;
          Row typicalCaseRow3;

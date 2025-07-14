@@ -28,8 +28,13 @@ public class Matrix {
     // REQUIRES: 0 <= rowIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
+    // public void scaleRow(float scale, int rowIndex) {
+    // Row a = this.matrixRows.get(rowIndex);
+    // a.scaleRow(scale);
+    // }
+
     public void scaleRow(float scale, int rowIndex) {
-        Row a = this.matrixRows.get(rowIndex);
+        Row a = this.redrefRows.get(rowIndex);
         a.scaleRow(scale);
     }
 
@@ -102,46 +107,49 @@ public class Matrix {
         return matrixRows.get(0);
     }
 
+    /*
+     * public void computeRedRef() {
+     * this.redrefRows = deepClone();
+     * int rowNumber = redrefRows.size();
+     * for (int k = 0; k < rowNumber; k++) {
+     * for (int i = k; i < rowNumber; i++) {
+     * Row row = redrefRows.get(i);
+     * if (row.getFloatArray().get(i) != 0) {
+     * swapRowRedRef(i, k);
+     * scaleRow(1 / row.getFloatArray().get(k), k);
+     * annihilator(k, rowNumber);
+     * break;
+     * }
+     * }
+     * }
+     * }
+     * 
+     */
+
+
+     
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
-
-
-/*     public void computeRedRef() {
-        this.redrefRows = deepClone();
-        int rowNumber = redrefRows.size();
-        for (int k = 0; k < rowNumber; k++) {
-            for (int i = k; i < rowNumber; i++) {
-                Row row = redrefRows.get(i);
-                if (row.getFloatArray().get(i) != 0) {
-                    swapRowRedRef(i, k);
-                    scaleRow(1 / row.getFloatArray().get(k), k);
-                    annihilator(k, rowNumber);
-                    break;
-                }
-            }
-        }
-    }
-
- */
-
     public void computeRedRef() {
         this.redrefRows = deepClone();
         int widthNumber = columnNum;
         int heightNumber = redrefRows.size();
         for (int k = 0; k < widthNumber; k++) {
-            for (int i = 0; i < heightNumber; i++) {
-                Row row = redrefRows.get(i);
-                if (row.getFloatArray().get(k) != 0) {
-                   // swapRowRedRef(i, k);
-                    scaleRow(1 / row.getFloatArray().get(k), k);
-                    annihilator(k, heightNumber);
-                    break;
-                }
-            }
+            rowCycleFinder(heightNumber, k);
         }
     }
 
+    public void rowCycleFinder(int heightNumber, int k) {
+        for (int i = 0; i < heightNumber; i++) {
+            Row row = redrefRows.get(i);
+            if (row.getFloatArray().get(k) != 0) {
+                // swapRowRedRef(i, k);
+                scaleRow(1 / row.getFloatArray().get(k), k);
+                annihilator(i, heightNumber);
+            }
+        }
+    }
 
 
 
