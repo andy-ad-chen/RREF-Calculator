@@ -36,19 +36,28 @@ public class Matrix {
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
     // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
     // MODIFIES: this
-    // EFFECTS: swaps 2 rows
-    public void swapRow(int firstIndex, int secondIndex) {
-        // stub
-    }
-
-    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
-    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
-    // MODIFIES: this
     // EFFECTS: sum the values in the first row by the second row
     public void sumRow(int firstIndex, int secondIndex) {
         Row a = this.matrixRows.get(firstIndex);
         Row b = this.matrixRows.get(secondIndex);
         a.sumRow(b);
+    }
+
+    // THESE two above functions are not useful in computing RREF; only the swap row
+    // in RREF
+    // and the subtract Row with factor is needed.
+
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
+    // MODIFIES: this
+    // EFFECTS: swaps 2 rows in the RREF matrix
+    public void swapRowRedRef(int firstIndex, int secondIndex) {
+        Row firstRow = this.redrefRows.get(firstIndex);
+        Row secondRow = this.redrefRows.get(secondIndex);
+        Row firstRowClone = new Row(firstRow.getCol(), new ArrayList<Float>(firstRow.getFloatArray()));
+        Row secondRowClone = new Row(secondRow.getCol(), new ArrayList<Float>(secondRow.getFloatArray()));
+        this.redrefRows.set(firstIndex, secondRowClone);
+        this.redrefRows.set(secondIndex, firstRowClone);
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
@@ -96,21 +105,46 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
-    public void computeRedRef() {
+
+
+/*     public void computeRedRef() {
         this.redrefRows = deepClone();
-        int length = redrefRows.size();
-        for (int k = 0; k < length; k++) {
-            for (int i = k; i < length; i++) {
+        int rowNumber = redrefRows.size();
+        for (int k = 0; k < rowNumber; k++) {
+            for (int i = k; i < rowNumber; i++) {
                 Row row = redrefRows.get(i);
                 if (row.getFloatArray().get(i) != 0) {
-                    swapRow(i, k);
-                    scaleRow(1 / row.getFloatArray().get(i), k);
-                    annihilator(k, length);
+                    swapRowRedRef(i, k);
+                    scaleRow(1 / row.getFloatArray().get(k), k);
+                    annihilator(k, rowNumber);
                     break;
                 }
             }
         }
     }
+
+ */
+
+    public void computeRedRef() {
+        this.redrefRows = deepClone();
+        int widthNumber = columnNum;
+        int heightNumber = redrefRows.size();
+        for (int k = 0; k < widthNumber; k++) {
+            for (int i = 0; i < heightNumber; i++) {
+                Row row = redrefRows.get(i);
+                if (row.getFloatArray().get(k) != 0) {
+                   // swapRowRedRef(i, k);
+                    scaleRow(1 / row.getFloatArray().get(k), k);
+                    annihilator(k, heightNumber);
+                    break;
+                }
+            }
+        }
+    }
+
+
+
+
 
     // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
     // redrefRows.size()
