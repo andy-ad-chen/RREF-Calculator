@@ -48,11 +48,11 @@ public class RowTest {
         testRow3Vals.add(7.0f);
 
         testRowSummedVals = new ArrayList<>();
-        testRowSummedVals.add(9.0f);
-        testRowSummedVals.add(12.0f);
-        testRowSummedVals.add(14.0f);
-        testRowSummedVals.add(14.0f);
-        testRowSummedVals.add(14.0f);
+        testRowSummedVals.add(5.0f + 4.0f);
+        testRowSummedVals.add(6.0f + 6.0f);
+        testRowSummedVals.add(7.0f + 7.0f);
+        testRowSummedVals.add(7.0f + 7.0f);
+        testRowSummedVals.add(7.0f + 7.0f);
 
         testRow1 = new Row(3, testRow1Vals);
     
@@ -75,17 +75,17 @@ public class RowTest {
     @Test
     void testSumRow() {
         ArrayList<Float> a = testRow2.getRow();
-        assertFalse(a == testRowSummedVals);
+        assertNotEquals(testRowSummedVals, a);
         testRow2.sumRow(testRow3);
-        assertTrue(a == testRowSummedVals);
+        assertEquals(testRowSummedVals, a);
     }
 
 
     @Test
     void testScaleRow() {
         ArrayList<Float> a = testRow1.getRow();
-        assertFalse(a == testRow1ValsScaled);
-        testRow2.scaleRow(2.0f);
-        assertTrue(a == testRow1ValsScaled);
+        assertNotEquals(testRow1ValsScaled, a);
+        testRow1.scaleRow(2.0f);
+        assertEquals(testRow1ValsScaled, a);
     }
 }
