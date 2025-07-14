@@ -28,13 +28,8 @@ public class Matrix {
     // REQUIRES: 0 <= rowIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
-    // public void scaleRow(float scale, int rowIndex) {
-    // Row a = this.matrixRows.get(rowIndex);
-    // a.scaleRow(scale);
-    // }
-
     public void scaleRow(float scale, int rowIndex) {
-        Row a = this.redrefRows.get(rowIndex);
+        Row a = this.matrixRows.get(rowIndex);
         a.scaleRow(scale);
     }
 
@@ -137,15 +132,19 @@ public class Matrix {
         for (int k = 0; k < widthNumber; k++) {
             rowCycleFinder(heightNumber, k, alreadyPassed);
         }
+        zeroRowSinker();
+        stairCaseShaper();
     }
 
+    // MODIFIES: this & alreadyPassed
+    // EFFECTS: searches column for a new row with a nonzero entry without a pivot;
+    // computes redref from that.
     public void rowCycleFinder(int heightNumber, int k, ArrayList<Integer> alreadyPassed) {
         for (int i = 0; i < heightNumber; i++) {
             Row row = redrefRows.get(i);
             if (row.getFloatArray().get(k) != 0.0f) {
                 if (alreadyPassed.contains(i)) {
                 } else {
-                    // swapRowRedRef(i, k);
                     scaleRow((1 / row.getFloatArray().get(k)), i);
                     annihilator(i, heightNumber, k);
                     alreadyPassed.add(i);
@@ -156,18 +155,28 @@ public class Matrix {
 
     // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
     // redrefRows.size()
-
     public void annihilator(int index, int length, int k) {
         for (int j = 0; j < length; j++) {
             if (j == index) {
-                continue;
-            } else if (redrefRows.get(j).getFloatArray().get(index) == 0.0f) {
-                continue;
             } else {
-                subtractRowRedRef(j, index, -redrefRows.get(j).getFloatArray().get(index));
+                subtractRowRedRef(j, index, -redrefRows.get(j).getFloatArray().get(k));
             }
         }
     }
+
+    // TODO:
+    // MODIFIES: this
+    // EFFECTS: sends all rows that are full of 0 to the end of the matrix..
+    public void zeroRowSinker() {
+    }
+
+    // TODO:
+    // MODIFIES: this
+    // EFFECTS: reorders rows based on descending staircase shape.
+    public void stairCaseShaper() {
+    }
+
+    
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
