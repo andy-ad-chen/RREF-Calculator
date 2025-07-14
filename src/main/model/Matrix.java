@@ -55,13 +55,26 @@ public class Matrix {
     // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: subtracts the values in the first row by the second row
-    public void subtractRow(int firstIndex, int secondIndex) {
+    public void subtractRow(int firstIndex, int secondIndex, float factor) {
 
         Row a = this.matrixRows.get(secondIndex);
         Row b = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
         // create a deepy copy to ensure same-row shenanigans don't bug our codew
-        b.scaleRow(-1);
+        b.scaleRow(factor);
         this.matrixRows.get(firstIndex).sumRow(b);
+    }
+
+    // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
+    // REQUIRES: 0 <= secondIndex < matrixRows.size() - 1
+    // MODIFIES: this
+    // EFFECTS: subtracts the values in the first row by the second row
+    public void subtractRowRedRef(int firstIndex, int secondIndex, float factor) {
+
+        Row a = this.redrefRows.get(secondIndex);
+        Row b = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+        // create a deepy copy to ensure same-row shenanigans don't bug our codew
+        b.scaleRow(factor);
+        this.redrefRows.get(firstIndex).sumRow(b);
     }
 
     // EFFECTS: gets col number of matrix
@@ -91,18 +104,26 @@ public class Matrix {
                 Row row = redrefRows.get(i);
                 if (row.getFloatArray().get(i) != 0) {
                     swapRow(i, k);
-                    downwardsAnnihilator(k);
-                    break; // this is there we call the big ugly monster
+                    scaleRow(1 / row.getFloatArray().get(i), k);
+                    annihilator(k, length);
+                    break;
                 }
             }
         }
     }
 
+    // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
+    // redrefRows.size()
 
-    // EFFECTS:  i-th index and 
-
-
-
+    public void annihilator(int index, int length) {
+        for (int j = 0; j < length; j++) {
+            if (j == index) {
+                continue;
+            } else {
+                subtractRowRedRef(j, index, -redrefRows.get(j).getFloatArray().get(index));
+            }
+        }
+    }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
@@ -117,10 +138,11 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: checks if the matrix is invertible
     public void checkInvert() {
-        if (matrixRows.size() == this.columnNum) {
+        computeRedRef();
+        if (redrefRows.size() == this.columnNum) {
             this.invertible = !hasZeroRows();
             if (this.columnNum == 1) {
-                if (matrixRows.get(0).getFloatArray().get(0) == 1) {
+                if (redrefRows.get(0).getFloatArray().get(0) == 1) {
                     this.invertible = true;
                 }
             }
@@ -174,6 +196,11 @@ public class Matrix {
     // EFFECTS: gets invertibility of matrix
     public Boolean getInvertible() {
         return this.invertible;
+    }
+
+    // EFFECTS: gets size of matrix
+    public int getSize() {
+        return matrixRows.size();
     }
 
 }

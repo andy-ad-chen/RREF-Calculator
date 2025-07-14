@@ -68,12 +68,12 @@ public class MatrixTest {
         listFloatTypical3.add(0.0f);
 
         listFloatTypical1RedRef.add(1.0f);
-        listFloatTypical1RedRef.add(2.0f);
         listFloatTypical1RedRef.add(0.0f);
+        listFloatTypical1RedRef.add(-4.0f);
 
         listFloatTypical2RedRef.add(0.0f);
+        listFloatTypical2RedRef.add(1.0f);
         listFloatTypical2RedRef.add(2.0f);
-        listFloatTypical2RedRef.add(4.0f);
 
         listFloatTypical3RedRef.add(0.0f);
         listFloatTypical3RedRef.add(0.0f);
@@ -210,7 +210,7 @@ public class MatrixTest {
     @Test
     void testSubtractRowOneOne() {
         assertNotEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
-        testMatrix.subtractRow(0, 0);
+        testMatrix.subtractRow(0, 0, -1.0f);
         assertEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
@@ -244,24 +244,46 @@ public class MatrixTest {
         }
     }
 
+    // @Test
+    // void testComputeRedRefForTest() {
+    // assertEquals(redRefVals, testMatrix.getMatrixRows());
+    // }
+
     @Test
     void testComputeRedRefForTest() {
-        assertEquals(redRefVals, testMatrix.getMatrixRows());
+        testMatrix.computeRedRef();
+        for (int i = 0; i < testMatrix.getCols(); i++) {
+            assertEquals(redRefVals.get(i).getFloatArray(),
+                    testMatrix.getRedRefRows().get(i).getFloatArray());
+        }
     }
 
     @Test
     void testComputeRedRefForIdentity() {
-        assertEquals(identityMatrix.getRedRefRows(), identityMatrix.getMatrixRows());
+        identityMatrix.computeRedRef();
+        for (int i = 0; i < identityMatrix.getCols(); i++) {
+            assertEquals(identityMatrix.getMatrixRows().get(i).getFloatArray(),
+                    identityMatrix.getRedRefRows().get(i).getFloatArray());
+        }
     }
 
     @Test
     void testComputeRedRefForZero() {
-        assertEquals(zeroMatrix.getRedRefRows(), zeroMatrix.getMatrixRows());
+        zeroMatrix.computeRedRef();
+        for (int i = 0; i < zeroMatrix.getSize(); i++) {
+            assertEquals(zeroMatrix.getMatrixRows().get(i).getFloatArray(),
+                    zeroMatrix.getRedRefRows().get(i).getFloatArray());
+        }
     }
+
 
     @Test
     void testComputeRedRefForBase() {
-        assertEquals(baseMatrix.getRedRefRows(), baseMatrix.getMatrixRows());
+        baseMatrix.computeRedRef();
+        for (int i = 0; i < baseMatrix.getSize(); i++) {
+            assertEquals(baseMatrix.getMatrixRows().get(i).getFloatArray(),
+                    baseMatrix.getRedRefRows().get(i).getFloatArray());
+        }
     }
 
     @Test
