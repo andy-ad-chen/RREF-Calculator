@@ -13,56 +13,56 @@ public class MatrixList {
 
     // EFFECTS: returns the list of matrices
     public ArrayList<Matrix> getMatrices() {
-        return new ArrayList<>();
-        // stub
+        return this.matrices;
     }
 
     // EFFECTS: returns the list of matrices' names
     public ArrayList<String> getMatricesNames() {
         return new ArrayList<>();
-        // stub
     }
 
     // MODIFIES: this
     // EFFECTS: adds a matrix to this list of matrices
     public void addMatrix(Matrix m) {
-        // stub
+        matrices.add(m);
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: removes the correct index of the matrix of this list of matrices
     public void removeMatrix(Matrix m, int index) {
-        // stub
+        matrices.remove(index);
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: change matrix name of specified index
     public void changeMatrixName(String n, int index) {
-        // stub
+        matrices.get(index).changeMatrixName(n);
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: change matrix description of specified index
     public void changeMatrixDesc(String d, int index) {
-        // stub
+        matrices.get(index).changeMatrixDesc(d);
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
     // EFFECTS: get matrix name of specified index
     public String getMatrixName(int index) {
-        return "hi";
+        return matrices.get(index).getMatrixName();
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
     // EFFECTS: get matrix description of specified index
     public String getMatrixDesc(int index) {
-        return "hi";
+        return matrices.get(index).getMatrixDesc();
     }
 
 }
+
+
 
 
 

@@ -64,9 +64,6 @@ public class Matrix {
         this.matrixRows.get(firstIndex).sumRow(b);
     }
 
-
-
-
     // EFFECTS: gets col number of matrix
     public int getCols() {
         return this.columnNum;
@@ -75,35 +72,72 @@ public class Matrix {
     // EFFECTS: gets list of rows of matrix
     public ArrayList<Row> getRows() {
         return this.matrixRows;
-        // stub
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
     // EFFECTS: gets a row of matrix
     public Row getRow(int index) {
         return matrixRows.get(0);
-        // stub
     }
 
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
     public void computeRedRef() {
-        // stub
+        this.redrefRows = deepClone();
+        int length = redrefRows.size();
+        for (int k = 0; k < length; k++) {
+            for (int i = k; i < length; i++) {
+                Row row = redrefRows.get(i);
+                if (row.getFloatArray().get(i) != 0) {
+                    swapRow(i, k);
+                    downwardsAnnihilator(k);
+                    break; // this is there we call the big ugly monster
+                }
+            }
+        }
+    }
+
+
+    // EFFECTS:  i-th index and 
+
+
+
+
+    // EFFECTS: clones an ArrayList<Row> object... deeply
+    public ArrayList<Row> deepClone() {
+        ArrayList<Row> returnVal = new ArrayList<>();
+        for (Row i : this.matrixRows) {
+            Row tempRow = new Row(i.getCol(), i.getFloatArray());
+            returnVal.add(tempRow);
+        }
+        return returnVal;
     }
 
     // MODIFIES: this
     // EFFECTS: checks if the matrix is invertible
     public void checkInvert() {
-        // stub
+        if (matrixRows.size() == this.columnNum) {
+            this.invertible = !hasZeroRows();
+            if (this.columnNum == 1) {
+                if (matrixRows.get(0).getFloatArray().get(0) == 1) {
+                    this.invertible = true;
+                }
+            }
+        }
     }
 
-    // EFFECTS: checks if the redref of a matrix is a square
-    public boolean checkSquareRedRef() {
-        return false;
-        // stub
+    // EFFECTS: produce true if the matrix has zero rows.
+    public Boolean hasZeroRows() {
+        Boolean zeroRow;
+        zeroRow = true;
+        for (Row i : this.redrefRows) {
+            if (i.zeroRow() == false) {
+                zeroRow = false;
+            }
+        }
+        return zeroRow;
     }
-    // COULD BE REDUNANT: code funtionality into the checkInvert
 
     // MODIFIES: this
     // EFFECTS: change name of matrix

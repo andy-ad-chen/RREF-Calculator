@@ -172,14 +172,12 @@ public class MatrixTest {
         assertEquals(zeroRow.getFloatArray(), testMatrix.getRow(0).getFloatArray());
     }
 
-//  @Test
-//  void testScaleRowZero() {
-//      assertNotEquals(zeroRow, testMatrix.getRow(0));
-//      testMatrix.scaleRow(0f, 0);
-//      assertEquals(zeroRow, testMatrix.getRow(0));
-//  }
-
-
+    // @Test
+    // void testScaleRowZero() {
+    // assertNotEquals(zeroRow, testMatrix.getRow(0));
+    // testMatrix.scaleRow(0f, 0);
+    // assertEquals(zeroRow, testMatrix.getRow(0));
+    // }
 
     @Test
     void testScaleRowByOne() {
@@ -223,17 +221,27 @@ public class MatrixTest {
 
     @Test
     void testCheckInvertForInvertible() {
+        identityMatrix.checkInvert();
         assertTrue(identityMatrix.getInvertible());
     }
 
     @Test
     void testCheckInvertForBase() {
+        baseMatrix.checkInvert();
         assertTrue(baseMatrix.getInvertible());
     }
 
     @Test
     void testCheckInvertForZero() {
         assertFalse(zeroMatrix.getInvertible());
+    }
+
+    @Test
+    void testCheckDeepClone() {
+        for (int i = 0; i < testMatrix.getCols(); i++) {
+            assertEquals(testMatrix.getRows().get(i).getFloatArray(),
+                    testMatrix.deepClone().get(i).getFloatArray());
+        }
     }
 
     @Test
@@ -258,9 +266,9 @@ public class MatrixTest {
 
     @Test
     void testChangeMatrixName() {
-        assertNotEquals(testMatrix.getMatrixName(), "asdf");
+        assertNotEquals("asdf", testMatrix.getMatrixName());
         testMatrix.changeMatrixName("asdf");
-        assertEquals(testMatrix.getMatrixName(), "asdf");
+        assertEquals("asdf", testMatrix.getMatrixName());
     }
 
     @Test
@@ -275,19 +283,19 @@ public class MatrixTest {
 
     @Test
     void testChangeMatrixDesc() {
-        assertNotEquals(testMatrix.getMatrixName(), "asdf");
+        assertNotEquals("asdf", testMatrix.getMatrixDesc());
         testMatrix.changeMatrixDesc("asdf");
-        assertEquals(testMatrix.getMatrixName(),"asdf");
+        assertEquals("asdf", testMatrix.getMatrixDesc());
     }
 
     @Test
     void testChangeMatrixDescTwice() {
-        assertNotEquals(testMatrix.getMatrixName(), "asdf");
+        assertNotEquals(testMatrix.getMatrixDesc(), "asdf");
         testMatrix.changeMatrixDesc("asdf");
-        assertEquals(testMatrix.getMatrixName(), "asdf");
-        assertNotEquals(testMatrix.getMatrixName(), "yourmom");
+        assertEquals(testMatrix.getMatrixDesc(), "asdf");
+        assertNotEquals(testMatrix.getMatrixDesc(), "yourmom");
         testMatrix.changeMatrixDesc("yourmom");
-        assertEquals(testMatrix.getMatrixName(), "yourmom");
+        assertEquals(testMatrix.getMatrixDesc(), "yourmom");
     }
 
 }
