@@ -279,7 +279,6 @@ public class MatrixTest {
 
 
 
-
     @Test
     void testCheckDeepClone() {
         for (int i = 0; i < testMatrix.getCols(); i++) {
