@@ -73,10 +73,10 @@ public class Matrix {
     // EFFECTS: swaps two rows in the matrix, first and second index
     public void swapRow(int firstIndex, int secondIndex) {
 
-        Row a = this.redrefRows.get(firstIndex);
+        Row a = this.matrixRows.get(firstIndex);
         Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
 
-        Row b = this.redrefRows.get(secondIndex);
+        Row b = this.matrixRows.get(secondIndex);
         Row copySecond = new Row(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
         // create a deepy copy of the second row to ensure same-row shenanigans don't
         // bug our code
@@ -85,6 +85,24 @@ public class Matrix {
         this.matrixRows.set(secondIndex, copyFirst);
     }
 
+    // REQUIRES: matrix of at least 2 rows
+    // MODIFIES: this
+    // EFFECTS: swaps two rows in the matrix, first and second index
+    public void swapRowRedRef(int firstIndex, int secondIndex) {
+
+        Row a = this.redrefRows.get(firstIndex);
+        Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+
+        Row b = this.redrefRows.get(secondIndex);
+        Row copySecond = new Row(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
+        // create a deepy copy of the second row to ensure same-row shenanigans don't
+        // bug our code
+
+        this.redrefRows.set(firstIndex, copySecond);
+        this.redrefRows.set(secondIndex, copyFirst);
+    }
+
+    // NOTE THAT THIS METHOD IS REDUNDANT IF WE HAVE a good interface :(
 
     /*
      * 
@@ -188,11 +206,31 @@ public class Matrix {
     }
 
     // TODO:
+    // can also implement for matrixRows not just redRefRows??
+
     // MODIFIES: this
     // EFFECTS: sends all rows that are full of 0 to the bottom, and sorts rows with
-    // earliest "1" value to top of matrix.
+    // earliest "1" value to top of matrix. Does this to the RREF matrix
     public void rowSorter() {
+        ArrayList<Integer> alreadyPassed = new ArrayList<>();
+            for (int k = 0; k < columnNum; k++) {
+                Row a = redrefRows.get(k);
+                for (int i = k; i <  redrefRows.size(); i++) {
+                    if (a.getFloatArray().get(i) == 1.0f) {
+                        if (!alreadyPassed.contains(i)) {
+                            swapRowRedRef(i, k);
+                            alreadyPassed.add(i);
+                        }
+                    }
+                }
+            }
+    }
 
+    // TODO:
+    // EFFECTS: returns true when matrix is sorted.
+    public Boolean checkSorted() {
+        return true;
+        // Stub
     }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
