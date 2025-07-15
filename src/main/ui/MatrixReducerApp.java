@@ -101,7 +101,6 @@ public class MatrixReducerApp {
 
         System.out.println("Enter the description of your matrix:   ");
         String desc = input.nextLine();
-        ArrayList<Float> listOfVals = new ArrayList();
         specifyMatrix(height, width, name, desc);
     }
 
@@ -110,7 +109,7 @@ public class MatrixReducerApp {
     void specifyMatrix(int height, int width, String name, String desc) {
         ArrayList<Row> listOfRows = new ArrayList<>();
         for (int j = 0; j < height; j++) {
-            ArrayList<Float> listOfVals = new ArrayList();
+            ArrayList<Float> listOfVals = new ArrayList<>();
             for (int i = 0; i < width; i++) {
                 System.out.print("Enter the next entry of your matrix, in the " + (j + 1) + " -th row:  ");
                 float val = input.nextFloat();
