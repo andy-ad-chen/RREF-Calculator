@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.ArrayList;
 
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
@@ -115,8 +114,7 @@ public class Matrix {
         for (int k = 0; k < widthNumber; k++) {
             rowCycleFinder(heightNumber, k, alreadyPassed);
         }
-        zeroRowSinker();
-        stairCaseShaper();
+        rowSorter();
     }
 
     // MODIFIES: this & alreadyPassed
@@ -147,15 +145,11 @@ public class Matrix {
 
     // TODO:
     // MODIFIES: this
-    // EFFECTS: sends all rows that are full of 0 to the end of the matrix..
-    public void zeroRowSinker() {
+    // EFFECTS: sends all rows that are full of 0 to the bottom, and sorts rows with
+    // earliest "1" value to top of matrix.
+    public void rowSorter() {
     }
 
-    // TODO:
-    // MODIFIES: this
-    // EFFECTS: reorders rows based on descending staircase shape.
-    public void stairCaseShaper() {
-    }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
@@ -187,8 +181,6 @@ public class Matrix {
         }
         return zeroRow;
     }
-
-
 
     // MODIFIES: this
     // EFFECTS: change name of matrix
