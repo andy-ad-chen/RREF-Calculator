@@ -241,6 +241,7 @@ public class MatrixTest {
     @Test
     void testRowSorterZeroMatrix() {
         Matrix cloned = new Matrix(zeroMatrix.deepClone(), zeroMatrix.getCols(), "test", "test");
+        identityMatrix.computeRedRef();
         zeroMatrix.rowSorter();
         for (int i = 0; i < zeroMatrix.getCols(); i++) {
             assertEquals(cloned.getRows().get(i).getFloatArray(),
@@ -252,10 +253,11 @@ public class MatrixTest {
     @Test
     void testRowSorterIdentityMatrix() {
         Matrix cloned = new Matrix(identityMatrix.deepClone(), identityMatrix.getCols(), "test", "test");
+        identityMatrix.computeRedRef();
         identityMatrix.rowSorter();
         for (int i = 0; i < identityMatrix.getCols(); i++) {
             assertEquals(cloned.getRows().get(i).getFloatArray(),
-                    identityMatrix.getRows().get(i).getFloatArray());
+                    identityMatrix.getRedRefRows().get(i).getFloatArray());
         }
     }
 
@@ -266,11 +268,11 @@ public class MatrixTest {
     void testRowSorterSwappedIdentityMatrix() {
         Matrix cloned = new Matrix(identityMatrix.deepClone(), identityMatrix.getCols(), "test", "test");
         identityMatrix.computeRedRef();
-        identityMatrix.s
+        identityMatrix.swapRowRedRef(0, 1);
         identityMatrix.rowSorter();
         for (int i = 0; i < identityMatrix.getCols(); i++) {
             assertEquals(cloned.getRows().get(i).getFloatArray(),
-                    identityMatrix.getRows().get(i).getFloatArray());
+                    identityMatrix.getRedRefRows().get(i).getFloatArray());
         }
     }
 
