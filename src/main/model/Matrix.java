@@ -68,6 +68,24 @@ public class Matrix {
         this.redrefRows.get(firstIndex).sumRow(b);
     }
 
+    // REQUIRES: matrix of at least 2 rows
+    // MODIFIES: this
+    // EFFECTS: swaps two rows in the matrix, first and second index
+    public void swapRow(int firstIndex, int secondIndex) {
+
+        Row a = this.redrefRows.get(firstIndex);
+        Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+
+        Row b = this.redrefRows.get(secondIndex);
+        Row copySecond = new Row(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
+        // create a deepy copy of the second row to ensure same-row shenanigans don't
+        // bug our code
+
+        this.matrixRows.set(firstIndex, copySecond);
+        this.matrixRows.set(secondIndex, copyFirst);
+    }
+
+
     /*
      * 
      * 
@@ -84,7 +102,7 @@ public class Matrix {
      * INTERFACE since that ways I could just give two different
      * implementations.
      * 
-     * This avoids the copied code that I used to make subtractRow and 
+     * This avoids the copied code that I used to make subtractRow and
      * subtractRowRedRef
      * 
      * 
