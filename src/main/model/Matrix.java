@@ -68,6 +68,32 @@ public class Matrix {
         this.redrefRows.get(firstIndex).sumRow(b);
     }
 
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * NOTES; for better style, I could make ArrayList<Row> a separately defined
+     * class and object; each matrix has two sets of these values
+     * after all, since one is the RREF and the other is the non-modified one. This
+     * would make this class smaller as the row-swapping ops
+     * can now be placed in that new class. I should also make ArrayList<Row> an
+     * INTERFACE since that ways I could just give two different
+     * implementations.
+     * 
+     * This avoids the copied code that I used to make subtractRow and 
+     * subtractRowRedRef
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+
     // EFFECTS: gets col number of matrix
     public int getCols() {
         return this.columnNum;
@@ -148,8 +174,8 @@ public class Matrix {
     // EFFECTS: sends all rows that are full of 0 to the bottom, and sorts rows with
     // earliest "1" value to top of matrix.
     public void rowSorter() {
-    }
 
+    }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {

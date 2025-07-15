@@ -237,6 +237,46 @@ public class MatrixTest {
         assertFalse(zeroMatrix.getInvertible());
     }
 
+    // TODO
+    @Test
+    void testRowSorterZeroMatrix() {
+        Matrix cloned = new Matrix(zeroMatrix.deepClone(), zeroMatrix.getCols(), "test", "test");
+        zeroMatrix.rowSorter();
+        for (int i = 0; i < zeroMatrix.getCols(); i++) {
+            assertEquals(cloned.getRows().get(i).getFloatArray(),
+                    zeroMatrix.getRows().get(i).getFloatArray());
+        }
+    }
+
+    // TODO
+    @Test
+    void testRowSorterIdentityMatrix() {
+        Matrix cloned = new Matrix(identityMatrix.deepClone(), identityMatrix.getCols(), "test", "test");
+        identityMatrix.rowSorter();
+        for (int i = 0; i < identityMatrix.getCols(); i++) {
+            assertEquals(cloned.getRows().get(i).getFloatArray(),
+                    identityMatrix.getRows().get(i).getFloatArray());
+        }
+    }
+
+
+
+    // TODO
+    @Test
+    void testRowSorterSwappedIdentityMatrix() {
+        Matrix cloned = new Matrix(identityMatrix.deepClone(), identityMatrix.getCols(), "test", "test");
+        identityMatrix.computeRedRef();
+        identityMatrix.s
+        identityMatrix.rowSorter();
+        for (int i = 0; i < identityMatrix.getCols(); i++) {
+            assertEquals(cloned.getRows().get(i).getFloatArray(),
+                    identityMatrix.getRows().get(i).getFloatArray());
+        }
+    }
+
+
+
+
     @Test
     void testCheckDeepClone() {
         for (int i = 0; i < testMatrix.getCols(); i++) {
