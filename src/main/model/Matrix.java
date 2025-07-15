@@ -226,12 +226,6 @@ public class Matrix {
             }
     }
 
-    // TODO:
-    // EFFECTS: returns true when matrix is sorted.
-    public Boolean checkSorted() {
-        return true;
-        // Stub
-    }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
