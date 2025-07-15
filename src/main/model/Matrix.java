@@ -1,7 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
 public class Matrix {
