@@ -241,13 +241,14 @@ public class MatrixTest {
     @Test
     void testRowSorterZeroMatrix() {
         Matrix cloned = new Matrix(zeroMatrix.deepClone(), zeroMatrix.getCols(), "test", "test");
-        identityMatrix.computeRedRef();
+        zeroMatrix.computeRedRef();
         zeroMatrix.rowSorter();
         for (int i = 0; i < zeroMatrix.getCols(); i++) {
             assertEquals(cloned.getRows().get(i).getFloatArray(),
                     zeroMatrix.getRows().get(i).getFloatArray());
         }
     }
+
 
     // TODO
     @Test
