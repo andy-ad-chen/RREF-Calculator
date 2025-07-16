@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
 public class Matrix {
     private String name; // give each matrix a name
@@ -74,16 +73,17 @@ public class Matrix {
     // EFFECTS: swaps two rows in the matrix, first and second index
     // public void swapRow(int firstIndex, int secondIndex) {
 
-    //     Row a = this.matrixRows.get(firstIndex);
-    //     Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+    // Row a = this.matrixRows.get(firstIndex);
+    // Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
 
-    //     Row b = this.matrixRows.get(secondIndex);
-    //     Row copySecond = new Row(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
-    //     // create a deepy copy of the second row to ensure same-row shenanigans don't
-    //     // bug our code
+    // Row b = this.matrixRows.get(secondIndex);
+    // Row copySecond = new Row(b.getCol(), new
+    // ArrayList<Float>(b.getFloatArray()));
+    // // create a deepy copy of the second row to ensure same-row shenanigans don't
+    // // bug our code
 
-    //     this.matrixRows.set(firstIndex, copySecond);
-    //     this.matrixRows.set(secondIndex, copyFirst);
+    // this.matrixRows.set(firstIndex, copySecond);
+    // this.matrixRows.set(secondIndex, copyFirst);
     // }
 
     // REQUIRES: matrix of at least 2 rows
@@ -214,20 +214,19 @@ public class Matrix {
     // earliest "1" value to top of matrix. Does this to the RREF matrix
     public void rowSorter() {
         ArrayList<Integer> alreadyPassed = new ArrayList<>();
-            for (int k = 0; k < columnNum; k++) {
-                for (int i = 0; i <  redrefRows.size(); i++) {
-                    if (redrefRows.get(i).getFloatArray().get(k) == 1.0f) {
-                        if (!alreadyPassed.contains(i)) {
-                            if ((i < (redrefRows.size() - 1))) {
-                                swapRowRedRef(i, alreadyPassed.size());
-                                alreadyPassed.add(alreadyPassed.size());
-                            }
+        for (int k = 0; k < columnNum; k++) {
+            for (int i = 0; i < redrefRows.size(); i++) {
+                if (redrefRows.get(i).getFloatArray().get(k) == 1.0f) {
+                    if (!alreadyPassed.contains(i)) {
+                        if ((i < (redrefRows.size() - 1))) {
+                            swapRowRedRef(i, alreadyPassed.size());
+                            alreadyPassed.add(alreadyPassed.size());
                         }
                     }
                 }
             }
+        }
     }
-
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
     public ArrayList<Row> deepClone() {
