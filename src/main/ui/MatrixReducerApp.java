@@ -12,6 +12,11 @@ public class MatrixReducerApp {
     private MatrixList matrices = new MatrixList();
     private Scanner input;
 
+    // This class is inspired by code provided by the UBC Department of Computer
+    // Science, in the course material of CPSC 210.
+    // Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
+    // Teller application, TellerApp class.
+
     // EFFECTS: runs the Matrix Reducer App
     public MatrixReducerApp() {
         runApp();
@@ -22,21 +27,17 @@ public class MatrixReducerApp {
     private void runApp() {
         boolean keepGoing = true;
         String command = null;
-
         init();
-
         while (keepGoing) {
             displayMenu();
             command = input.next();
             command = command.toLowerCase();
-
             if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
             }
         }
-
         System.out.println("Bye!");
     }
 
@@ -71,15 +72,12 @@ public class MatrixReducerApp {
             selectMatrixIndex();
         } else if (command.equals("r")) {
             removeMatrixIndex();
-        }
-        else if (command.equals("c")) {
+        } else if (command.equals("c")) {
             changeMatrixName();
-        }
-        else if (command.equals("d")) {
+        } else if (command.equals("d")) {
             changeMatrixDesc();
         }
-        
-        
+
         else {
             System.out.println("Selection not valid...");
         }
@@ -93,12 +91,9 @@ public class MatrixReducerApp {
         int height = input.nextInt();
         System.out.print("Enter the number of columns of your matrix:   ");
         int width = input.nextInt();
-
         input.nextLine();
-
         System.out.println("Enter the name of your matrix:   ");
         String name = input.nextLine();
-
         System.out.println("Enter the description of your matrix:   ");
         String desc = input.nextLine();
         specifyMatrix(height, width, name, desc);
@@ -136,7 +131,7 @@ public class MatrixReducerApp {
         System.out.println("===============================================");
         int val = input.nextInt();
         Matrix matrix = matrices.getMatrices().get(val - 1);
-        System.out.println("Matrix is called:" + matrix.getMatrixName());
+        System.out.println("Matrix is called:  " + matrix.getMatrixName());
         System.out.println(matrix.getMatrixDesc());
         System.out.println("===============================================");
         for (int i = 0; i < matrix.getMatrixRows().size(); i++) {
@@ -148,7 +143,6 @@ public class MatrixReducerApp {
         matrix.computeRedRef();
         for (int i = 0; i < matrix.getRedRefRows().size(); i++) {
             System.out.println(matrix.getRedRefRows().get(i).getFloatArray());
-
         }
         System.out.println("===============================================");
     }
@@ -174,21 +168,20 @@ public class MatrixReducerApp {
         input.nextLine();
         String name = input.nextLine();
         matrices.changeMatrixName(name, val - 1);
-
         System.out.println("Done!");
     }
 
-        // MODIFIES: this
-        // EFFECTS: allows users to change desc of matrix
-        void changeMatrixDesc() {
-            System.out.println("change description matrix number?:  ");
-            System.out.println("===============================================");
-            int val = input.nextInt();
-            System.out.println("change description to?:  ");
-            System.out.println("===============================================");
-            input.nextLine();
-            String desc = input.nextLine();
-            matrices.changeMatrixDesc(desc, val - 1);
-            System.out.println("Done!");
-        }
+    // MODIFIES: this
+    // EFFECTS: allows users to change desc of matrix
+    void changeMatrixDesc() {
+        System.out.println("change description matrix number?:  ");
+        System.out.println("===============================================");
+        int val = input.nextInt();
+        System.out.println("change description to?:  ");
+        System.out.println("===============================================");
+        input.nextLine();
+        String desc = input.nextLine();
+        matrices.changeMatrixDesc(desc, val - 1);
+        System.out.println("Done!");
+    }
 }

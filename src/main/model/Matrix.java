@@ -218,7 +218,7 @@ public class Matrix {
             for (int i = 0; i < redrefRows.size(); i++) {
                 if (redrefRows.get(i).getFloatArray().get(k) == 1.0f) {
                     if (!alreadyPassed.contains(i)) {
-                        if ((i < (redrefRows.size()))) {
+                        if (i < (redrefRows.size())) {
                             swapRowRedRef(i, alreadyPassed.size());
                             alreadyPassed.add(alreadyPassed.size());
                         }
