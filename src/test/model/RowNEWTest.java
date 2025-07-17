@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 public class RowNEWTest {
-    private RowNEW testRow1;
+    private Row testRow1;
 
-    private RowNEW testRow2;
-    private RowNEW testRow3;
-    private RowNEW testRow4;
+    private Row testRow2;
+    private Row testRow3;
+    private Row testRow4;
 
     private ArrayList<Float> testRow1Vals;
     private ArrayList<Float> testRow1ValsScaled;
@@ -60,10 +60,10 @@ public class RowNEWTest {
         testRowSummedVals.add(7.0f + 7.0f);
         testRowSummedVals.add(7.0f + 7.0f);
 
-        testRow1 = new RowNEW(testRow1Vals);
-        testRow2 = new RowNEW(testRow2Vals);
-        testRow3 = new RowNEW(testRow3Vals);
-        testRow4 = new RowNEW(testRow4Vals);
+        testRow1 = new Row(testRow1Vals);
+        testRow2 = new Row(testRow2Vals);
+        testRow3 = new Row(testRow3Vals);
+        testRow4 = new Row(testRow4Vals);
 
     }
 
@@ -71,7 +71,7 @@ public class RowNEWTest {
     void testConstructor() {
         assertFalse(testRow1.size() == 5);
         assertNotEquals(testRow1, testRow2Vals);
-        testRow1 = new RowNEW(testRow2Vals);
+        testRow1 = new Row(testRow2Vals);
         assertTrue(testRow1.size() == 5);
         assertEquals(testRow1, testRow2Vals);
     }

@@ -29,9 +29,10 @@ public class RedRefRowList extends RowList {
     // computes redref from that.
     private void rowCycleFinder(int heightNumber, int k, ArrayList<Integer> alreadyPassed) {
         for (int i = 0; i < heightNumber; i++) {
-            if (super.get(i).get(k) != 0.0f) {
+            Row row = new Row(super.get(i));
+            if (row.get(k) != 0.0f) {
                 if (!alreadyPassed.contains(i)) {
-                    scaleRow((1 / super.get(i).get(k)), i);
+                    scaleRow((1 / row.get(k)), i);
                     annihilator(i, heightNumber, k);
                     alreadyPassed.add(i);
                 }
@@ -61,7 +62,7 @@ public class RedRefRowList extends RowList {
     private void annihilator(int i, int heightNumber, int k) {
         for (int j = 0; j < heightNumber; j++) {
             if (!(j == i)) {
-                subtractRow(j, i, -super.get(j).get(k));
+                subtractRow(j, i, super.get(j).get(k));
             }
         }
     }
