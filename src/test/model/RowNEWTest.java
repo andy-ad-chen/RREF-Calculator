@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-public class RowTest {
-    private Row testRow1;
+public class RowNEWTest {
+    private RowNEW testRow1;
 
-    private Row testRow2;
-    private Row testRow3;
-    private Row testRow4;
+    private RowNEW testRow2;
+    private RowNEW testRow3;
+    private RowNEW testRow4;
 
     private ArrayList<Float> testRow1Vals;
     private ArrayList<Float> testRow1ValsScaled;
@@ -60,29 +60,27 @@ public class RowTest {
         testRowSummedVals.add(7.0f + 7.0f);
         testRowSummedVals.add(7.0f + 7.0f);
 
-        testRow1 = new Row(3, testRow1Vals);
-
-        testRow2 = new Row(5, testRow2Vals);
-        testRow3 = new Row(5, testRow3Vals);
-        testRow4 = new Row(3, testRow4Vals);
+        testRow1 = new RowNEW(testRow1Vals);
+        testRow2 = new RowNEW(testRow2Vals);
+        testRow3 = new RowNEW(testRow3Vals);
+        testRow4 = new RowNEW(testRow4Vals);
 
     }
 
     @Test
     void testConstructor() {
         assertFalse(testRow1.getCol() == 5);
-        assertNotEquals(testRow1.getFloatArray(), testRow2Vals);
-        testRow1 = new Row(5, testRow2Vals);
+        assertNotEquals(testRow1, testRow2Vals);
+        testRow1 = new RowNEW(testRow2Vals);
         assertTrue(testRow1.getCol() == 5);
-        assertEquals(testRow1.getFloatArray(), testRow2Vals);
+        assertEquals(testRow1, testRow2Vals);
     }
 
     @Test
     void testSumRow() {
-        ArrayList<Float> a = testRow2.getFloatArray();
-        assertNotEquals(testRowSummedVals, a);
+        assertNotEquals(testRowSummedVals, testRow2);
         testRow2.sumRow(testRow3);
-        assertEquals(testRowSummedVals, a);
+        assertEquals(testRowSummedVals, testRow2);
     }
 
     @Test
@@ -97,9 +95,8 @@ public class RowTest {
 
     @Test
     void testScaleRow() {
-        ArrayList<Float> a = testRow1.getFloatArray();
-        assertNotEquals(testRow1ValsScaled, a);
+        assertNotEquals(testRow1ValsScaled, testRow1);
         testRow1.scaleRow(2.0f);
-        assertEquals(testRow1ValsScaled, a);
+        assertEquals(testRow1ValsScaled, testRow1);
     }
 }

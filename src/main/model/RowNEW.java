@@ -40,5 +40,5 @@ public class RowNEW extends ArrayList<Float> {
     public int getCol() {
         return this.columnNum;
     }
-
+    
 }
