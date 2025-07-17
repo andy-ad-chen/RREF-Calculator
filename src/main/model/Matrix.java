@@ -1,5 +1,6 @@
 package model;
 
+
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
 public class Matrix {
     private String name; // give each matrix a name
