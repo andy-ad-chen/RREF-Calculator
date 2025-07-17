@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class RowList extends ArrayList<Row> {
+public class RowList extends ArrayList<RowNEW> {
 
     public RowList() {
         super();
@@ -11,7 +11,7 @@ public class RowList extends ArrayList<Row> {
     // REQUIRES: 0 <= rowIndex < matrixRows.size() - 1
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
-    public void scaleRow() {
+    public void scaleRow(float scale, int index) {
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
@@ -34,7 +34,7 @@ public class RowList extends ArrayList<Row> {
     // MODIFIES: this
     // EFFECTS: subtracts the values in the first row by the second row times some
     // factor
-    public void subtractRow() {
+    public void subtractRow(int firstIndex, int secondIndex, float factor) {
     }
 
     // EFFECTS: clones a RowList and copies all objects
