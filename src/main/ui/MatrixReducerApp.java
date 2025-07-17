@@ -2,7 +2,7 @@ package ui;
 
 import model.Matrix;
 import model.MatrixList;
-import model.Row;
+import model.RowLEGACY;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -102,7 +102,7 @@ public class MatrixReducerApp {
     // MODIFIES: this
     // EFFECTS: allows user to continue to specify a matrix
     void specifyMatrix(int height, int width, String name, String desc) {
-        ArrayList<Row> listOfRows = new ArrayList<>();
+        ArrayList<RowLEGACY> listOfRows = new ArrayList<>();
         for (int j = 0; j < height; j++) {
             ArrayList<Float> listOfVals = new ArrayList<>();
             for (int i = 0; i < width; i++) {
@@ -110,7 +110,7 @@ public class MatrixReducerApp {
                 float val = input.nextFloat();
                 listOfVals.add(val);
             }
-            Row row = new Row(width, listOfVals);
+            RowLEGACY row = new RowLEGACY(width, listOfVals);
             listOfRows.add(row);
         }
         Matrix matrix = new Matrix(listOfRows, width, name, desc);

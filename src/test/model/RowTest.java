@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 public class RowTest {
-    private Row testRow1;
+    private RowLEGACY testRow1;
     
-    private Row testRow2;
-    private Row testRow3;
-    private Row testRow4;
+    private RowLEGACY testRow2;
+    private RowLEGACY testRow3;
+    private RowLEGACY testRow4;
     
 
     private ArrayList<Float> testRow1Vals;
@@ -63,12 +63,12 @@ testRow4Vals = new ArrayList<>();
         testRowSummedVals.add(7.0f + 7.0f);
         testRowSummedVals.add(7.0f + 7.0f);
 
-        testRow1 = new Row(3, testRow1Vals);
+        testRow1 = new RowLEGACY(3, testRow1Vals);
     
 
-        testRow2 = new Row(5, testRow2Vals);
-        testRow3 = new Row(5, testRow3Vals);
-        testRow4 = new Row(3, testRow4Vals);
+        testRow2 = new RowLEGACY(5, testRow2Vals);
+        testRow3 = new RowLEGACY(5, testRow3Vals);
+        testRow4 = new RowLEGACY(3, testRow4Vals);
 
     }
 
@@ -76,7 +76,7 @@ testRow4Vals = new ArrayList<>();
     void testConstructor() {
         assertFalse(testRow1.getCol() == 5);
         assertNotEquals(testRow1.getFloatArray(), testRow2Vals);
-        testRow1 = new Row(5, testRow2Vals);
+        testRow1 = new RowLEGACY(5, testRow2Vals);
         assertTrue(testRow1.getCol() == 5);
         assertEquals(testRow1.getFloatArray(), testRow2Vals);
     }
