@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class RowList extends ArrayList<RowLEGACY> {
+public class RowList extends ArrayList<Row> {
 
     public RowList() {
         super();

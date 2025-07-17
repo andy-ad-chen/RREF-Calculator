@@ -7,15 +7,15 @@ public class Matrix {
     private String name; // give each matrix a name
     private String desc; // give each matrix a description
     private Boolean invertible; // give each matrix an invertibility
-    private ArrayList<RowLEGACY> matrixRows; // list of matrix rows
+    private ArrayList<Row> matrixRows; // list of matrix rows
     private int columnNum; // number of columns OR number of elements in each row
-    private ArrayList<RowLEGACY> redrefRows; // list of matrix rows in redref
+    private ArrayList<Row> redrefRows; // list of matrix rows in redref
 
     // REQUIRES name and desc are both non-zero length strings,
     // matrixRows.size() = cols > 0,
     // rows is not empty.
     // EFFECTS: builds a matrix
-    public Matrix(ArrayList<RowLEGACY> rows, int cols, String name, String desc) {
+    public Matrix(ArrayList<Row> rows, int cols, String name, String desc) {
         matrixRows = rows;
         redrefRows = new ArrayList<>();
         columnNum = cols;
@@ -28,7 +28,7 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: scales a row by a float value.
     public void scaleRow(float scale, int rowIndex) {
-        RowLEGACY a = this.matrixRows.get(rowIndex);
+        Row a = this.matrixRows.get(rowIndex);
         a.scaleRow(scale);
     }
 
@@ -37,8 +37,8 @@ public class Matrix {
     // MODIFIES: this
     // EFFECTS: sum the values in the first row by the second row
     public void sumRow(int firstIndex, int secondIndex) {
-        RowLEGACY a = this.matrixRows.get(firstIndex);
-        RowLEGACY b = this.matrixRows.get(secondIndex);
+        Row a = this.matrixRows.get(firstIndex);
+        Row b = this.matrixRows.get(secondIndex);
         a.sumRow(b);
     }
 
@@ -48,8 +48,8 @@ public class Matrix {
     // EFFECTS: subtracts the values in the first row by the second row
     public void subtractRow(int firstIndex, int secondIndex, float factor) {
 
-        RowLEGACY a = this.matrixRows.get(secondIndex);
-        RowLEGACY b = new RowLEGACY(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+        Row a = this.matrixRows.get(secondIndex);
+        Row b = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
         // create a deepy copy to ensure same-row shenanigans don't bug our codew
         b.scaleRow(factor);
         this.matrixRows.get(firstIndex).sumRow(b);
@@ -61,8 +61,8 @@ public class Matrix {
     // EFFECTS: subtracts the values in the first row by the second row
     public void subtractRowRedRef(int firstIndex, int secondIndex, float factor) {
 
-        RowLEGACY a = this.redrefRows.get(secondIndex);
-        RowLEGACY b = new RowLEGACY(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+        Row a = this.redrefRows.get(secondIndex);
+        Row b = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
         // create a deepy copy to ensure same-row shenanigans don't bug our codew
         b.scaleRow(factor);
         this.redrefRows.get(firstIndex).sumRow(b);
@@ -91,11 +91,11 @@ public class Matrix {
     // EFFECTS: swaps two rows in the matrix, first and second index
     public void swapRowRedRef(int firstIndex, int secondIndex) {
 
-        RowLEGACY a = this.redrefRows.get(firstIndex);
-        RowLEGACY copyFirst = new RowLEGACY(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
+        Row a = this.redrefRows.get(firstIndex);
+        Row copyFirst = new Row(a.getCol(), new ArrayList<Float>(a.getFloatArray()));
 
-        RowLEGACY b = this.redrefRows.get(secondIndex);
-        RowLEGACY copySecond = new RowLEGACY(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
+        Row b = this.redrefRows.get(secondIndex);
+        Row copySecond = new Row(b.getCol(), new ArrayList<Float>(b.getFloatArray()));
         // create a deepy copy of the second row to ensure same-row shenanigans don't
         // bug our code
 
@@ -137,13 +137,13 @@ public class Matrix {
     }
 
     // EFFECTS: gets list of rows of matrix
-    public ArrayList<RowLEGACY> getRows() {
+    public ArrayList<Row> getRows() {
         return this.matrixRows;
     }
 
     // REQUIRES: 0 <= firstIndex < matrixRows.size() - 1
     // EFFECTS: gets a row of matrix
-    public RowLEGACY getRow(int index) {
+    public Row getRow(int index) {
         return matrixRows.get(0);
     }
 
@@ -185,7 +185,7 @@ public class Matrix {
     // computes redref from that.
     public void rowCycleFinder(int heightNumber, int k, ArrayList<Integer> alreadyPassed) {
         for (int i = 0; i < heightNumber; i++) {
-            RowLEGACY row = redrefRows.get(i);
+            Row row = redrefRows.get(i);
             if (row.getFloatArray().get(k) != 0.0f) {
                 if (!alreadyPassed.contains(i)) {
                     scaleRow((1 / row.getFloatArray().get(k)), i);
@@ -229,10 +229,10 @@ public class Matrix {
     }
 
     // EFFECTS: clones an ArrayList<Row> object... deeply
-    public ArrayList<RowLEGACY> deepClone() {
-        ArrayList<RowLEGACY> returnVal = new ArrayList<>();
-        for (RowLEGACY i : this.matrixRows) {
-            RowLEGACY tempRow = new RowLEGACY(i.getCol(), i.getFloatArray());
+    public ArrayList<Row> deepClone() {
+        ArrayList<Row> returnVal = new ArrayList<>();
+        for (Row i : this.matrixRows) {
+            Row tempRow = new Row(i.getCol(), i.getFloatArray());
             returnVal.add(tempRow);
         }
         return returnVal;
@@ -251,7 +251,7 @@ public class Matrix {
     public Boolean hasZeroRows() {
         Boolean zeroRow;
         zeroRow = false;
-        for (RowLEGACY i : this.redrefRows) {
+        for (Row i : this.redrefRows) {
             if (i.zeroRow() == true) {
                 zeroRow = true;
             }
@@ -282,12 +282,12 @@ public class Matrix {
     }
 
     // EFFECTS: gets list of rows of a matrix
-    public ArrayList<RowLEGACY> getMatrixRows() {
+    public ArrayList<Row> getMatrixRows() {
         return this.matrixRows;
     }
 
     // EFFECTS: gets list of rows of a matrix's rref
-    public ArrayList<RowLEGACY> getRedRefRows() {
+    public ArrayList<Row> getRedRefRows() {
         return this.redrefRows;
     }
 

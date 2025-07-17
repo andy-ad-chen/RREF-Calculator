@@ -13,15 +13,15 @@ public class MatrixListTest {
     private Matrix baseMatrix1;
     private Matrix baseMatrix2;
     private ArrayList<Float> oneByOneList = new ArrayList<>();
-    private RowLEGACY oneByOneRow;
-    private ArrayList<RowLEGACY> baseVals = new ArrayList<>();
+    private Row oneByOneRow;
+    private ArrayList<Row> baseVals = new ArrayList<>();
 
     private MatrixList testList;
 
     @BeforeEach
     void runBefore() {
         oneByOneList.add(1.0f);
-        oneByOneRow = new RowLEGACY(1, oneByOneList);
+        oneByOneRow = new Row(1, oneByOneList);
         baseVals.add(oneByOneRow);
         baseMatrix1 = new Matrix(baseVals, 1, "name1", "desc1");
         baseMatrix2 = new Matrix(baseVals, 1, "name2", "desc2");

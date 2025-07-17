@@ -31,27 +31,27 @@ public class MatrixTest {
     private ArrayList<Float> listIdentity2 = new ArrayList<>();
     private ArrayList<Float> listIdentity3 = new ArrayList<>();
 
-    private ArrayList<RowLEGACY> typicalTestVals = new ArrayList<>();
-    private ArrayList<RowLEGACY> baseVals = new ArrayList<>();
-    private ArrayList<RowLEGACY> identityVals = new ArrayList<>();
-    private ArrayList<RowLEGACY> zeroVals = new ArrayList<>();
-    private ArrayList<RowLEGACY> redRefVals = new ArrayList<>();
+    private ArrayList<Row> typicalTestVals = new ArrayList<>();
+    private ArrayList<Row> baseVals = new ArrayList<>();
+    private ArrayList<Row> identityVals = new ArrayList<>();
+    private ArrayList<Row> zeroVals = new ArrayList<>();
+    private ArrayList<Row> redRefVals = new ArrayList<>();
 
-    private RowLEGACY typicalCaseRow1;
-    private RowLEGACY typicalCaseRow2;
-    private RowLEGACY typicalCaseRow3;
-    private RowLEGACY typicalCaseRow1RedRef;
-    private RowLEGACY typicalCaseRow2RedRef;
-    private RowLEGACY typicalCaseRow3RedRef;
-    private RowLEGACY typicalCaseScaled;
-    private RowLEGACY typicalCaseSummed;
-    private RowLEGACY zeroRow;
+    private Row typicalCaseRow1;
+    private Row typicalCaseRow2;
+    private Row typicalCaseRow3;
+    private Row typicalCaseRow1RedRef;
+    private Row typicalCaseRow2RedRef;
+    private Row typicalCaseRow3RedRef;
+    private Row typicalCaseScaled;
+    private Row typicalCaseSummed;
+    private Row zeroRow;
 
-    private RowLEGACY oneByOneRow;
+    private Row oneByOneRow;
 
-    private RowLEGACY identity1;
-    private RowLEGACY identity2;
-    private RowLEGACY identity3;
+    private Row identity1;
+    private Row identity2;
+    private Row identity3;
 
     @BeforeEach
     void runBefore() {
@@ -103,25 +103,25 @@ public class MatrixTest {
 
         oneByOneList.add(1.0f);
 
-        typicalCaseRow1 = new RowLEGACY(3, listFloatTypical1);
-        typicalCaseRow2 = new RowLEGACY(3, listFloatTypical2);
-        typicalCaseRow3 = new RowLEGACY(3, listFloatTypical3);
+        typicalCaseRow1 = new Row(3, listFloatTypical1);
+        typicalCaseRow2 = new Row(3, listFloatTypical2);
+        typicalCaseRow3 = new Row(3, listFloatTypical3);
 
-        typicalCaseRow1RedRef = new RowLEGACY(3, listFloatTypical1RedRef);
-        typicalCaseRow2RedRef = new RowLEGACY(3, listFloatTypical2RedRef);
-        typicalCaseRow3RedRef = new RowLEGACY(3, listFloatTypical3RedRef);
+        typicalCaseRow1RedRef = new Row(3, listFloatTypical1RedRef);
+        typicalCaseRow2RedRef = new Row(3, listFloatTypical2RedRef);
+        typicalCaseRow3RedRef = new Row(3, listFloatTypical3RedRef);
 
-        identity1 = new RowLEGACY(3, listIdentity1);
-        identity2 = new RowLEGACY(3, listIdentity2);
-        identity3 = new RowLEGACY(3, listIdentity3);
+        identity1 = new Row(3, listIdentity1);
+        identity2 = new Row(3, listIdentity2);
+        identity3 = new Row(3, listIdentity3);
 
-        typicalCaseScaled = new RowLEGACY(3, listFloatTypicalScaled);
+        typicalCaseScaled = new Row(3, listFloatTypicalScaled);
 
-        typicalCaseSummed = new RowLEGACY(3, listFloatTypicalSumFirstSecondRow);
+        typicalCaseSummed = new Row(3, listFloatTypicalSumFirstSecondRow);
 
-        zeroRow = new RowLEGACY(3, zeroList);
+        zeroRow = new Row(3, zeroList);
 
-        oneByOneRow = new RowLEGACY(1, oneByOneList);
+        oneByOneRow = new Row(1, oneByOneList);
 
         typicalTestVals.add(typicalCaseRow1);
         typicalTestVals.add(typicalCaseRow2);
