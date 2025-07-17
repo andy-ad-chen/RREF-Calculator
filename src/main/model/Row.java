@@ -18,7 +18,7 @@ public class Row extends ArrayList<Float> {
     // EFFECTS: constructs a copy of a row
     public Row(Row toBeCopied) {
         super();
-        for(float c: toBeCopied) {
+        for (float c: toBeCopied) {
             super.add(c);
         }
     }
