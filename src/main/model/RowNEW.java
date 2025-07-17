@@ -3,19 +3,33 @@ package model;
 import java.util.ArrayList;
 
 public class RowNEW extends ArrayList<Float> {
-    private int columnNum;
+
+    // EFFECTS: constructs row
+    public RowNEW() {
+        super();
+    }
 
     // EFFECTS: constructs row with a collection and correct column num
     public RowNEW(ArrayList<Float> collection) {
         super(collection);
-        columnNum = collection.size();
     }
+
+
+    // EFFECTS: constructs a copy of a row
+    public RowNEW(RowNEW toBeCopied) {
+        super();
+        for(float c: toBeCopied) {
+            super.add(c);
+        }
+    }
+
+    // for some freaking reason, this is the only way to get a good deep clone.
 
     // REQUIRES: two rows are of same length
     // MODIFIES: this
     // EFFECTS: sums the values of the row passed as an argument and super
     public void sumRow(RowNEW secondRow) {
-        for (int i = 0; i < this.columnNum; i++) {
+        for (int i = 0; i < super.size(); i++) {
             float firstRowVal = super.get(i);
             float secondRowVal = secondRow.get(i);
             float a = firstRowVal + secondRowVal;
@@ -26,7 +40,7 @@ public class RowNEW extends ArrayList<Float> {
     // MODIFIES: this
     // EFFECTS: scales the values of this row
     public void scaleRow(float scale) {
-        for (int i = 0; i < this.columnNum; i++) {
+        for (int i = 0; i < super.size(); i++) {
             float val = scale * super.get(i);
             super.set(i, val);
         }
@@ -43,12 +57,4 @@ public class RowNEW extends ArrayList<Float> {
         }
         return zeroRow;
     }
-
-
-
-    // EFFECTS: gets columns number
-    public int getCol() {
-        return this.columnNum;
-    }
-
 }

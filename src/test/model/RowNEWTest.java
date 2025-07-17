@@ -69,10 +69,10 @@ public class RowNEWTest {
 
     @Test
     void testConstructor() {
-        assertFalse(testRow1.getCol() == 5);
+        assertFalse(testRow1.size() == 5);
         assertNotEquals(testRow1, testRow2Vals);
         testRow1 = new RowNEW(testRow2Vals);
-        assertTrue(testRow1.getCol() == 5);
+        assertTrue(testRow1.size() == 5);
         assertEquals(testRow1, testRow2Vals);
     }
 

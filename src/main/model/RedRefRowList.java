@@ -36,17 +36,23 @@ public class RedRefRowList extends RowList {
     // EFFECTS: sends all rows that are full of 0 to the bottom, and sorts rows with
     // earliest "1" value to top of matrix. Does this to the RREF matrix
     private void rowSorter() {
+        ArrayList<Integer> alreadyPassed = new ArrayList<>();
+        for (int k = 0; k < super.getWidth(); k++) {
+            for (int i = 0; i < super.size(); i++) {
+                if (super.get(i).get(k) == 1.0f) {
+                    if (!alreadyPassed.contains(i)) {
+                        swapRow(i, alreadyPassed.size());
+                        alreadyPassed.add(alreadyPassed.size());
+                    }
+                }
+            }
+        }
     }
 
-    // MODIFIES: this
-    // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
-    // redrefRows.size()
-    private void annihilator() {
-    }
 
     // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
     // redrefRows.size()
-    public void annihilator(int i, int heightNumber, int k) {
+    private void annihilator(int i, int heightNumber, int k) {
         for (int j = 0; j < heightNumber; j++) {
             if (!(j == i)) {
                 subtractRow(j, i, -super.get(j).get(k));
