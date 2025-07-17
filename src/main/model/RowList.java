@@ -17,7 +17,7 @@ public class RowList extends ArrayList<RowNEW> {
         columnNum = num;
     }
 
-    // EFFECTS: constructs a deep cllone of RowList
+    // EFFECTS: constructs a deep clone of RowList
 
     public RowList(RowList rowList) {
         super();

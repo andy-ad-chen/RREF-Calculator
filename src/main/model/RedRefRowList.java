@@ -3,8 +3,15 @@ package model;
 import java.util.ArrayList;
 
 public class RedRefRowList extends RowList {
+
+    // EFFECTS: constructs a RedRefRowList
     public RedRefRowList() {
         super();
+    }
+
+    // EFFECTS: clones a RedRefRowList from RowList
+    public RedRefRowList(RowList rowList) {
+        super(rowList);
     }
 
     // MODIFIES: this
@@ -49,7 +56,6 @@ public class RedRefRowList extends RowList {
         }
     }
 
-
     // EFFECTS: subtracts i-th row times index(j) for all j s.t. i< j <
     // redrefRows.size()
     private void annihilator(int i, int heightNumber, int k) {
@@ -58,6 +64,14 @@ public class RedRefRowList extends RowList {
                 subtractRow(j, i, -super.get(j).get(k));
             }
         }
+    }
+
+    // EFFECTS: checks if the RowList (matrix) is invertible
+    public boolean checkInvert() {
+        if (super.size() == super.getWidth()) {
+            return !hasZeroRows();
+        }
+        return false;
     }
 
     // EFFECTS: determines if a RowList has zero rows
