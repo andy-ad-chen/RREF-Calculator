@@ -14,7 +14,7 @@ public class Row extends ArrayList<Float> {
         super(collection);
     }
 
-
+    // REQUIERS: nonzero row
     // EFFECTS: constructs a copy of a row
     public Row(Row toBeCopied) {
         super();
@@ -48,13 +48,14 @@ public class Row extends ArrayList<Float> {
 
     // EFFECTS: produce true if Row is all 0
     public boolean zeroRow() {
-        Boolean zeroRow;
-        zeroRow = true;
-        for (int val = 0; val < super.size(); val++) {
-            if (val != 0.0f || val != -0.0f) {
-                zeroRow = false;
+        for (float f: this) {
+            if (f != 0.0f) {
+                return false;
             }
         }
-        return zeroRow;
+        return true;
     }
 }
+
+
+

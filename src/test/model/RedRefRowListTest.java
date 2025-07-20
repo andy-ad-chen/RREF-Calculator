@@ -10,6 +10,9 @@ public class RedRefRowListTest extends RowListTest {
     // TODO: extend RowList testing to include
     // computeRedRefTypical, computeRedRefIdentity, computeRedRefOneByOne
     // computeRedRefZero
+
+
+    
     
     // TODO: testCheckInvertIdentity, testCheckInvertZero
 

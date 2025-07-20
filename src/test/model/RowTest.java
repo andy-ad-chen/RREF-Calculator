@@ -15,6 +15,7 @@ public class RowTest {
     private Row testRow2;
     private Row testRow3;
     private Row testRow4;
+    private Row testRowZero;
     private Row testRowSummed;
 
     private ArrayList<Float> testRow2Vals;
@@ -56,6 +57,12 @@ public class RowTest {
         testRow4.add(0.0f);
         testRow4.add(0.0f);
         testRow4.add(0.0f);
+
+        testRowZero = new Row();
+        testRowZero.add(0f);
+        testRowZero.add(0f);
+        testRowZero.add(0f);
+        testRowZero.add(0f);
 
         testRowSummed = new Row();
         testRowSummed.add(5.0f + 4.0f);
@@ -104,7 +111,7 @@ public class RowTest {
 
     @Test
     void testZeroRow() {
-        assertTrue(testRow4.zeroRow());
+        assertTrue(testRowZero.zeroRow());
     }
 
     @Test

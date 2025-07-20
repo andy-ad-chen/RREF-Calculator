@@ -150,7 +150,6 @@ public class RowListTest {
 
     }
 
-
     @Test
     void testSumRowSelf() {
         Row row = typicalCase.get(0);
@@ -174,8 +173,50 @@ public class RowListTest {
         assertEquals(typicalCase.get(0), summed);
     }
 
-    //TODO: testSwapRowSelf, testSwapRowElse
+    // TODO: testSwapRowSelf, testSwapRowElse
 
-    //TODO: use sumRow and scaleRow to easily test subtractRowSelf
+    @Test
+    void testSwapRowSelf() {
+        Row row1 = typicalCase.get(0);
+        Row alt1 = new Row(row1);
+        typicalCase.swapRow(0, 0);
+        assertEquals(typicalCase.get(0), alt1);
+    }
+
+    @Test
+    void testSwapRowElse() {
+        Row row1 = typicalCase.get(0);
+        Row row2 = typicalCase.get(1);
+        Row alt1 = new Row(row1);
+        Row alt2 = new Row(row2);
+        typicalCase.swapRow(0, 1);
+
+        assertNotEquals(typicalCase.get(0), alt1);
+        assertNotEquals(typicalCase.get(1), alt2);
+        assertEquals(typicalCase.get(0), alt2);
+        assertEquals(typicalCase.get(1), alt1);
+    }
+
+    @Test
+    void testSubtractRowSelf() {
+        Row row1 = typicalCase.get(0);
+        Row alt1 = new Row(row1);
+        typicalCase.subtractRow(0, 0, 1f);
+        assertNotEquals(typicalCase.get(0), alt1);
+        alt1.scaleRow(0f);
+        assertEquals(typicalCase.get(0), alt1);
+    }
+
+    @Test
+    void testSubtractRowElse() {
+        Row row1 = typicalCase.get(0);
+        Row row2 = typicalCase.get(1);
+        Row alt1 = new Row(row1);
+        Row alt2 = new Row(row2);
+        typicalCase.subtractRow(0, 1, -1f);
+        assertNotEquals(typicalCase.get(0), alt1);
+        alt1.sumRow(alt2);
+        assertEquals(typicalCase.get(0), alt1);
+    }
 
 }

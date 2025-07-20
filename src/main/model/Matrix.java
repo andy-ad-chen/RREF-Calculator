@@ -1,6 +1,5 @@
 package model;
 
-
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
 public class Matrix {
     private String name; // give each matrix a name
@@ -22,6 +21,15 @@ public class Matrix {
         this.desc = desc;
         invertible = false;
     }
+
+    // // REQUIRES: non-null matrix
+    // // EFFECTS: copies a matrix without computing redref
+    // public Matrix(Matrix matrix) {
+    //     this(RowList(matrix.getMatrixRows()),
+    //             matrix.getWidth(),
+    //             matrix.getMatrixName(),
+    //             matrix.getMatrixDesc());
+    // }
 
     // EFFECTS: gets col number of matrix
     public int getWidth() {
