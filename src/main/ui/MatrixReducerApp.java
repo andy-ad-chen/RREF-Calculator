@@ -76,9 +76,7 @@ public class MatrixReducerApp {
             changeMatrixName();
         } else if (command.equals("d")) {
             changeMatrixDesc();
-        }
-
-        else {
+        } else {
             System.out.println("Selection not valid...");
         }
     }
