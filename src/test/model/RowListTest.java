@@ -81,6 +81,15 @@ public class RowListTest {
         identityRow1 = new Row();
         identityRow2 = new Row();
         identityRow3 = new Row();
+        identityRow1.add(1.0f);
+        identityRow1.add(0.0f);
+        identityRow1.add(0.0f);
+        identityRow2.add(0.0f);
+        identityRow2.add(1.0f);
+        identityRow2.add(0.0f);
+        identityRow3.add(0.0f);
+        identityRow3.add(0.0f);
+        identityRow3.add(1.0f);
         identity.add(identityRow1);
         identity.add(identityRow2);
         identity.add(identityRow3);
@@ -172,8 +181,6 @@ public class RowListTest {
         typicalCase.sumRow(0, 1);
         assertEquals(typicalCase.get(0), summed);
     }
-
-    // TODO: testSwapRowSelf, testSwapRowElse
 
     @Test
     void testSwapRowSelf() {
