@@ -5,27 +5,40 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import java.util.ArrayList;
 
 public class MatrixListTest {
 
     private Matrix baseMatrix1;
     private Matrix baseMatrix2;
-    private ArrayList<Float> oneByOneList = new ArrayList<>();
-    private Row oneByOneRow;
-    private ArrayList<Row> baseVals = new ArrayList<>();
 
+    private Row oneByOneRow;
+    private Row baseRow;
+    private RowList baseRowList;
+    private Row cloneRow;
+    private RowList cloneRowList;
     private MatrixList testList;
 
     @BeforeEach
     void runBefore() {
-        oneByOneList.add(1.0f);
-        oneByOneRow = new Row(1, oneByOneList);
-        baseVals.add(oneByOneRow);
-        baseMatrix1 = new Matrix(baseVals, 1, "name1", "desc1");
-        baseMatrix2 = new Matrix(baseVals, 1, "name2", "desc2");
+        oneByOneRow = new Row();
+        baseRow = new Row();
+        cloneRow = new Row();
 
+        baseRowList = new RowList();
+        cloneRowList = new RowList();
+        
+
+        oneByOneRow.add(1.0f);
+        baseRow.add(1.0f);
+        baseRow.add(1.0f);
+        baseRow.add(1.0f);
+        cloneRow = new Row(baseRow);
+        baseRowList.add(cloneRow);
+        baseRowList.add(baseRow);
+        cloneRowList = new RowList(baseRowList);
+        baseMatrix1 = new Matrix(baseRowList, 3, "name1", "desc1");
+        baseMatrix2 = new Matrix(cloneRowList, 3, "name2", "desc2");
         testList = new MatrixList();
     }
 
@@ -83,7 +96,6 @@ public class MatrixListTest {
         testList.removeMatrix(0);
         assertFalse(matrices.contains(baseMatrix1));
     }
-
 
     @Test
     void testChangeNameOne() {

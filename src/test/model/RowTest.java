@@ -6,34 +6,38 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RowTest {
     private Row testRow1;
-    
+    private Row testRow1Scaled;
     private Row testRow2;
     private Row testRow3;
     private Row testRow4;
-    
+    private Row testRowZero;
+    private Row testRowSummed;
 
-    private ArrayList<Float> testRow1Vals;
-    private ArrayList<Float> testRow1ValsScaled;
     private ArrayList<Float> testRow2Vals;
-    private ArrayList<Float> testRow3Vals;
-    private ArrayList<Float> testRow4Vals;
-    private ArrayList<Float> testRowSummedVals;
 
     @BeforeEach
     void runBefore() {
-        testRow1Vals = new ArrayList<>();
-        testRow1Vals.add(1.0f);
-        testRow1Vals.add(2.0f);
-        testRow1Vals.add(3.0f);
+        testRow1 = new Row();
+        testRow1.add(1.0f);
+        testRow1.add(2.0f);
+        testRow1.add(3.0f);
 
-        testRow1ValsScaled = new ArrayList<>();
-        testRow1ValsScaled.add(2.0f);
-        testRow1ValsScaled.add(4.0f);
-        testRow1ValsScaled.add(6.0f);
+        testRow1Scaled = new Row();
+        testRow1Scaled.add(2.0f);
+        testRow1Scaled.add(4.0f);
+        testRow1Scaled.add(6.0f);
+
+        testRow2 = new Row();
+        testRow2.add(5.0f);
+        testRow2.add(6.0f);
+        testRow2.add(7.0f);
+        testRow2.add(7.0f);
+        testRow2.add(7.0f);
 
         testRow2Vals = new ArrayList<>();
         testRow2Vals.add(5.0f);
@@ -42,57 +46,72 @@ public class RowTest {
         testRow2Vals.add(7.0f);
         testRow2Vals.add(7.0f);
 
-        testRow3Vals = new ArrayList<>();
-        testRow3Vals.add(4.0f);
-        testRow3Vals.add(6.0f);
-        testRow3Vals.add(7.0f);
-        testRow3Vals.add(7.0f);
-        testRow3Vals.add(7.0f);
+        testRow3 = new Row();
+        testRow3.add(4.0f);
+        testRow3.add(6.0f);
+        testRow3.add(7.0f);
+        testRow3.add(7.0f);
+        testRow3.add(7.0f);
 
+        testRow4 = new Row();
+        testRow4.add(0.0f);
+        testRow4.add(0.0f);
+        testRow4.add(0.0f);
 
-testRow4Vals = new ArrayList<>();
-        testRow4Vals.add(0.0f);
-        testRow4Vals.add(0.0f);
-        testRow4Vals.add(0.0f);
+        testRowZero = new Row();
+        testRowZero.add(0f);
+        testRowZero.add(0f);
+        testRowZero.add(0f);
+        testRowZero.add(0f);
 
-
-        testRowSummedVals = new ArrayList<>();
-        testRowSummedVals.add(5.0f + 4.0f);
-        testRowSummedVals.add(6.0f + 6.0f);
-        testRowSummedVals.add(7.0f + 7.0f);
-        testRowSummedVals.add(7.0f + 7.0f);
-        testRowSummedVals.add(7.0f + 7.0f);
-
-        testRow1 = new Row(3, testRow1Vals);
-    
-
-        testRow2 = new Row(5, testRow2Vals);
-        testRow3 = new Row(5, testRow3Vals);
-        testRow4 = new Row(3, testRow4Vals);
+        testRowSummed = new Row();
+        testRowSummed.add(5.0f + 4.0f);
+        testRowSummed.add(6.0f + 6.0f);
+        testRowSummed.add(7.0f + 7.0f);
+        testRowSummed.add(7.0f + 7.0f);
+        testRowSummed.add(7.0f + 7.0f);
 
     }
 
     @Test
     void testConstructor() {
-        assertFalse(testRow1.getCol() == 5);
-        assertNotEquals(testRow1.getFloatArray(), testRow2Vals);
-        testRow1 = new Row(5, testRow2Vals);
-        assertTrue(testRow1.getCol() == 5);
-        assertEquals(testRow1.getFloatArray(), testRow2Vals);
+        assertFalse(testRow1.size() == 5);
+        assertNotEquals(testRow1, testRow2);
+        assertTrue(testRow1.size() == 3);
     }
+
+
+    @Test
+    void testConstructorCopyCollection() {
+        assertFalse(testRow1.size() == 5);
+        assertNotEquals(testRow1, testRow2);
+        testRow1 = new Row(testRow2Vals);
+        assertTrue(testRow1.size() == 5);
+        assertEquals(testRow1, testRow2);
+    }
+
+
+
+    @Test
+    void testConstructorCopyRow() {
+        assertFalse(testRow1.size() == 5);
+        assertNotEquals(testRow1, testRow2);
+        testRow1 = new Row(testRow2);
+        assertTrue(testRow1.size() == 5);
+        assertEquals(testRow1, testRow2);
+    }
+
 
     @Test
     void testSumRow() {
-        ArrayList<Float> a = testRow2.getFloatArray();
-        assertNotEquals(testRowSummedVals, a);
+        assertNotEquals(testRowSummed, testRow2);
         testRow2.sumRow(testRow3);
-        assertEquals(testRowSummedVals, a);
+        assertEquals(testRowSummed, testRow2);
     }
-
 
     @Test
     void testZeroRow() {
-        assertTrue(testRow4.zeroRow());
+        assertTrue(testRowZero.zeroRow());
     }
 
     @Test
@@ -100,13 +119,10 @@ testRow4Vals = new ArrayList<>();
         assertFalse(testRow3.zeroRow());
     }
 
-
-
     @Test
     void testScaleRow() {
-        ArrayList<Float> a = testRow1.getFloatArray();
-        assertNotEquals(testRow1ValsScaled, a);
+        assertNotEquals(testRow1Scaled, testRow1);
         testRow1.scaleRow(2.0f);
-        assertEquals(testRow1ValsScaled, a);
+        assertEquals(testRow1Scaled, testRow1);
     }
 }

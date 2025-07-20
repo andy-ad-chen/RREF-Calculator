@@ -3,6 +3,7 @@ package ui;
 import model.Matrix;
 import model.MatrixList;
 import model.Row;
+import model.RowList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -100,7 +101,7 @@ public class MatrixReducerApp {
     // MODIFIES: this
     // EFFECTS: allows user to continue to specify a matrix
     void specifyMatrix(int height, int width, String name, String desc) {
-        ArrayList<Row> listOfRows = new ArrayList<>();
+        RowList listOfRows = new RowList(width);
         for (int j = 0; j < height; j++) {
             ArrayList<Float> listOfVals = new ArrayList<>();
             for (int i = 0; i < width; i++) {
@@ -108,7 +109,7 @@ public class MatrixReducerApp {
                 float val = input.nextFloat();
                 listOfVals.add(val);
             }
-            Row row = new Row(width, listOfVals);
+            Row row = new Row(listOfVals);
             listOfRows.add(row);
         }
         Matrix matrix = new Matrix(listOfRows, width, name, desc);
@@ -133,14 +134,14 @@ public class MatrixReducerApp {
         System.out.println(matrix.getMatrixDesc());
         System.out.println("===============================================");
         for (int i = 0; i < matrix.getMatrixRows().size(); i++) {
-            System.out.println(matrix.getMatrixRows().get(i).getFloatArray());
+            System.out.println(matrix.getMatrixRows().get(i));
         }
         System.out.println("===============================================");
         System.out.println("Matrix in Reduced Row Echelon Form is:");
         System.out.println("===============================================");
         matrix.computeRedRef();
         for (int i = 0; i < matrix.getRedRefRows().size(); i++) {
-            System.out.println(matrix.getRedRefRows().get(i).getFloatArray());
+            System.out.println(matrix.getRedRefRows().get(i));
         }
         System.out.println("===============================================");
     }
