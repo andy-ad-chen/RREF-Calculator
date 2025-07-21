@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -38,7 +37,6 @@ public class JsonReader {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseMatrixList(jsonObject);
-        // TODO: implement parseMatrixList
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -71,19 +69,16 @@ public class JsonReader {
 
     // MODIFIES: ml
     // EFFECTS: parses 1 matrix from JSON object and adds it to matrixlist
-    // Recompute RREF rather than parsing, optionally.
+    // Recompute RREF rather than parsing, funciontally the same.
     private void addOneMatrix(MatrixList ml, JSONObject jsonObject) {
         String name = jsonObject.getString("Name");
         String desc = jsonObject.getString("Description");
         int width = jsonObject.getInt("Width");
-
         JSONArray rowListArray = jsonObject.getJSONArray("Matrix Rows");
         RowList matrixRows = parseRowList(rowListArray, width);
-
         Matrix matrix = new Matrix(matrixRows, width, name, desc);
         matrix.computeRedRef();
         matrix.checkInvert();
-
         ml.addMatrix(matrix);
     }
 
@@ -101,7 +96,6 @@ public class JsonReader {
     }
 
     // EFFECTS: parses a row from JSONArray
-
     private Row parseRow(JSONArray rowArray) {
         Row row = new Row();
         for (int i = 0; i < rowArray.length(); i++) {

@@ -1,0 +1,82 @@
+{"List of Matrices": [
+    {
+        "Description": "desc",
+        "Invertibility": false,
+        "Matrix Rows in RREF": [
+            {"row": [
+                1,
+                2,
+                0
+            ]},
+            {"row": [
+                0,
+                2,
+                4
+            ]},
+            {"row": [
+                0,
+                0,
+                0
+            ]}
+        ],
+        "Matrix Rows": [
+            {"row": [
+                1,
+                2,
+                0
+            ]},
+            {"row": [
+                0,
+                2,
+                4
+            ]},
+            {"row": [
+                0,
+                0,
+                0
+            ]}
+        ],
+        "Width": 3,
+        "Name": "name"
+    },
+    {
+        "Description": "desc",
+        "Invertibility": false,
+        "Matrix Rows in RREF": [
+            {"row": [
+                1,
+                2,
+                0
+            ]},
+            {"row": [
+                0,
+                2,
+                4
+            ]},
+            {"row": [
+                0,
+                0,
+                0
+            ]}
+        ],
+        "Matrix Rows": [
+            {"row": [
+                1,
+                2,
+                0
+            ]},
+            {"row": [
+                0,
+                2,
+                4
+            ]},
+            {"row": [
+                0,
+                0,
+                0
+            ]}
+        ],
+        "Width": 3,
+        "Name": "name"
+    }
+]}

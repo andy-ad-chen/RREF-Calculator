@@ -70,8 +70,6 @@ public class Row extends ArrayList<Float> implements Writable {
         return json;
     }
 
-    // TODO: sends the non-primitives (non-fundamental JSON types) to json
-
     // EFFECTS: returns Rows in this matrix as a JSON array
     private JSONArray rowToJson() {
         JSONArray jsonArray = new JSONArray();

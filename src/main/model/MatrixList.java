@@ -58,7 +58,8 @@ public class MatrixList implements Writable {
     public String getMatrixDesc(int index) {
         return matrices.get(index).getMatrixDesc();
     }
-
+    
+    // EFFECTS: retursn JSONObject of list of matrix
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

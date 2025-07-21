@@ -111,6 +111,7 @@ public class Matrix implements Writable {
 
     // RECALL the above fields.
 
+    // EFFECTS: retursn JSONObject of matrix
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
