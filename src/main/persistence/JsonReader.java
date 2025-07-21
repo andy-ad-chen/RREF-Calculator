@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Category;
-import model.Thingy;
-import model.WorkRoom;
+import model.MatrixList;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -32,10 +30,11 @@ public class JsonReader {
 
     // EFFECTS: reads workroom from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public WorkRoom read() throws IOException {
+    public MatrixList read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseWorkRoom(jsonObject);
+        return parseMatrixList(jsonObject);
+        //TODO: implement parseMatrixList
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -49,25 +48,27 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
-    private WorkRoom parseWorkRoom(JSONObject jsonObject) {
+    // EFFECTS: parses matrixList from JSON object and returns it
+    private MatrixList parseMatrixList(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        WorkRoom wr = new WorkRoom(name);
-        addThingies(wr, jsonObject);
-        return wr;
+        MatrixList ml = new MatrixList(name);
+        addThingies(ml, jsonObject);
+
+        return ml;
+        //TODO: implement this.
     }
 
-    // MODIFIES: wr
+    // MODIFIES: ml
     // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addThingies(WorkRoom wr, JSONObject jsonObject) {
+    private void addThingies(MatrixList ml, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("thingies");
         for (Object json : jsonArray) {
             JSONObject nextThingy = (JSONObject) json;
-            addThingy(wr, nextThingy);
+            addThingy(ml, nextThingy);
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: ml
     // EFFECTS: parses thingy from JSON object and adds it to workroom
     private void addThingy(WorkRoom wr, JSONObject jsonObject) {
         String name = jsonObject.getString("name");

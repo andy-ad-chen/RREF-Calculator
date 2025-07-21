@@ -5,22 +5,33 @@ import model.MatrixList;
 import model.Row;
 import model.RowList;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-    /*
-     * 
-     * This class is inspired by code provided by the UBC Department of Computer
-     * Science, in the course material of CPSC 210.
-     * Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
-     * Teller application, TellerApp class.
-     * 
-     */
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
+ * Teller application, TellerApp class.
+ * 
+ */
+
+/*
+* 
+* This class is inspired by code provided by the UBC Department of Computer
+* Science, in the course material of CPSC 210.
+* Found in edX, CPSC 210 2025S2, Personal Project, Phase 2.
+* JsonSerializationDemo application, ui package.
+* 
+*/
+
 
 public class MatrixReducerApp {
 
     private MatrixList matrices = new MatrixList();
     private Scanner input;
-
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixReducerApp() {
@@ -191,4 +202,28 @@ public class MatrixReducerApp {
         matrices.changeMatrixDesc(desc, val - 1);
         System.out.println("Done!");
     }
+
+    // EFFECTS: saves the MatrixList to file
+    private void saveMatrixList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(matrices);
+            jsonWriter.close();
+            System.out.println("Saved matrices " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads matrices from file
+    private void loadWorkRoom() {
+        try {
+            matrices = jsonReader.read();
+            System.out.println("Loaded matrices from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

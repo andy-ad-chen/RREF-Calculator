@@ -1,7 +1,13 @@
 package model;
 
+import java.util.Collection;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a matrix as having a name, description, invertibility, and the list of rows making up the matrix.
-public class Matrix {
+public class Matrix implements Writable {
     private String name; // give each matrix a name
     private String desc; // give each matrix a description
     private Boolean invertible; // give each matrix an invertibility
@@ -25,10 +31,10 @@ public class Matrix {
     // // REQUIRES: non-null matrix
     // // EFFECTS: copies a matrix without computing redref
     // public Matrix(Matrix matrix) {
-    //     this(RowList(matrix.getMatrixRows()),
-    //             matrix.getWidth(),
-    //             matrix.getMatrixName(),
-    //             matrix.getMatrixDesc());
+    // this(RowList(matrix.getMatrixRows()),
+    // matrix.getWidth(),
+    // matrix.getMatrixName(),
+    // matrix.getMatrixDesc());
     // }
 
     // EFFECTS: gets col number of matrix
@@ -91,4 +97,52 @@ public class Matrix {
     public Boolean getInvertible() {
         return this.invertible;
     }
+
+    /*
+     * private String name; // give each matrix a name
+     * private String desc; // give each matrix a description
+     * private Boolean invertible; // give each matrix an invertibility
+     * private RowList matrixRows; // list of matrix rows
+     * private int columnNum; // number of columns OR number of elements in each row
+     * private RedRefRowList redrefRows; // list of matrix rows in redref
+     */
+
+    // RECALL the above fields.
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name", this.getMatrixName());
+        json.put("Description", this.getMatrixDesc());
+        json.put("Invertibility", this.getInvertible());
+
+        json.put("Matrix Rows", this.rowListsToJson(this.getMatrixRows()));
+        // ListOfRows
+
+        json.put("Width", this.getWidth());
+
+        json.put("Matrix Rows in RREF", this.rowListsToJson(this.getRedRefRows()));
+
+        return json;
+    }
+
+    // TODO: sends the non-primitives (non-fundamental JSON types) to json
+
+    // EFFECTS: returns Rows in this matrix as a JSON array
+    private JSONArray rowListsToJson(RowList rowList) {
+        JSONArray jsonArray = new JSONArray();
+        for (Row r : rowList) {
+            jsonArray.put(r.toJson());
+        }
+        return jsonArray;
+    }
+
+
+
+
+
+
+
+
+
 }

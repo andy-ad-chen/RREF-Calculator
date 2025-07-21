@@ -1,5 +1,5 @@
 package persistence;
-import model.WorkRoom;
+import model.MatrixList;
 import org.json.JSONObject;
 
 
@@ -14,7 +14,7 @@ import java.io.*;
      * 
      */
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of matrices to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -33,9 +33,13 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
-    public void write(WorkRoom wr) {
-        JSONObject json = wr.toJson();
+    // EFFECTS: writes MatrixList representation of workroom to file
+    public void write(MatrixList ml) {
+        JSONObject json = ml.toJson();
+
+        //TODO: implement toJson in matrix list.
+
+        
         saveToFile(json.toString(TAB));
     }
 

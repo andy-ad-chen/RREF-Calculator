@@ -2,7 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
-public class Row extends ArrayList<Float> {
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+
+
+public class Row extends ArrayList<Float> implements Writable {
 
     // EFFECTS: constructs row
     public Row() {
@@ -55,6 +62,25 @@ public class Row extends ArrayList<Float> {
         }
         return true;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("row", this.rowToJson());
+        return json;
+    }
+
+    // TODO: sends the non-primitives (non-fundamental JSON types) to json
+
+    // EFFECTS: returns Rows in this matrix as a JSON array
+    private JSONArray rowToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (float f : this) {
+            jsonArray.put(f);
+        }
+        return jsonArray;
+    }
+
 }
 
 
