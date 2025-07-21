@@ -7,16 +7,20 @@ import model.RowList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+    /*
+     * 
+     * This class is inspired by code provided by the UBC Department of Computer
+     * Science, in the course material of CPSC 210.
+     * Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
+     * Teller application, TellerApp class.
+     * 
+     */
 
 public class MatrixReducerApp {
 
     private MatrixList matrices = new MatrixList();
     private Scanner input;
 
-    // This class is inspired by code provided by the UBC Department of Computer
-    // Science, in the course material of CPSC 210.
-    // Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
-    // Teller application, TellerApp class.
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixReducerApp() {
