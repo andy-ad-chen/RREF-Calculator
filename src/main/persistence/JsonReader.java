@@ -1,11 +1,15 @@
 package persistence;
 
+import model.Matrix;
 import model.MatrixList;
+import model.Row;
+import model.RowList;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -34,7 +38,7 @@ public class JsonReader {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseMatrixList(jsonObject);
-        //TODO: implement parseMatrixList
+        // TODO: implement parseMatrixList
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -50,30 +54,61 @@ public class JsonReader {
 
     // EFFECTS: parses matrixList from JSON object and returns it
     private MatrixList parseMatrixList(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        MatrixList ml = new MatrixList(name);
-        addThingies(ml, jsonObject);
-
+        MatrixList ml = new MatrixList();
+        addMatrices(ml, jsonObject);
         return ml;
-        //TODO: implement this.
     }
 
     // MODIFIES: ml
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addThingies(MatrixList ml, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("thingies");
+    // EFFECTS: parses matrices from JSON object and adds them to matrix list
+    private void addMatrices(MatrixList ml, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("List of Matrices");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addThingy(ml, nextThingy);
+            JSONObject nextMatrix = (JSONObject) json;
+            addOneMatrix(ml, nextMatrix);
         }
     }
 
     // MODIFIES: ml
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
-    private void addThingy(WorkRoom wr, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        Category category = Category.valueOf(jsonObject.getString("category"));
-        Thingy thingy = new Thingy(name, category);
-        wr.addThingy(thingy);
+    // EFFECTS: parses 1 matrix from JSON object and adds it to matrixlist
+    // Recompute RREF rather than parsing, optionally.
+    private void addOneMatrix(MatrixList ml, JSONObject jsonObject) {
+        String name = jsonObject.getString("Name");
+        String desc = jsonObject.getString("Description");
+        int width = jsonObject.getInt("Width");
+
+        JSONArray rowListArray = jsonObject.getJSONArray("Matrix Rows");
+        RowList matrixRows = parseRowList(rowListArray, width);
+
+        Matrix matrix = new Matrix(matrixRows, width, name, desc);
+        matrix.computeRedRef();
+        matrix.checkInvert();
+
+        ml.addMatrix(matrix);
     }
+
+    // EFFECTS: parses rowlist from JSON object
+    private RowList parseRowList(JSONArray rowListArray, int width) {
+        RowList rowList = new RowList(width);
+        for (Object json : rowListArray) {
+            JSONArray nextRow = (JSONArray) ((JSONObject) json).getJSONArray("row");
+            // EXPLANATION TO SELF
+            // case `json` object as JSONOBJECT, use get... to get the row array which
+            // used the key "row", then set nextRow to be JSONARRAY by casting.
+            rowList.add(parseRow(nextRow));
+        }
+        return rowList;
+    }
+
+    // EFFECTS: parses a row from JSONArray
+
+    private Row parseRow(JSONArray rowArray) {
+        Row row = new Row();
+        for (int i = 0; i < rowArray.length(); i++) {
+            float val = (float) rowArray.getFloat(i);
+            row.add(val);
+        }
+        return row;
+    }
+
 }

@@ -37,9 +37,6 @@ public class JsonWriter {
     public void write(MatrixList ml) {
         JSONObject json = ml.toJson();
 
-        //TODO: implement toJson in matrix list.
-
-        
         saveToFile(json.toString(TAB));
     }
 

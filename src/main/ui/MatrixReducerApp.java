@@ -4,6 +4,8 @@ import model.Matrix;
 import model.MatrixList;
 import model.Row;
 import model.RowList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,11 +29,13 @@ import java.util.Scanner;
 * 
 */
 
-
 public class MatrixReducerApp {
 
     private MatrixList matrices = new MatrixList();
+    private static final String JSON_STORE = "./data/matrices.json";
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixReducerApp() {
@@ -62,6 +66,9 @@ public class MatrixReducerApp {
     private void init() {
         input = new Scanner(System.in);
         // input.useDelimiter("\r?\n|\r");
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to user
@@ -74,6 +81,8 @@ public class MatrixReducerApp {
         System.out.println("r: remove a matrix:   ");
         System.out.println("c: change a matrix name:   ");
         System.out.println("d: change a matrix description:   ");
+        System.out.println("w: write the matrices to file:   ");
+        System.out.println("l: load matrices from file:   ");
         System.out.println("q: quit:   ");
     }
 
@@ -92,6 +101,10 @@ public class MatrixReducerApp {
             changeMatrixName();
         } else if (command.equals("d")) {
             changeMatrixDesc();
+        } else if (command.equals("w")) {
+            saveMatrixList();
+        } else if (command.equals("l")) {
+            loadMatrixList();
         }
 
         else {
@@ -217,7 +230,7 @@ public class MatrixReducerApp {
 
     // MODIFIES: this
     // EFFECTS: loads matrices from file
-    private void loadWorkRoom() {
+    private void loadMatrixList() {
         try {
             matrices = jsonReader.read();
             System.out.println("Loaded matrices from" + JSON_STORE);

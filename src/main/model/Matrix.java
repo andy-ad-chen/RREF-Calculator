@@ -37,6 +37,8 @@ public class Matrix implements Writable {
     // matrix.getMatrixDesc());
     // }
 
+
+
     // EFFECTS: gets col number of matrix
     public int getWidth() {
         return this.columnNum;
