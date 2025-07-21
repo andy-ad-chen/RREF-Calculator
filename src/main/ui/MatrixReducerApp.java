@@ -105,9 +105,7 @@ public class MatrixReducerApp {
             saveMatrixList();
         } else if (command.equals("l")) {
             loadMatrixList();
-        }
-
-        else {
+        } else {
             System.out.println("Selection not valid...");
         }
     }
