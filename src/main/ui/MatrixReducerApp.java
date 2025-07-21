@@ -145,6 +145,8 @@ public class MatrixReducerApp {
         for (int i = 0; i < matrix.getRedRefRows().size(); i++) {
             System.out.println(matrix.getRedRefRows().get(i));
         }
+        matrix.checkInvert();
+        System.out.println("Invertible?: " + matrix.getInvertible());
         System.out.println("===============================================");
     }
 
