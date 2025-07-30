@@ -11,6 +11,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tools.AddMatrixTool;
 import ui.tools.LoadTool;
+import ui.tools.RemoveMatrixTool;
 import ui.tools.SaveTool;
 import ui.tools.Tool;
 import ui.tools.ViewSelectMenu;
@@ -33,11 +34,13 @@ public class MatrixGui extends JFrame {
 
     private MatrixList matrices;
 
-
     private ViewSelectMenu viewSelect;
     private SaveTool saveTool;
     private LoadTool loadTool;
     private AddMatrixTool addTool;
+    private RemoveMatrixTool deleteTool;
+
+    private JPanel toolArea;
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixGui() {
@@ -77,7 +80,7 @@ public class MatrixGui extends JFrame {
     // EFFECTS: a helper method which declares and instantiates all tools
     public void createTools() {
 
-        JPanel toolArea = new JPanel();
+        toolArea = new JPanel();
         toolArea.setLayout(new GridLayout(0, 1));
         toolArea.setSize(new Dimension(0, 0));
         add(toolArea, BorderLayout.SOUTH);
@@ -97,7 +100,10 @@ public class MatrixGui extends JFrame {
 
         pack();
 
-        System.out.println("tools created / recreated");
+    }
+
+    public void addDeleteTool() {
+        deleteTool = new RemoveMatrixTool(this, toolArea);
 
     }
 
@@ -108,79 +114,6 @@ public class MatrixGui extends JFrame {
     public void addMatrix() {
         addTool.addMatrixToList(this.matrices);
     }
-
-    // public void showMatrix(Matrix matrix) {
-    //     int height = matrix.getRows().size();
-    //     int width = matrix.getWidth();
-    //     RowList rowsMatrix = matrix.getMatrixRows();
-    //     RowList redRefMatrix = matrix.getRedRefRows();
-
-    //     JPanel container = new JPanel(new FlowLayout());
-    //     container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
-    //     container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
-
-    //     add(container, BorderLayout.CENTER);
-
-    //     pack();
-    //     revalidate();
-    //     repaint();
-    // }
-
-    // private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
-    //     JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
-
-    //     for (Row r : rowList) {
-    //         for (float f : r) {
-    //             String val = String.valueOf(f);
-    //             JLabel label = new JLabel(val);
-    //             label.setHorizontalAlignment(SwingConstants.CENTER);
-    //             matrixSpace.add(label);
-    //         }
-    //     }
-    //     matrixSpace.setBorder(new LineBorder(Color.BLACK, 2));
-    //     matrixSpace.setPreferredSize(new Dimension(width * 30, height * 30));
-    //     JPanel container = new JPanel();
-    //     container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-    //     container.add(matrixSpace);
-    //     container.add(new JLabel(msg + " Matrix"));
-    //     return container;
-    // }
-
-    // // EFFECTS: TESTING METHOD ONLY
-    // public void showMatrix() {
-    // // TODO: creates a JPanel of a matrix then adds to JFrame.
-    // // JPanel is aligned to the same area so repeated calls
-    // // of this method lead to replacing the matrix.
-
-    // matrixArea.setBorder(new LineBorder(Color.BLACK, 2));
-
-    // JPanel container = new JPanel();
-    // container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-    // matrixArea.setPreferredSize(new Dimension(100, 100));
-
-    // container.add(matrixArea);
-    // container.add(new JLabel("this is a LABEL RAGGHH"));
-
-    // JPanel outerContainer = new JPanel(new FlowLayout());
-    // outerContainer.add(container);
-
-    // outerContainer.add(new JLabel("a thing"));
-
-    // add(outerContainer, BorderLayout.CENTER);
-    // // STUB
-
-    // pack();
-    // revalidate();
-    // repaint();
-
-    // }
-
-    /*
-     * 
-     * This above method successfully creates a "stub"
-     * button whenever I click and select a matrix!
-     * 
-     */
 
     // EFFECTS: saves the MatrixList to file
 

@@ -98,6 +98,8 @@ public class ViewSelectMenu {
         container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
 
         mainGui.add(container, BorderLayout.CENTER);
+        
+        mainGui.addDeleteTool();
 
         mainGui.pack();
         mainGui.revalidate();
