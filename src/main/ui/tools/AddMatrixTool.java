@@ -78,6 +78,7 @@ public class AddMatrixTool extends Tool {
     // MODIFIES: matrices
     // EFFECTS: allows user to specify and add a matrix
     public void addMatrixToList(MatrixList matrices) {
+        matrices.getMatrices().add(new Matrix(identity, 3, "differnet id matrix", "nuh huh"));
         matrices.getMatrices().add(identityMatrix); // STUB 
 
     }
