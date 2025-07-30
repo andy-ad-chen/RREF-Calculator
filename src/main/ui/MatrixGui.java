@@ -109,42 +109,42 @@ public class MatrixGui extends JFrame {
         addTool.addMatrixToList(this.matrices);
     }
 
-    public void showMatrix(Matrix matrix) {
-        int height = matrix.getRows().size();
-        int width = matrix.getWidth();
-        RowList rowsMatrix = matrix.getMatrixRows();
-        RowList redRefMatrix = matrix.getRedRefRows();
+    // public void showMatrix(Matrix matrix) {
+    //     int height = matrix.getRows().size();
+    //     int width = matrix.getWidth();
+    //     RowList rowsMatrix = matrix.getMatrixRows();
+    //     RowList redRefMatrix = matrix.getRedRefRows();
 
-        JPanel container = new JPanel(new FlowLayout());
-        container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
-        container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
+    //     JPanel container = new JPanel(new FlowLayout());
+    //     container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
+    //     container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
 
-        add(container, BorderLayout.CENTER);
+    //     add(container, BorderLayout.CENTER);
 
-        pack();
-        revalidate();
-        repaint();
-    }
+    //     pack();
+    //     revalidate();
+    //     repaint();
+    // }
 
-    private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
-        JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
+    // private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
+    //     JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
 
-        for (Row r : rowList) {
-            for (float f : r) {
-                String val = String.valueOf(f);
-                JLabel label = new JLabel(val);
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                matrixSpace.add(label);
-            }
-        }
-        matrixSpace.setBorder(new LineBorder(Color.BLACK, 2));
-        matrixSpace.setPreferredSize(new Dimension(width * 30, height * 30));
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-        container.add(matrixSpace);
-        container.add(new JLabel(msg + " Matrix"));
-        return container;
-    }
+    //     for (Row r : rowList) {
+    //         for (float f : r) {
+    //             String val = String.valueOf(f);
+    //             JLabel label = new JLabel(val);
+    //             label.setHorizontalAlignment(SwingConstants.CENTER);
+    //             matrixSpace.add(label);
+    //         }
+    //     }
+    //     matrixSpace.setBorder(new LineBorder(Color.BLACK, 2));
+    //     matrixSpace.setPreferredSize(new Dimension(width * 30, height * 30));
+    //     JPanel container = new JPanel();
+    //     container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+    //     container.add(matrixSpace);
+    //     container.add(new JLabel(msg + " Matrix"));
+    //     return container;
+    // }
 
     // // EFFECTS: TESTING METHOD ONLY
     // public void showMatrix() {
