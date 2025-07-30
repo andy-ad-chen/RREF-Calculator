@@ -1,9 +1,14 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import model.Matrix;
 import model.MatrixList;
+import model.Row;
+import model.RowList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import ui.tools.LoadTool;
 import ui.tools.SaveTool;
 import ui.tools.Tool;
@@ -12,12 +17,18 @@ import ui.tools.ViewSelectMenu;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MatrixGui extends JFrame {
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 330;
+    private static final String JSON_STORE = "./data/matrices.json";
+
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     private MatrixList matrices = new MatrixList();
 
@@ -77,39 +88,105 @@ public class MatrixGui extends JFrame {
         LoadTool loadTool = new LoadTool(this, toolArea);
         tools.add(loadTool);
 
+        pack();
+
     }
 
     public void showMatrix(Matrix matrix) {
-        // TODO: creates a JPanel of a matrix then adds to JFrame.
-        // JPanel is aligned to the same area so repeated calls
-        // of this method lead to replacing the matrix.
+        int height = matrix.getRows().size();
+        int width = matrix.getWidth();
+        RowList rowsMatrix = matrix.getMatrixRows();
+        RowList redRefMatrix = matrix.getRedRefRows();
 
+        JPanel container = new JPanel(new FlowLayout());
+        container.add(getPanel(rowsMatrix, width, height, "Unsolved"));
+        container.add(getPanel(redRefMatrix, width, height, "RREF"));
+
+        add(container, BorderLayout.CENTER);
+
+        pack();
+        revalidate();
+        repaint();
     }
 
+    private JPanel getPanel(RowList rowList, int width, int height, String msg) {
+        JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
+
+        for (Row r : rowList) {
+            for (float f : r) {
+                String val = String.valueOf(f);
+                JLabel label = new JLabel(val);
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                matrixSpace.add(label);
+            }
+        }
+        matrixSpace.setBorder(new LineBorder(Color.BLACK, 2));
+        matrixSpace.setPreferredSize(new Dimension(width * 30, height * 30));
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(matrixSpace);
+        container.add(new JLabel(msg + " Matrix"));
+        return container;
+    }
 
     // // EFFECTS: TESTING METHOD ONLY
     // public void showMatrix() {
-    //     // TODO: creates a JPanel of a matrix then adds to JFrame.
-    //     // JPanel is aligned to the same area so repeated calls
-    //     // of this method lead to replacing the matrix.
+    // // TODO: creates a JPanel of a matrix then adds to JFrame.
+    // // JPanel is aligned to the same area so repeated calls
+    // // of this method lead to replacing the matrix.
 
-    //     JPanel matrixArea = new JPanel();
-    //     matrixArea.setLayout(new GridLayout(0, 1));
-    //     matrixArea.setSize(new Dimension(0, 0));
-    //     add(matrixArea, BorderLayout.NORTH);
-    //     // adds a "save tool" in as a stub.
-    //     new SaveTool(this, matrixArea);
-    //     // STUB
-    //     revalidate();
-    //     repaint();
+    // matrixArea.setBorder(new LineBorder(Color.BLACK, 2));
+
+    // JPanel container = new JPanel();
+    // container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+    // matrixArea.setPreferredSize(new Dimension(100, 100));
+
+    // container.add(matrixArea);
+    // container.add(new JLabel("this is a LABEL RAGGHH"));
+
+    // JPanel outerContainer = new JPanel(new FlowLayout());
+    // outerContainer.add(container);
+
+    // outerContainer.add(new JLabel("a thing"));
+
+    // add(outerContainer, BorderLayout.CENTER);
+    // // STUB
+
+    // pack();
+    // revalidate();
+    // repaint();
 
     // }
 
-    /* 
+    /*
      * 
      * This above method successfully creates a "stub"
      * button whenever I click and select a matrix!
      * 
      */
+
+    // EFFECTS: saves the MatrixList to file
+
+    public void saveMatrixList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(matrices);
+            jsonWriter.close();
+            System.out.println("Saved matrices " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads matrices from file
+    public void loadMatrixList() {
+        try {
+            matrices = jsonReader.read();
+            System.out.println("Loaded matrices from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }

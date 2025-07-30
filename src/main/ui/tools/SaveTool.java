@@ -1,5 +1,6 @@
 package ui.tools;
 
+import ui.Main;
 import ui.MatrixGui;
 
 import javax.swing.*;
@@ -10,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SaveTool extends Tool {
+    private static MatrixGui mainGui;
 
     public SaveTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
+        mainGui = Main.getMatrixGui();
     }
 
     @Override
@@ -34,7 +37,7 @@ public class SaveTool extends Tool {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             System.out.println("clicked the save tool");
-            
+            mainGui.saveMatrixList();
         }
     }
 }

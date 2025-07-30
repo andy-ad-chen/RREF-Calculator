@@ -1,5 +1,6 @@
 package ui.tools;
 
+import ui.Main;
 import ui.MatrixGui;
 
 import javax.swing.*;
@@ -10,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoadTool extends Tool {
+    private static MatrixGui mainGui;
 
     public LoadTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
+        mainGui = Main.getMatrixGui();
     }
 
     @Override
@@ -32,9 +35,9 @@ public class LoadTool extends Tool {
     private class LoadToolHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
+
             System.out.println("clicked the load tool");
-            
+            mainGui.loadMatrixList();
         }
     }
 }
