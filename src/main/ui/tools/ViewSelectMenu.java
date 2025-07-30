@@ -4,9 +4,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import model.Matrix;
 import model.MatrixList;
@@ -80,9 +83,45 @@ public class ViewSelectMenu {
             System.out.println(indexOfName);
             // shows the selected matrix on the main panel.
             mainGui = Main.getMatrixGui();
-            mainGui.showMatrix(shownMatrix); // COMMENT IN
-
+            showMatrix(shownMatrix);
         }
+    }
+
+    public void showMatrix(Matrix matrix) {
+        int height = matrix.getRows().size();
+        int width = matrix.getWidth();
+        RowList rowsMatrix = matrix.getMatrixRows();
+        RowList redRefMatrix = matrix.getRedRefRows();
+
+        JPanel container = new JPanel(new FlowLayout());
+        container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
+        container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
+
+        mainGui.add(container, BorderLayout.CENTER);
+
+        mainGui.pack();
+        mainGui.revalidate();
+        mainGui.repaint();
+    }
+
+    private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
+        JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
+
+        for (Row r : rowList) {
+            for (float f : r) {
+                String val = String.valueOf(f);
+                JLabel label = new JLabel(val);
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                matrixSpace.add(label);
+            }
+        }
+        matrixSpace.setBorder(new LineBorder(Color.BLACK, 2));
+        matrixSpace.setPreferredSize(new Dimension(width * 30, height * 30));
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.add(matrixSpace);
+        container.add(new JLabel(msg + " Matrix"));
+        return container;
     }
 
     // MODIFIES: comboOfMatrices

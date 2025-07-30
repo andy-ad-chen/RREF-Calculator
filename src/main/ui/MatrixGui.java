@@ -9,6 +9,7 @@ import model.Row;
 import model.RowList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.tools.AddMatrixTool;
 import ui.tools.LoadTool;
 import ui.tools.SaveTool;
 import ui.tools.Tool;
@@ -32,12 +33,11 @@ public class MatrixGui extends JFrame {
 
     private MatrixList matrices;
 
-    private List<Tool> tools;
-    // private Tool activeTool;
 
     private ViewSelectMenu viewSelect;
     private SaveTool saveTool;
     private LoadTool loadTool;
+    private AddMatrixTool addTool;
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixGui() {
@@ -57,7 +57,6 @@ public class MatrixGui extends JFrame {
     private void initializeFields() {
         matrices = new MatrixList();
         // activeTool = null;
-        tools = new ArrayList<Tool>();
     }
 
     // MODIFIES: this
@@ -89,11 +88,12 @@ public class MatrixGui extends JFrame {
 
         // adds Save Tool
         saveTool = new SaveTool(this, toolArea);
-        tools.add(saveTool);
 
         // adds Load Tool
         loadTool = new LoadTool(this, toolArea);
-        tools.add(loadTool);
+
+        // adds add a matrix tool
+        addTool = new AddMatrixTool(this, toolArea);
 
         pack();
 
@@ -105,6 +105,10 @@ public class MatrixGui extends JFrame {
         viewSelect.addMatricesToComboBox(this.matrices);
     }
 
+    public void addMatrix() {
+        addTool.addMatrixToList(this.matrices);
+    }
+
     public void showMatrix(Matrix matrix) {
         int height = matrix.getRows().size();
         int width = matrix.getWidth();
@@ -112,8 +116,8 @@ public class MatrixGui extends JFrame {
         RowList redRefMatrix = matrix.getRedRefRows();
 
         JPanel container = new JPanel(new FlowLayout());
-        container.add(getPanel(rowsMatrix, width, height, "Unsolved"));
-        container.add(getPanel(redRefMatrix, width, height, "RREF"));
+        container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
+        container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
 
         add(container, BorderLayout.CENTER);
 
@@ -122,7 +126,7 @@ public class MatrixGui extends JFrame {
         repaint();
     }
 
-    private JPanel getPanel(RowList rowList, int width, int height, String msg) {
+    private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
         JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
 
         for (Row r : rowList) {
