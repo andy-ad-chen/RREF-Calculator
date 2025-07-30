@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import model.Matrix;
 import model.MatrixList;
 import ui.Main;
 import ui.MatrixGui;
@@ -44,12 +45,12 @@ public class ViewSelectMenu {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
             String selectedName = (String) combo.getSelectedItem();
             int indexOfName = combo.getSelectedIndex();
-            Matrix shownMatrix = matrices.getMatrices().get(indexOfName - 1);
+            // Matrix shownMatrix = matrices.getMatrices().get(indexOfName - 1); // COMMENT IN
             System.out.println(selectedName);
             System.out.println(indexOfName);
             mainGui = Main.getMatrixGui();
             // shows the selected matrix on the main panel.
-            mainGui.showMatrix(shownMatrix);
+            mainGui.showMatrix(); // STUB
 
         }
     }

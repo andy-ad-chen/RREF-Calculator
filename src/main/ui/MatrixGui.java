@@ -83,11 +83,33 @@ public class MatrixGui extends JFrame {
         // TODO: creates a JPanel of a matrix then adds to JFrame.
         // JPanel is aligned to the same area so repeated calls
         // of this method lead to replacing the matrix.
-        
-
-        JPanel matrixArea = new JPanel();
-        matrixArea
 
     }
+
+
+    // // EFFECTS: TESTING METHOD ONLY
+    // public void showMatrix() {
+    //     // TODO: creates a JPanel of a matrix then adds to JFrame.
+    //     // JPanel is aligned to the same area so repeated calls
+    //     // of this method lead to replacing the matrix.
+
+    //     JPanel matrixArea = new JPanel();
+    //     matrixArea.setLayout(new GridLayout(0, 1));
+    //     matrixArea.setSize(new Dimension(0, 0));
+    //     add(matrixArea, BorderLayout.NORTH);
+    //     // adds a "save tool" in as a stub.
+    //     new SaveTool(this, matrixArea);
+    //     // STUB
+    //     revalidate();
+    //     repaint();
+
+    // }
+
+    /* 
+     * 
+     * This above method successfully creates a "stub"
+     * button whenever I click and select a matrix!
+     * 
+     */
 
 }
