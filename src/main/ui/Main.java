@@ -2,6 +2,8 @@ package ui;
 
 public class Main {
     private static MatrixGui mainGui;
+
+
     public static void main(String[] args) {
         mainGui = new MatrixGui();
     }
@@ -10,6 +12,9 @@ public class Main {
         return mainGui; 
     }
 
+    // public static void main(String[] args) {
+    //     new MatrixReducerApp();
+    // }
 
 
     public static void mainConsole(String[] args) {

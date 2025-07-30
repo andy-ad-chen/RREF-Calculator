@@ -15,7 +15,6 @@ public class SaveTool extends Tool {
 
     public SaveTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
-        mainGui = Main.getMatrixGui();
     }
 
     @Override
@@ -37,6 +36,8 @@ public class SaveTool extends Tool {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             System.out.println("clicked the save tool");
+            mainGui = Main.getMatrixGui();
+
             mainGui.saveMatrixList();
         }
     }

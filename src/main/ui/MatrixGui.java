@@ -30,14 +30,20 @@ public class MatrixGui extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    private MatrixList matrices = new MatrixList();
+    private MatrixList matrices;
 
     private List<Tool> tools;
     // private Tool activeTool;
 
+    private ViewSelectMenu viewSelect;
+    private SaveTool saveTool;
+    private LoadTool loadTool;
+
     // EFFECTS: runs the Matrix Reducer App
     public MatrixGui() {
         super("Matrix Reducer App");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         initializeFields();
         initializeGraphics();
         // initializeInteraction();
@@ -49,6 +55,7 @@ public class MatrixGui extends JFrame {
     // and tools with ArrayList
     // this method is called by the DrawingEditor constructor
     private void initializeFields() {
+        matrices = new MatrixList();
         // activeTool = null;
         tools = new ArrayList<Tool>();
     }
@@ -69,7 +76,7 @@ public class MatrixGui extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all tools
-    private void createTools() {
+    public void createTools() {
 
         JPanel toolArea = new JPanel();
         toolArea.setLayout(new GridLayout(0, 1));
@@ -77,19 +84,25 @@ public class MatrixGui extends JFrame {
         add(toolArea, BorderLayout.SOUTH);
 
         // adds a view select tool
-        ViewSelectMenu viewSelect = new ViewSelectMenu(matrices);
+        viewSelect = new ViewSelectMenu(this.matrices);
         viewSelect.viewSelectToolAdd(toolArea);
 
         // adds Save Tool
-        SaveTool saveTool = new SaveTool(this, toolArea);
+        saveTool = new SaveTool(this, toolArea);
         tools.add(saveTool);
 
         // adds Load Tool
-        LoadTool loadTool = new LoadTool(this, toolArea);
+        loadTool = new LoadTool(this, toolArea);
         tools.add(loadTool);
 
         pack();
 
+        System.out.println("tools created / recreated");
+
+    }
+
+    public void refreshComboBox() {
+        viewSelect.addMatricesToComboBox(this.matrices);
     }
 
     public void showMatrix(Matrix matrix) {
@@ -182,11 +195,13 @@ public class MatrixGui extends JFrame {
     // EFFECTS: loads matrices from file
     public void loadMatrixList() {
         try {
-            matrices = jsonReader.read();
+            this.matrices = jsonReader.read();
             System.out.println("Loaded matrices from" + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+        // System.out.println(matrices.getMatrices().get(0).getMatrixDesc()); working
+        // fine
     }
 
 }

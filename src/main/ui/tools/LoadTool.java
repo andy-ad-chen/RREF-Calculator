@@ -15,7 +15,6 @@ public class LoadTool extends Tool {
 
     public LoadTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
-        mainGui = Main.getMatrixGui();
     }
 
     @Override
@@ -37,7 +36,10 @@ public class LoadTool extends Tool {
         public void actionPerformed(ActionEvent e) {
 
             System.out.println("clicked the load tool");
+            mainGui = Main.getMatrixGui();
             mainGui.loadMatrixList();
+            mainGui.refreshComboBox();
+
         }
     }
 }
