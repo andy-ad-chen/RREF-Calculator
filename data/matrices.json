@@ -1,1 +1,26 @@
-{"List of Matrices": []}
+{"List of Matrices": [{
+    "Description": "asdf",
+    "Invertibility": false,
+    "Matrix Rows in RREF": [
+        {"row": [
+            1,
+            0
+        ]},
+        {"row": [
+            0,
+            1
+        ]}
+    ],
+    "Matrix Rows": [
+        {"row": [
+            1,
+            0
+        ]},
+        {"row": [
+            0,
+            1
+        ]}
+    ],
+    "Width": 2,
+    "Name": "2 by 2 "
+}]}

@@ -11,6 +11,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+
 /*
  * 
  * This class is inspired by code provided by the UBC Department of Computer
@@ -19,6 +28,8 @@ import java.util.Scanner;
  * Teller application, TellerApp class.
  * 
  */
+
+
 
 /*
 * 
@@ -29,7 +40,10 @@ import java.util.Scanner;
 * 
 */
 
-public class MatrixReducerApp {
+public class MatrixReducerApp extends JFrame {
+
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 700;
 
     private MatrixList matrices = new MatrixList();
     private static final String JSON_STORE = "./data/matrices.json";
@@ -41,6 +55,7 @@ public class MatrixReducerApp {
     public MatrixReducerApp() {
         runApp();
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes user input
