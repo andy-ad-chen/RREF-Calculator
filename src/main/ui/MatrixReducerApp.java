@@ -4,24 +4,58 @@ import model.Matrix;
 import model.MatrixList;
 import model.Row;
 import model.RowList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MatrixReducerApp {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
+ * Teller application, TellerApp class.
+ * 
+ */
+
+
+
+/*
+* 
+* This class is inspired by code provided by the UBC Department of Computer
+* Science, in the course material of CPSC 210.
+* Found in edX, CPSC 210 2025S2, Personal Project, Phase 2.
+* JsonSerializationDemo application, ui package.
+* 
+*/
+
+public class MatrixReducerApp extends JFrame {
+
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 700;
 
     private MatrixList matrices = new MatrixList();
+    private static final String JSON_STORE = "./data/matrices.json";
     private Scanner input;
-
-    // This class is inspired by code provided by the UBC Department of Computer
-    // Science, in the course material of CPSC 210.
-    // Found in edX, CPSC 210 2025S2, Personal Project, Phase 1.
-    // Teller application, TellerApp class.
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixReducerApp() {
         runApp();
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes user input
@@ -47,6 +81,9 @@ public class MatrixReducerApp {
     private void init() {
         input = new Scanner(System.in);
         // input.useDelimiter("\r?\n|\r");
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to user
@@ -59,6 +96,8 @@ public class MatrixReducerApp {
         System.out.println("r: remove a matrix:   ");
         System.out.println("c: change a matrix name:   ");
         System.out.println("d: change a matrix description:   ");
+        System.out.println("w: write the matrices to file:   ");
+        System.out.println("l: load matrices from file:   ");
         System.out.println("q: quit:   ");
     }
 
@@ -77,6 +116,10 @@ public class MatrixReducerApp {
             changeMatrixName();
         } else if (command.equals("d")) {
             changeMatrixDesc();
+        } else if (command.equals("w")) {
+            saveMatrixList();
+        } else if (command.equals("l")) {
+            loadMatrixList();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -143,6 +186,8 @@ public class MatrixReducerApp {
         for (int i = 0; i < matrix.getRedRefRows().size(); i++) {
             System.out.println(matrix.getRedRefRows().get(i));
         }
+        matrix.checkInvert();
+        System.out.println("Invertible?: " + matrix.getInvertible());
         System.out.println("===============================================");
     }
 
@@ -183,4 +228,28 @@ public class MatrixReducerApp {
         matrices.changeMatrixDesc(desc, val - 1);
         System.out.println("Done!");
     }
+
+    // EFFECTS: saves the MatrixList to file
+    private void saveMatrixList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(matrices);
+            jsonWriter.close();
+            System.out.println("Saved matrices " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads matrices from file
+    private void loadMatrixList() {
+        try {
+            matrices = jsonReader.read();
+            System.out.println("Loaded matrices from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

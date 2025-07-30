@@ -1,0 +1,26 @@
+{"List of Matrices": [
+    {
+        "Description": "this is a good desc",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [{"row": [1]}],
+        "Matrix Rows": [{"row": [1]}],
+        "Width": 1,
+        "Name": "This is a 1 matrix"
+    },
+    {
+        "Description": "second",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [{"row": [1]}],
+        "Matrix Rows": [{"row": [1]}],
+        "Width": 1,
+        "Name": "Second matrix"
+    },
+    {
+        "Description": "third",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [{"row": [1]}],
+        "Matrix Rows": [{"row": [1]}],
+        "Width": 1,
+        "Name": "Third"
+    }
+]}

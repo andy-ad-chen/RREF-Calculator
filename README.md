@@ -17,3 +17,7 @@ Being a physics and maths student, this type of project interests me since it in
 * As a user, I want to be able to see the number of matrices in a collection which are invertible and the number which are not invertible. 
 * As a user, I want to be able to select a matrix in a collection and modify its name and what its note says.
 
+* As a user, I want to be able to save my selection of matrices to a file, if I so choose.
+* As a user, I want to be able to load my selection of matrices from a file, if I so choose.
+
+
