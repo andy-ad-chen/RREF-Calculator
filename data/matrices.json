@@ -1,7 +1,7 @@
 {"List of Matrices": [
     {
         "Description": "nuh huh",
-        "Invertibility": true,
+        "Invertibility": false,
         "Matrix Rows in RREF": [
             {"row": [
                 1,
@@ -41,7 +41,7 @@
     },
     {
         "Description": "desc",
-        "Invertibility": true,
+        "Invertibility": false,
         "Matrix Rows in RREF": [
             {"row": [
                 1,

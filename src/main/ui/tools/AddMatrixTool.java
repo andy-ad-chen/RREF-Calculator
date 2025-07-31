@@ -28,6 +28,13 @@ import ui.MatrixGui;
 public class AddMatrixTool extends Tool {
     private static MatrixGui mainGui;
 
+    private JButton next;
+
+    private JTextField descField;
+    private JTextField nameField;
+    private JTextField widthField;
+    private JTextField heightField;
+
     private int width;
     private int height;
     private String name;
@@ -63,6 +70,7 @@ public class AddMatrixTool extends Tool {
         identity.add(identityRow3);
         identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
         // FOR TESTING END
+
     }
 
     @Override
@@ -96,6 +104,9 @@ public class AddMatrixTool extends Tool {
         matrices.getMatrices().add(new Matrix(identity, 3, "differnet id matrix", "nuh huh")); // STUB
         matrices.getMatrices().add(identityMatrix); // STUBS
 
+        next = new JButton("Verify values and Continue");
+        JPanel wrapper = new JPanel(new BorderLayout());
+
         JPanel panel = new JPanel(new GridLayout(2, 2, 5, 5));
 
         JPanel widthChooser = new JPanel(new BorderLayout());
@@ -116,53 +127,39 @@ public class AddMatrixTool extends Tool {
         descChooser.add(new Label("Write a description"), BorderLayout.NORTH);
 
         // Can refactor if wanted.
-        JTextField widthField = new JTextField(20);
+        widthField = new JTextField(20);
         widthField.setText("Default Description");
         widthChooser.add(widthField, BorderLayout.CENTER);
-        widthField.addActionListener(e -> {
-            try {
-                String input = widthField.getText();
-                width = Integer.parseInt(input);
-            } catch (Exception f) {
-                System.out.println("did not except non-number");
-            }
-        });
 
-        JTextField heightField = new JTextField(20);
+        heightField = new JTextField(20);
         heightField.setText("Default Description");
         heightChooser.add(heightField, BorderLayout.CENTER);
-        heightField.addActionListener(e -> {
-            try {
-                String input = heightField.getText();
-                height = Integer.parseInt(input);
-            } catch (Exception f) {
-                System.out.println("did not except non-number");
-            }
 
-        });
 
-        JTextField nameField = new JTextField(20);
+        nameField = new JTextField(20);
         nameField.setText("Default Name");
         nameChooser.add(nameField, BorderLayout.CENTER);
-        nameField.addActionListener(e -> {
-            try {
-                name = nameField.getText();
-            } catch (Exception f) {
-                System.out.println("did not except");
-            }
 
-        });
 
-        JTextField descField = new JTextField(20);
+        descField = new JTextField(20);
         descField.setText("Default Description");
         descChooser.add(descField, BorderLayout.CENTER);
-        descField.addActionListener(e -> {
-            try {
-                desc = descField.getText();
-            } catch (Exception f) {
-                System.out.println("did not except");
-            }
 
+
+        // Action listener for Continue Button
+        next.addActionListener(e -> {
+            if (valuesOk()) {
+                // valueInsertion(int width, int height, int name, int desc);
+
+                JOptionPane.showMessageDialog(null,
+                "all OK now");
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "These values are not valid; please ensure that " +
+                                "matrices are at least 1 x 1 and are less than" +
+                                " 15 x 15. For larger matrices, please use the console" +
+                                " version of this app.");
+            }
         });
 
         // add to panel and refresh screen.
@@ -172,16 +169,43 @@ public class AddMatrixTool extends Tool {
         panel.add(heightChooser);
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        wrapper.add(panel, BorderLayout.CENTER);
+        wrapper.add(next, BorderLayout.SOUTH);
+
         mainGui.resetCenter();
-        mainGui.getContentPane().add(panel, BorderLayout.CENTER);
+        mainGui.getContentPane().add(wrapper, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();
 
-        System.out.println("Height: " + height);
-        System.out.println("Widht: " + width);
-        System.out.println("Name:" + name);
-        System.out.println("Desc:" + desc);
+        // System.out.println("Height: " + height);
+        // System.out.println("Widht: " + width);
+        // System.out.println("Name:" + name);
+        // System.out.println("Desc:" + desc);
+    }
 
+    private boolean valuesOk() {
+        try {
+            String input = widthField.getText();
+            width = Integer.parseInt(input);
+        } catch (Exception f) {
+            System.out.println("did not except non-number");
+        }
+        try {
+            String input = heightField.getText();
+            height = Integer.parseInt(input);
+        } catch (Exception f) {
+            System.out.println("did not except non-number");
+        }
+
+        name = nameField.getText();
+        
+        desc = descField.getText();
+
+        if (name != null && desc != null && width > 0 && width < 15 && height > 0 && height < 15) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
