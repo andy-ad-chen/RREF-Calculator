@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxEditor;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,8 +32,10 @@ public class ViewSelectMenu {
 
     private MatrixList matrices;
     private static MatrixGui mainGui;
+    private Matrix shownMatrix;
 
     private JComboBox<String> comboOfMatrices;
+    private JButton confirmButton;
 
     // EFFECTS: builds an empty item used to build View Select Menu
     public ViewSelectMenu(MatrixList matrices) {
@@ -63,11 +67,31 @@ public class ViewSelectMenu {
     // EFFECTS: adds the list of matrices to the drop down panel.
     public void viewSelectToolAdd(JPanel panel) {
         comboOfMatrices = new JComboBox<String>();
+        confirmButton = new JButton("View and Edit");
+        confirmButton.setForeground(Color.GRAY);
+        JPanel container = new JPanel(new BorderLayout());
+
         // comboOfMatrices.addItem("- asdfs and View a Matrix -");
         addMatricesToComboBox(this.matrices);
         comboOfMatrices.addActionListener(new comboHandler());
-        panel.add(comboOfMatrices);
 
+        confirmButton.addActionListener(new confirmHandler());
+
+        container.add(comboOfMatrices, BorderLayout.CENTER);
+        container.add(confirmButton, BorderLayout.LINE_END);
+
+        panel.add(container);
+
+    }
+
+    private class confirmHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("clicked the confirm button");
+            if (shownMatrix != null) {
+                showMatrix(shownMatrix);
+            }
+        }
     }
 
     private class comboHandler implements ActionListener {
@@ -75,15 +99,28 @@ public class ViewSelectMenu {
         public void actionPerformed(ActionEvent e) {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
             String selectedName = (String) combo.getSelectedItem();
-            int indexOfName = combo.getSelectedIndex();
+            int indexOfName = combo.getSelectedIndex() - 1;
             // Matrix shownMatrix = matrices.getMatrices().get(indexOfName); // COMNT IN
             // BROKEN TOBE WORKED ON.
-            Matrix shownMatrix = identityMatrix; // STUB
+            shownMatrix = identityMatrix; // STUB
             System.out.println(selectedName);
             System.out.println(indexOfName);
-            // shows the selected matrix on the main panel.
+
+            // start to show the selected matrix on the main panel.
             mainGui = Main.getMatrixGui();
-            showMatrix(shownMatrix);
+            // Make this only run when the selection is not the default.
+
+            if (indexOfName > -1) {
+                confirmButton.setForeground(Color.DARK_GRAY);
+                mainGui.setDeleteActive();
+            } else {
+                confirmButton.setForeground(Color.GRAY);
+                mainGui.setDeleteInactive();
+            }
+
+            mainGui.setActiveIndex(indexOfName);
+            // showMatrix(shownMatrix);
+
         }
     }
 
@@ -93,17 +130,17 @@ public class ViewSelectMenu {
         RowList rowsMatrix = matrix.getMatrixRows();
         RowList redRefMatrix = matrix.getRedRefRows();
 
+        mainGui.resetCenter();
+
         JPanel container = new JPanel(new FlowLayout());
         container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
         container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
 
         mainGui.add(container, BorderLayout.CENTER);
-        
-        mainGui.addDeleteTool();
 
-        mainGui.pack();
         mainGui.revalidate();
         mainGui.repaint();
+
     }
 
     private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {

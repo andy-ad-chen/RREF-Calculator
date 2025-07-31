@@ -23,15 +23,24 @@ public class RemoveMatrixTool extends Tool {
 
     }
 
-        @Override
+    @Override
     protected void createButton(JComponent parent) {
         // TODO Auto-generated method stub
         button = new JButton("Delete This Matrix");
         button = customizeButton(button);
         button.setOpaque(true);
-        button.setForeground(Color.RED);
+        button.setForeground(Color.GRAY);
         addToParent(parent);
     }
+
+    public void setActive() {
+        button.setForeground(Color.RED);
+    }
+
+    public void setInactive() {
+        button.setForeground(Color.GRAY);
+    }
+    
 
     private class RemoveMatrixToolHandler implements ActionListener {
         @Override
@@ -39,9 +48,8 @@ public class RemoveMatrixTool extends Tool {
 
             System.out.println("clicked the delete tool");
             mainGui = Main.getMatrixGui();
-            mainGui.loadMatrixList();
+            mainGui.removeActiveIndex();
             mainGui.refreshComboBox();
-
         }
     }
 

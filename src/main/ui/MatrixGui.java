@@ -32,6 +32,9 @@ public class MatrixGui extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    // // contents in BorderLayout.CENTER
+    // private JPanel container;
+
     private MatrixList matrices;
 
     private ViewSelectMenu viewSelect;
@@ -39,12 +42,14 @@ public class MatrixGui extends JFrame {
     private LoadTool loadTool;
     private AddMatrixTool addTool;
     private RemoveMatrixTool deleteTool;
+    private int activeIndex;
 
     private JPanel toolArea;
 
     // EFFECTS: runs the Matrix Reducer App
     public MatrixGui() {
         super("Matrix Reducer App");
+        setVisible(true);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         initializeFields();
@@ -76,6 +81,19 @@ public class MatrixGui extends JFrame {
 
     }
 
+    public void resetCenter() {
+        Container contentPane = getContentPane();
+        Component center = ((BorderLayout) contentPane.getLayout()).getLayoutComponent(BorderLayout.CENTER);
+
+        if (center != null) {
+            contentPane.remove(center);
+        }
+    }
+
+    // public JPanel getCenter() {
+    // return this.container;
+    // }
+
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all tools
     public void createTools() {
@@ -98,13 +116,36 @@ public class MatrixGui extends JFrame {
         // adds add a matrix tool
         addTool = new AddMatrixTool(this, toolArea);
 
+        // adds a delete tool
+        deleteTool = new RemoveMatrixTool(this, toolArea);
+
+        // // empty centre area.
+        // this.container = new JPanel();
+
         pack();
 
     }
 
-    public void addDeleteTool() {
-        deleteTool = new RemoveMatrixTool(this, toolArea);
+    public void setActiveIndex(int i) {
+        activeIndex = i;
+    }
 
+    public int getActiveIndex() {
+        return activeIndex;
+    }
+
+    public void removeActiveIndex() {
+        if (activeIndex >= 0) {
+            matrices.removeMatrix(activeIndex);
+        }
+    }
+
+    public void setDeleteActive() {
+        deleteTool.setActive();
+    }
+
+    public void setDeleteInactive() {
+        deleteTool.setInactive();
     }
 
     public void refreshComboBox() {

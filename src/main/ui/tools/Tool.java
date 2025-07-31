@@ -12,7 +12,6 @@ public abstract class Tool {
 
 	protected JButton button;
 	protected MatrixGui editor;
-	private boolean active;
 
 	// EFFECTS: constructs a Tool associated with the given editor
 	// with its activation button inside the given parent
@@ -20,7 +19,7 @@ public abstract class Tool {
 		this.editor = gui;
 		createButton(parent);
 		addToParent(parent);
-		active = false;
+
 		addListener();
 	}
 
@@ -33,18 +32,6 @@ public abstract class Tool {
 		return button;
 	}
 
-	// getters
-	public boolean isActive() { return active; }
-
-	// EFFECTS: sets this Tool's active field to true
-	public void activate() {
-		active = true;
-	}
-
-	// EFFECTS: sets this Tool's active field to false
-	public void deactivate() {
-		active = false;
-	}
 
 	// EFFECTS: creates button to activate tool
 	protected abstract void createButton(JComponent parent);

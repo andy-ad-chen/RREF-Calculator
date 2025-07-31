@@ -1,0 +1,82 @@
+{"List of Matrices": [
+    {
+        "Description": "nuh huh",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [
+            {"row": [
+                1,
+                0,
+                0
+            ]},
+            {"row": [
+                0,
+                1,
+                0
+            ]},
+            {"row": [
+                0,
+                0,
+                1
+            ]}
+        ],
+        "Matrix Rows": [
+            {"row": [
+                1,
+                0,
+                0
+            ]},
+            {"row": [
+                0,
+                1,
+                0
+            ]},
+            {"row": [
+                0,
+                0,
+                1
+            ]}
+        ],
+        "Width": 3,
+        "Name": "differnet id matrix"
+    },
+    {
+        "Description": "desc",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [
+            {"row": [
+                1,
+                0,
+                0
+            ]},
+            {"row": [
+                0,
+                1,
+                0
+            ]},
+            {"row": [
+                0,
+                0,
+                1
+            ]}
+        ],
+        "Matrix Rows": [
+            {"row": [
+                1,
+                0,
+                0
+            ]},
+            {"row": [
+                0,
+                1,
+                0
+            ]},
+            {"row": [
+                0,
+                0,
+                1
+            ]}
+        ],
+        "Width": 3,
+        "Name": "myIDMatrix"
+    }
+]}
