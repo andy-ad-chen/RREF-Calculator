@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 
 import ui.Main;
 import ui.MatrixGui;
+import ui.MatrixInserter;
 
 public class AddMatrixTool extends Tool {
     private static MatrixGui mainGui;
@@ -40,36 +41,45 @@ public class AddMatrixTool extends Tool {
     private String name;
     private String desc;
 
-    // FOR TESTING START
-    protected RowList identity;
-    protected Row identityRow1;
-    protected Row identityRow2;
-    protected Row identityRow3;
-    protected Matrix identityMatrix;
-    // FOR TESTING END
+    // // FOR TESTING START
+    // protected RowList identity;
+    // protected Row identityRow1;
+    // protected Row identityRow2;
+    // protected Row identityRow3;
+    // protected Matrix identityMatrix;
+    // // FOR TESTING END
+
+    /* 
+     * 
+     * 
+     * TODO: Gaurd against same name
+     * 
+     * 
+     * 
+     */
 
     public AddMatrixTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
 
-        // FOR TESTING START
-        identity = new RowList(3);
-        identityRow1 = new Row();
-        identityRow2 = new Row();
-        identityRow3 = new Row();
-        identityRow1.add(1.0f);
-        identityRow1.add(0.0f);
-        identityRow1.add(0.0f);
-        identityRow2.add(0.0f);
-        identityRow2.add(1.0f);
-        identityRow2.add(0.0f);
-        identityRow3.add(0.0f);
-        identityRow3.add(0.0f);
-        identityRow3.add(1.0f);
-        identity.add(identityRow1);
-        identity.add(identityRow2);
-        identity.add(identityRow3);
-        identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
-        // FOR TESTING END
+        // // FOR TESTING START
+        // identity = new RowList(3);
+        // identityRow1 = new Row();
+        // identityRow2 = new Row();
+        // identityRow3 = new Row();
+        // identityRow1.add(1.0f);
+        // identityRow1.add(0.0f);
+        // identityRow1.add(0.0f);
+        // identityRow2.add(0.0f);
+        // identityRow2.add(1.0f);
+        // identityRow2.add(0.0f);
+        // identityRow3.add(0.0f);
+        // identityRow3.add(0.0f);
+        // identityRow3.add(1.0f);
+        // identity.add(identityRow1);
+        // identity.add(identityRow2);
+        // identity.add(identityRow3);
+        // identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
+        // // FOR TESTING END
 
     }
 
@@ -93,16 +103,16 @@ public class AddMatrixTool extends Tool {
 
             System.out.println("clicked the add matrix tool");
             mainGui = Main.getMatrixGui();
-            mainGui.addMatrix();
+            addMatrixToList();
             mainGui.refreshComboBox();
         }
     }
 
     // MODIFIES: matrices
     // EFFECTS: allows user to specify and add a matrix
-    public void addMatrixToList(MatrixList matrices) {
-        matrices.getMatrices().add(new Matrix(identity, 3, "differnet id matrix", "nuh huh")); // STUB
-        matrices.getMatrices().add(identityMatrix); // STUBS
+    public void addMatrixToList() {
+        // matrices.getMatrices().add(new Matrix(identity, 3, "differnet id matrix", "nuh huh")); // STUB
+        // matrices.getMatrices().add(identityMatrix); // STUBS
 
         next = new JButton("Verify values and Continue");
         JPanel wrapper = new JPanel(new BorderLayout());
@@ -149,10 +159,13 @@ public class AddMatrixTool extends Tool {
         // Action listener for Continue Button
         next.addActionListener(e -> {
             if (valuesOk()) {
-                // valueInsertion(int width, int height, int name, int desc);
+                MatrixInserter adder = new MatrixInserter();
+                adder.adder(width, height, name, desc);
 
-                JOptionPane.showMessageDialog(null,
-                "all OK now");
+                System.out.println("starting matrix value thing");
+
+                // JOptionPane.showMessageDialog(null,
+                // "all OK now");
             } else {
                 JOptionPane.showMessageDialog(null,
                         "These values are not valid; please ensure that " +
@@ -198,7 +211,7 @@ public class AddMatrixTool extends Tool {
         }
 
         name = nameField.getText();
-        
+
         desc = descField.getText();
 
         if (name != null && desc != null && width > 0 && width < 15 && height > 0 && height < 15) {

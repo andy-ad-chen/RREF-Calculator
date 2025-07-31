@@ -61,6 +61,8 @@ public class ViewSelectMenu {
         identity.add(identityRow3);
         identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
         // FOR TESTING END
+
+        shownMatrix = identityMatrix;
     }
 
     // MODIFIES: panel
@@ -88,30 +90,31 @@ public class ViewSelectMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("clicked the confirm button");
+            int indexOfName = comboOfMatrices.getSelectedIndex() - 1;
+            if (indexOfName >= 0) {
+                // I personally find this very funny
+                shownMatrix = mainGui.getMatrices().getMatrices().get(indexOfName);
+            }
             if (shownMatrix != null) {
-                showMatrix(shownMatrix);
+                showMatrix();
             }
         }
     }
 
+    // RECALL originally intended to handle everything without the button
+    // realized this was quite stupid or at least hard for me.
     private class comboHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
-            String selectedName = (String) combo.getSelectedItem();
+            // String selectedName = (String) combo.getSelectedItem();
             int indexOfName = combo.getSelectedIndex() - 1;
-            // Matrix shownMatrix = matrices.getMatrices().get(indexOfName); // COMNT IN
-            // BROKEN TOBE WORKED ON.
-            shownMatrix = identityMatrix; // STUB
-            System.out.println(selectedName);
-            System.out.println(indexOfName);
 
-            // start to show the selected matrix on the main panel.
             mainGui = Main.getMatrixGui();
             // Make this only run when the selection is not the default.
 
             if (indexOfName > -1) {
-                confirmButton.setForeground(Color.DARK_GRAY);
+                confirmButton.setForeground(Color.GREEN);
                 mainGui.setDeleteActive();
             } else {
                 confirmButton.setForeground(Color.GRAY);
@@ -119,16 +122,16 @@ public class ViewSelectMenu {
             }
 
             mainGui.setActiveIndex(indexOfName);
-            // showMatrix(shownMatrix);
+            // showMatrix(shownMatrix); // DO NOT comment in; use button
 
         }
     }
 
-    public void showMatrix(Matrix matrix) {
-        int height = matrix.getRows().size();
-        int width = matrix.getWidth();
-        RowList rowsMatrix = matrix.getMatrixRows();
-        RowList redRefMatrix = matrix.getRedRefRows();
+    public void showMatrix() {
+        int height = shownMatrix.getRows().size();
+        int width = shownMatrix.getWidth();
+        RowList rowsMatrix = shownMatrix.getMatrixRows();
+        RowList redRefMatrix = shownMatrix.getRedRefRows();
 
         mainGui.resetCenter();
 

@@ -1,6 +1,6 @@
 {"List of Matrices": [
     {
-        "Description": "nuh huh",
+        "Description": "Default Description",
         "Invertibility": false,
         "Matrix Rows in RREF": [
             {"row": [
@@ -16,7 +16,7 @@
             {"row": [
                 0,
                 0,
-                1
+                0
             ]}
         ],
         "Matrix Rows": [
@@ -33,50 +33,24 @@
             {"row": [
                 0,
                 0,
-                1
+                0
             ]}
         ],
         "Width": 3,
-        "Name": "differnet id matrix"
+        "Name": "3x3 normal"
     },
     {
-        "Description": "desc",
+        "Description": "Changed Description just to not confuse java",
         "Invertibility": false,
         "Matrix Rows in RREF": [
-            {"row": [
-                1,
-                0,
-                0
-            ]},
-            {"row": [
-                0,
-                1,
-                0
-            ]},
-            {"row": [
-                0,
-                0,
-                1
-            ]}
+            {"row": [1]},
+            {"row": [0]}
         ],
         "Matrix Rows": [
-            {"row": [
-                1,
-                0,
-                0
-            ]},
-            {"row": [
-                0,
-                1,
-                0
-            ]},
-            {"row": [
-                0,
-                0,
-                1
-            ]}
+            {"row": [1]},
+            {"row": [11]}
         ],
-        "Width": 3,
-        "Name": "myIDMatrix"
+        "Width": 1,
+        "Name": "Default Name"
     }
 ]}

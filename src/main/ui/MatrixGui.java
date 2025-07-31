@@ -152,8 +152,12 @@ public class MatrixGui extends JFrame {
         viewSelect.addMatricesToComboBox(this.matrices);
     }
 
-    public void addMatrix() {
-        addTool.addMatrixToList(this.matrices);
+    public MatrixList getMatrices() {
+        return this.matrices;
+    }
+
+    public void addCompletedMatrix(Matrix matrix) {
+        matrices.addMatrix(matrix);
     }
 
     // EFFECTS: saves the MatrixList to file
