@@ -115,13 +115,55 @@ public class AddMatrixTool extends Tool {
         nameChooser.add(new Label("Choose a name"), BorderLayout.NORTH);
         descChooser.add(new Label("Write a description"), BorderLayout.NORTH);
 
+        // Can refactor if wanted.
+        JTextField widthField = new JTextField(20);
+        widthField.setText("Default Description");
+        widthChooser.add(widthField, BorderLayout.CENTER);
+        widthField.addActionListener(e -> {
+            try {
+                String input = widthField.getText();
+                width = Integer.parseInt(input);
+            } catch (Exception f) {
+                System.out.println("did not except non-number");
+            }
+        });
+
+        JTextField heightField = new JTextField(20);
+        heightField.setText("Default Description");
+        heightChooser.add(heightField, BorderLayout.CENTER);
+        heightField.addActionListener(e -> {
+            try {
+                String input = heightField.getText();
+                height = Integer.parseInt(input);
+            } catch (Exception f) {
+                System.out.println("did not except non-number");
+            }
+
+        });
+
         JTextField nameField = new JTextField(20);
         nameField.setText("Default Name");
         nameChooser.add(nameField, BorderLayout.CENTER);
+        nameField.addActionListener(e -> {
+            try {
+                name = nameField.getText();
+            } catch (Exception f) {
+                System.out.println("did not except");
+            }
+
+        });
 
         JTextField descField = new JTextField(20);
         descField.setText("Default Description");
         descChooser.add(descField, BorderLayout.CENTER);
+        descField.addActionListener(e -> {
+            try {
+                desc = descField.getText();
+            } catch (Exception f) {
+                System.out.println("did not except");
+            }
+
+        });
 
         // add to panel and refresh screen.
         panel.add(nameChooser);
@@ -134,6 +176,12 @@ public class AddMatrixTool extends Tool {
         mainGui.getContentPane().add(panel, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();
+
+        System.out.println("Height: " + height);
+        System.out.println("Widht: " + width);
+        System.out.println("Name:" + name);
+        System.out.println("Desc:" + desc);
+
     }
 
 }
