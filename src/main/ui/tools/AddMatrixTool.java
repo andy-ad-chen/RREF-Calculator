@@ -168,10 +168,10 @@ public class AddMatrixTool extends Tool {
                 // "all OK now");
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "These values are not valid; please ensure that " +
-                                "matrices are at least 1 x 1 and are less than" +
-                                " 15 x 15. For larger matrices, please use the console" +
-                                " version of this app.");
+                        "These values are not valid; please ensure that "
+                               +  "matrices are at least 1 x 1 and are less than"
+                               +  " 15 x 15. For larger matrices, please use the console"
+                                + " version of this app.");
             }
         });
 
@@ -190,10 +190,6 @@ public class AddMatrixTool extends Tool {
         mainGui.revalidate();
         mainGui.repaint();
 
-        // System.out.println("Height: " + height);
-        // System.out.println("Widht: " + width);
-        // System.out.println("Name:" + name);
-        // System.out.println("Desc:" + desc);
     }
 
     private boolean valuesOk() {

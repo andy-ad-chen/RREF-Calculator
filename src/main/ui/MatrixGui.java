@@ -1,28 +1,20 @@
 package ui;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import model.Matrix;
 import model.MatrixList;
-import model.Row;
-import model.RowList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tools.AddMatrixTool;
 import ui.tools.LoadTool;
 import ui.tools.RemoveMatrixTool;
 import ui.tools.SaveTool;
-import ui.tools.Tool;
 import ui.tools.ViewSelectMenu;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MatrixGui extends JFrame {
     public static final int WIDTH = 500;
@@ -32,21 +24,19 @@ public class MatrixGui extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // // contents in BorderLayout.CENTER
-    // private JPanel container;
-
     private MatrixList matrices;
 
     private ViewSelectMenu viewSelect;
-    private SaveTool saveTool;
-    private LoadTool loadTool;
-    private AddMatrixTool addTool;
+    // private SaveTool saveTool;
+    // private LoadTool loadTool;
+    // private AddMatrixTool addTool;
     private RemoveMatrixTool deleteTool;
     private int activeIndex;
 
     private JPanel toolArea;
 
-    // EFFECTS: runs the Matrix Reducer App
+    // EFFECTS: runs the Matrix Reducer App GUI, initializes fields and starts
+    // graphics
     public MatrixGui() {
         super("Matrix Reducer App");
         setVisible(true);
@@ -54,17 +44,12 @@ public class MatrixGui extends JFrame {
         jsonReader = new JsonReader(JSON_STORE);
         initializeFields();
         initializeGraphics();
-        // initializeInteraction();
-        // runApp();
     }
 
     // MODIFIES: this
-    // EFFECTS: sets activeTool, currentDrawing to null, and instantiates drawings
-    // and tools with ArrayList
-    // this method is called by the DrawingEditor constructor
+    // EFFECTS: creates a new MatrixList in this
     private void initializeFields() {
         matrices = new MatrixList();
-        // activeTool = null;
     }
 
     // MODIFIES: this
@@ -78,7 +63,6 @@ public class MatrixGui extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-
     }
 
     public void resetCenter() {
@@ -89,10 +73,6 @@ public class MatrixGui extends JFrame {
             contentPane.remove(center);
         }
     }
-
-    // public JPanel getCenter() {
-    // return this.container;
-    // }
 
     // MODIFIES: this
     // EFFECTS: a helper method which declares and instantiates all tools
@@ -105,63 +85,76 @@ public class MatrixGui extends JFrame {
 
         // adds a view select tool
         viewSelect = new ViewSelectMenu(this.matrices);
+        // adds the matrices to this menu
         viewSelect.viewSelectToolAdd(toolArea);
-
         // adds Save Tool
-        saveTool = new SaveTool(this, toolArea);
-
+        new SaveTool(this, toolArea);
         // adds Load Tool
-        loadTool = new LoadTool(this, toolArea);
-
-        // adds add a matrix tool
-        addTool = new AddMatrixTool(this, toolArea);
-
-        // adds a delete tool
+        new LoadTool(this, toolArea);
+        // adds "add a matrix" tool
+        new AddMatrixTool(this, toolArea);
+        // adds a delete tool and stores it to field
         deleteTool = new RemoveMatrixTool(this, toolArea);
-
-        // // empty centre area.
-        // this.container = new JPanel();
-
         pack();
-
     }
 
+    // REQUIRES: -1 <= i <= matrices.size()
+    // MODIFIES: this
+    // EFFECTS: sets the active index to i, setting to -1 when "- select matrix -"
+    // is
+    // selected
     public void setActiveIndex(int i) {
         activeIndex = i;
     }
 
+    // EFFECTS: get the active index i
     public int getActiveIndex() {
         return activeIndex;
     }
 
+    /*
+     * The next four methods are included to reduce coupling between many classes
+     * and RemoveMatrixTool.java
+     */
+
+    // MODIFIES: this
+    // EFFECTS: remove the current acitve matrix
     public void removeActiveIndex() {
         if (activeIndex >= 0) {
             matrices.removeMatrix(activeIndex);
         }
     }
 
+    // MODIFIES: this.deleteTool
+    // EFFECTS: sets deleteTool to be red
     public void setDeleteActive() {
         deleteTool.setActive();
     }
 
+    // MODIFIES: this.deleteTool
+    // EFFECTS: sets deleteTool to be grayed out
     public void setDeleteInactive() {
         deleteTool.setInactive();
     }
 
+    // MODIFIES: this.viewSelect
+    // EFFECTS: redraws the comboBox to show updated matrices list
     public void refreshComboBox() {
         viewSelect.addMatricesToComboBox(this.matrices);
     }
 
+    // EFFECTS: gets matrices
     public MatrixList getMatrices() {
         return this.matrices;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a matrix to this
     public void addCompletedMatrix(Matrix matrix) {
         matrices.addMatrix(matrix);
     }
 
-    // EFFECTS: saves the MatrixList to file
-
+    // EFFECTS: saves the matrices to file
     public void saveMatrixList() {
         try {
             jsonWriter.open();
@@ -182,8 +175,6 @@ public class MatrixGui extends JFrame {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        // System.out.println(matrices.getMatrices().get(0).getMatrixDesc()); working
-        // fine
     }
 
 }

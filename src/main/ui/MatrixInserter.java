@@ -30,6 +30,7 @@ public class MatrixInserter {
 
     private Matrix workingMatrix;
 
+    // EFFECTS: creates new matrix inserter pane with the static MainGui from Main.
     public MatrixInserter() {
         mainGui = Main.getMatrixGui();
         next = new JButton("Verify values and Continue");
@@ -42,8 +43,8 @@ public class MatrixInserter {
 
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "These values are not valid; please ensure that " +
-                                "all items in matrix are numbers.");
+                        "These values are not valid; please ensure that "
+                                + "all items in matrix are numbers.");
             }
         });
     }
@@ -90,7 +91,7 @@ public class MatrixInserter {
                 }
             }
         } catch (Exception e) {
-            return false ;
+            return false;
         }
         return true;
 

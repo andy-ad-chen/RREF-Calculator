@@ -122,8 +122,7 @@ public class ViewSelectMenu {
             }
 
             mainGui.setActiveIndex(indexOfName);
-            // showMatrix(shownMatrix); // DO NOT comment in; use button
-
+            
         }
     }
 
