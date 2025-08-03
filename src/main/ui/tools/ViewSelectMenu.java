@@ -28,8 +28,7 @@ import ui.MatrixGui;
  * 
  */
 
-
- // menu to see all matrices
+// menu to see all matrices
 public class ViewSelectMenu {
     private MatrixList matrices;
     private static MatrixGui mainGui;
@@ -49,7 +48,7 @@ public class ViewSelectMenu {
     // EFFECTS: adds the list of matrices to the drop down panel.
     public void viewSelectToolAdd(JPanel panel) {
         comboOfMatrices = new JComboBox<String>();
-        confirmButton = new JButton("View and Edit");
+        confirmButton = new JButton("View");
         confirmButton.setForeground(Color.GRAY);
         JPanel container = new JPanel(new BorderLayout());
 
@@ -65,7 +64,10 @@ public class ViewSelectMenu {
 
     }
 
+    // EFFECTS: a handler for the view button.
     private class ConfirmHandler implements ActionListener {
+        // MODIFIES: this, mainGui
+        // EFFECTS: displays selected matrix
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("clicked the confirm button");
@@ -80,11 +82,14 @@ public class ViewSelectMenu {
         }
     }
 
-    // RECALL originally intended to handle everything without the button
-    // realized this was quite stupid or at least hard for me.
+    // RECALL: I originally intended to handle everything without a confirm button
+    // but this was difficult as many strange events were being caught.
 
-    //
+    // EFFECTS: handler for delete key changing colour
     private class ComboHandler implements ActionListener {
+        // MODIFIES: mainGui
+        // EFFECTS: if the selected index is not the first (IE is a valid matrix),
+        // change delete key colour to red.
         @Override
         public void actionPerformed(ActionEvent e) {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
@@ -107,6 +112,8 @@ public class ViewSelectMenu {
         }
     }
 
+    // MODIFIES: mainGui
+    // EFFECTS: shows a matrix
     public void showMatrix() {
         int height = shownMatrix.getRows().size();
         int width = shownMatrix.getWidth();
@@ -119,13 +126,15 @@ public class ViewSelectMenu {
         container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
         container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
 
-        mainGui.add(container, BorderLayout.CENTER);
+        // TODO: display the description
 
+        mainGui.add(container, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();
 
     }
 
+    // EFFECTS: returns a JPanel of the matrix passed in. 
     private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
         JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
 
@@ -160,10 +169,5 @@ public class ViewSelectMenu {
         }
         comboOfMatrices.revalidate();
         comboOfMatrices.repaint();
-
-        // for (Matrix matrix : matrices.getMatrices()) {
-        // System.out.println(matrix.getMatrixName());
-        // }
-
     }
 }
