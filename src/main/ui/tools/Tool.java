@@ -3,7 +3,6 @@ package ui.tools;
 import ui.MatrixGui;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
 
 /*
  * 

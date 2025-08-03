@@ -19,10 +19,14 @@ import java.awt.event.ActionListener;
 public class SaveTool extends Tool {
     private static MatrixGui mainGui;
 
+    // MODIFIES: parent
+    // EFFECTS: adds a new LoadTool button
     public SaveTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
     }
 
+    // MODIFIES: parent
+    // EFFECTS: adds a new button saying "Save and Write to File"
     @Override
     protected void createButton(JComponent parent) {
         button = new JButton("Save and Write to File");
@@ -30,13 +34,18 @@ public class SaveTool extends Tool {
         addToParent(parent);
     }
 
+    // MODIFIES: parent
+    // EFFECTS: adds a handler for this button
     @Override
     protected void addListener() {
         button.addActionListener(new SaveToolHandler());
 
     }
 
+    // EFFECTS: a handler for this button
     private class SaveToolHandler implements ActionListener {
+        // MODIFIES: this, mainGui
+        // EFFECTS: loads from file
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("clicked the save tool");

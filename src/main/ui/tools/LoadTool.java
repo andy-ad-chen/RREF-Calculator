@@ -25,6 +25,8 @@ public class LoadTool extends Tool {
         super(gui, parent);
     }
 
+    // MODIFIES: parent
+    // EFFECTS: adds a new button saying "Load from File"
     @Override
     protected void createButton(JComponent parent) {
         button = new JButton("Load from File");
@@ -32,13 +34,18 @@ public class LoadTool extends Tool {
         addToParent(parent);
     }
 
+    // MODIFIES: parent
+    // EFFECTS: adds a handler for this button
     @Override
     protected void addListener() {
         button.addActionListener(new LoadToolHandler());
 
     }
 
+    // EFFECTS: a handler for this button
     private class LoadToolHandler implements ActionListener {
+        // MODIFIES: this, mainGui
+        // EFFECTS: loads from file
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("clicked the load tool");
