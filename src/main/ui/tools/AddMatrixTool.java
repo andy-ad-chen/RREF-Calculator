@@ -3,20 +3,12 @@ package ui.tools;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-
-import model.Matrix;
-import model.MatrixList;
-import model.Row;
-import model.RowList;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -25,6 +17,16 @@ import java.awt.event.ActionListener;
 import ui.Main;
 import ui.MatrixGui;
 import ui.MatrixInserter;
+
+
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in lecture lab, CPSC 210 2025S2, SimplyDrawingPlayer,
+ * DeleteTool.java class.
+ * 
+ */
 
 public class AddMatrixTool extends Tool {
     private static MatrixGui mainGui;
@@ -49,18 +51,8 @@ public class AddMatrixTool extends Tool {
     // protected Matrix identityMatrix;
     // // FOR TESTING END
 
-    /* 
-     * 
-     * 
-     * TODO: Gaurd against same name
-     * 
-     * 
-     * 
-     */
-
     public AddMatrixTool(MatrixGui gui, JComponent parent) {
         super(gui, parent);
-
         // // FOR TESTING START
         // identity = new RowList(3);
         // identityRow1 = new Row();
@@ -80,12 +72,10 @@ public class AddMatrixTool extends Tool {
         // identity.add(identityRow3);
         // identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
         // // FOR TESTING END
-
     }
 
     @Override
     protected void createButton(JComponent parent) {
-        // TODO Auto-generated method stub
         button = new JButton("Add a new Matrix");
         button = customizeButton(button);
         addToParent(parent);
@@ -94,13 +84,16 @@ public class AddMatrixTool extends Tool {
     @Override
     protected void addListener() {
         button.addActionListener(new AddMatrixToolHandler());
-
     }
 
+    // EFFECTS: handler for add matrix button
     private class AddMatrixToolHandler implements ActionListener {
+
+        // MODIFIES: mainGui
+        // EFFECTS: calls addMatrixToList(); displays pane for adding matrix and adds a
+        // matrix
         @Override
         public void actionPerformed(ActionEvent e) {
-
             System.out.println("clicked the add matrix tool");
             mainGui = Main.getMatrixGui();
             addMatrixToList();
@@ -111,76 +104,29 @@ public class AddMatrixTool extends Tool {
     // MODIFIES: matrices
     // EFFECTS: allows user to specify and add a matrix
     public void addMatrixToList() {
-        // matrices.getMatrices().add(new Matrix(identity, 3, "differnet id matrix", "nuh huh")); // STUB
-        // matrices.getMatrices().add(identityMatrix); // STUBS
+        // matrices.getMatrices().add(identityMatrix); // STUB
 
         next = new JButton("Verify values and Continue");
         JPanel wrapper = new JPanel(new BorderLayout());
-
         JPanel panel = new JPanel(new GridLayout(2, 2, 5, 5));
-
         JPanel widthChooser = new JPanel(new BorderLayout());
         JPanel heightChooser = new JPanel(new BorderLayout());
         JPanel nameChooser = new JPanel(new BorderLayout());
         JPanel descChooser = new JPanel(new BorderLayout());
+        initFields();
+        displayLabels(widthChooser, heightChooser, nameChooser, descChooser);
 
-        // initialize fields
-        width = 0;
-        height = 0;
-        name = null;
-        desc = null;
-
-        // display labels
-        widthChooser.add(new Label("Choose a number of Columns"), BorderLayout.NORTH);
-        heightChooser.add(new Label("Choose a number of Rows"), BorderLayout.NORTH);
-        nameChooser.add(new Label("Choose a name"), BorderLayout.NORTH);
-        descChooser.add(new Label("Write a description"), BorderLayout.NORTH);
-
-        // Can refactor if wanted.
-        widthField = new JTextField(20);
-        widthField.setText("Default Description");
-        widthChooser.add(widthField, BorderLayout.CENTER);
-
-        heightField = new JTextField(20);
-        heightField.setText("Default Description");
-        heightChooser.add(heightField, BorderLayout.CENTER);
-
-
-        nameField = new JTextField(20);
-        nameField.setText("Default Name");
-        nameChooser.add(nameField, BorderLayout.CENTER);
-
-
-        descField = new JTextField(20);
-        descField.setText("Default Description");
-        descChooser.add(descField, BorderLayout.CENTER);
-
+        // init all the choosers
+        widthChooserInit(widthChooser);
+        heightChooserInit(heightChooser);
+        nameChooserInit(nameChooser);
+        descChooserInit(descChooser);
 
         // Action listener for Continue Button
-        next.addActionListener(e -> {
-            if (valuesOk()) {
-                MatrixInserter adder = new MatrixInserter();
-                adder.adder(width, height, name, desc);
+        actionListenerOnNext();
 
-                System.out.println("starting matrix value thing");
-
-                // JOptionPane.showMessageDialog(null,
-                // "all OK now");
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "These values are not valid; please ensure that "
-                               +  "matrices are at least 1 x 1 and are less than"
-                               +  " 15 x 15. For larger matrices, please use the console"
-                                + " version of this app.");
-            }
-        });
-
-        // add to panel and refresh screen.
-        panel.add(nameChooser);
-        panel.add(widthChooser);
-        panel.add(descChooser);
-        panel.add(heightChooser);
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // adds everything to panel
+        addToPanel(panel, widthChooser, heightChooser, nameChooser, descChooser);
 
         wrapper.add(panel, BorderLayout.CENTER);
         wrapper.add(next, BorderLayout.SOUTH);
@@ -189,9 +135,95 @@ public class AddMatrixTool extends Tool {
         mainGui.getContentPane().add(wrapper, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();
-
     }
 
+    // MODIFIES: panel
+    // EFFECTS: adds everything to panel
+    private void addToPanel(JPanel panel, JPanel widthChooser, JPanel heightChooser, JPanel nameChooser,
+            JPanel descChooser) {
+        panel.add(nameChooser);
+        panel.add(widthChooser);
+        panel.add(descChooser);
+        panel.add(heightChooser);
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+
+    // MODIFES: this
+    // EFFECTS: adds an actionlisteer for the "next" button, with a value checker
+    private void actionListenerOnNext() {
+        next.addActionListener(e -> {
+            if (valuesOk()) {
+                MatrixInserter adder = new MatrixInserter();
+                adder.adder(width, height, name, desc);
+
+                System.out.println("starting matrix value inserter");
+
+                // JOptionPane.showMessageDialog(null,
+                // "all OK now");
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "These values are not valid: please ensure that "
+                                + "matrices are at least 1 x 1 and are less than"
+                                + " 15 x 15. For larger matrices, please use the console"
+                                + " version of this app. Please also ensure that"
+                                + " names are unique.");
+            }
+        });
+    }
+
+    // MODIFIES: JPanel parameter
+    // EFFECTS: initializes a text field for desc
+    private void descChooserInit(JPanel descChooser) {
+        descField = new JTextField(20);
+        descField.setText("Description");
+        descChooser.add(descField, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: JPanel parameter
+    // EFFECTS: initializes a text field for name
+    private void nameChooserInit(JPanel nameChooser) {
+        nameField = new JTextField(20);
+        nameField.setText("Name");
+        nameChooser.add(nameField, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: JPanel parameter
+    // EFFECTS: initializes a text field for height
+    private void heightChooserInit(JPanel heightChooser) {
+        heightField = new JTextField(20);
+        heightField.setText("1");
+        heightChooser.add(heightField, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: JPanel parameter
+    // EFFECTS: initializes a text field for width
+    private void widthChooserInit(JPanel widthChooser) {
+        widthField = new JTextField(20);
+        widthField.setText("1");
+        widthChooser.add(widthField, BorderLayout.CENTER);
+    }
+
+    // MODIFEIS: this
+    // EFFECTS: initializes fields
+    private void initFields() {
+        width = 0;
+        height = 0;
+        name = null;
+        desc = null;
+    }
+
+    // MODIFIES: widthChooser, heightChooser, nameChooser, descChooser
+    // EFFECTS: Display labels
+    private void displayLabels(JPanel widthChooser, JPanel heightChooser, JPanel nameChooser, JPanel descChooser) {
+        widthChooser.add(new Label("Choose a number of Columns"), BorderLayout.NORTH);
+        heightChooser.add(new Label("Choose a number of Rows"), BorderLayout.NORTH);
+        nameChooser.add(new Label("Choose a name"), BorderLayout.NORTH);
+        descChooser.add(new Label("Write a description"), BorderLayout.NORTH);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: checks the matrix for valid values, returns true if OK.
+    // TODO: prevent same names from passing.
     private boolean valuesOk() {
         try {
             String input = widthField.getText();
@@ -207,7 +239,6 @@ public class AddMatrixTool extends Tool {
         }
 
         name = nameField.getText();
-
         desc = descField.getText();
 
         if (name != null && desc != null && width > 0 && width < 15 && height > 0 && height < 15) {

@@ -16,6 +16,15 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in lecture lab, CPSC 210 2025S2, SimplyDrawingPlayer,
+ * DrawingEditor.java class.
+ * 
+ */
+
 public class MatrixGui extends JFrame {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 330;

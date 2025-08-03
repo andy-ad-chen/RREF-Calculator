@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
-import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,6 +18,15 @@ import model.Row;
 import model.RowList;
 import ui.Main;
 import ui.MatrixGui;
+
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in lecture lab, CPSC 210 2025S2, SimplyDrawingPlayer,
+ * DeleteTool.java class.
+ * 
+ */
 
 public class ViewSelectMenu {
 
@@ -75,9 +83,9 @@ public class ViewSelectMenu {
 
         // comboOfMatrices.addItem("- asdfs and View a Matrix -");
         addMatricesToComboBox(this.matrices);
-        comboOfMatrices.addActionListener(new comboHandler());
+        comboOfMatrices.addActionListener(new ComboHandler());
 
-        confirmButton.addActionListener(new confirmHandler());
+        confirmButton.addActionListener(new ConfirmHandler());
 
         container.add(comboOfMatrices, BorderLayout.CENTER);
         container.add(confirmButton, BorderLayout.LINE_END);
@@ -86,7 +94,7 @@ public class ViewSelectMenu {
 
     }
 
-    private class confirmHandler implements ActionListener {
+    private class ConfirmHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("clicked the confirm button");
@@ -103,7 +111,7 @@ public class ViewSelectMenu {
 
     // RECALL originally intended to handle everything without the button
     // realized this was quite stupid or at least hard for me.
-    private class comboHandler implements ActionListener {
+    private class ComboHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             JComboBox<String> combo = (JComboBox<String>) e.getSource();
@@ -122,7 +130,7 @@ public class ViewSelectMenu {
             }
 
             mainGui.setActiveIndex(indexOfName);
-            
+
         }
     }
 

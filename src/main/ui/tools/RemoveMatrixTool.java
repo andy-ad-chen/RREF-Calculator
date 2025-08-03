@@ -10,6 +10,15 @@ import javax.swing.JComponent;
 import ui.Main;
 import ui.MatrixGui;
 
+/*
+ * 
+ * This class is inspired by code provided by the UBC Department of Computer
+ * Science, in the course material of CPSC 210.
+ * Found in lecture lab, CPSC 210 2025S2, SimplyDrawingPlayer,
+ * DeleteTool.java class.
+ * 
+ */
+
 public class RemoveMatrixTool extends Tool {
     private static MatrixGui mainGui;
 

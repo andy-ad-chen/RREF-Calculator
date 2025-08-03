@@ -2,9 +2,6 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Robot;
-import java.awt.print.PrinterException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -30,7 +27,9 @@ public class MatrixInserter {
 
     private Matrix workingMatrix;
 
-    // EFFECTS: creates new matrix inserter pane with the static MainGui from Main.
+    // MODIFIES: this.mainGui
+    // EFFECTS: constructs empty matrix inserter table within the static MainGui
+    // from Main. does not add the insertion plane until adder is called.
     public MatrixInserter() {
         mainGui = Main.getMatrixGui();
         next = new JButton("Verify values and Continue");
@@ -40,7 +39,6 @@ public class MatrixInserter {
                 mainGui.addCompletedMatrix(workingMatrix);
                 mainGui.refreshComboBox();
                 mainGui.resetCenter();
-
             } else {
                 JOptionPane.showMessageDialog(null,
                         "These values are not valid; please ensure that "
@@ -49,6 +47,8 @@ public class MatrixInserter {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the table needed to insert matrices.
     public void adder(int width, int height, String name, String desc) {
         this.width = width;
         this.height = height;
@@ -69,15 +69,14 @@ public class MatrixInserter {
 
         wrapper = new JPanel(new BorderLayout());
         wrapper.add(table, BorderLayout.CENTER);
-
         wrapper.add(next, BorderLayout.SOUTH);
 
         mainGui.getContentPane().add(wrapper, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();
-
     }
 
+    // EFFECTS: returns true if the values in the matrix are valid.
     private boolean valuesOk() {
         try {
             if (table.isEditing()) {
@@ -94,7 +93,6 @@ public class MatrixInserter {
             return false;
         }
         return true;
-
         // return false; // STUB
     }
 
