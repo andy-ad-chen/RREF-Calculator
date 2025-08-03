@@ -75,7 +75,4 @@ public class MatrixList implements Writable {
         }
         return jsonArray;
     }
-
-    //TODO: check this over
-
 }

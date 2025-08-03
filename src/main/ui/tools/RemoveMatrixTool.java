@@ -32,7 +32,6 @@ public class RemoveMatrixTool extends Tool {
     // EFFECTS: adds a new button saying "Delete This Matrix"
     @Override
     protected void createButton(JComponent parent) {
-        // TODO Auto-generated method stub
         button = new JButton("Delete This Matrix");
         button = customizeButton(button);
         button.setOpaque(true);

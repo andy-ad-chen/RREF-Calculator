@@ -35,8 +35,6 @@ public class Matrix implements Writable {
     // matrix.getMatrixDesc());
     // }
 
-
-
     // EFFECTS: gets col number of matrix
     public int getWidth() {
         return this.columnNum;
@@ -127,8 +125,6 @@ public class Matrix implements Writable {
         return json;
     }
 
-    // TODO: sends the non-primitives (non-fundamental JSON types) to json
-
     // EFFECTS: returns Rows in this matrix as a JSON array
     private JSONArray rowListsToJson(RowList rowList) {
         JSONArray jsonArray = new JSONArray();
@@ -137,13 +133,5 @@ public class Matrix implements Writable {
         }
         return jsonArray;
     }
-
-
-
-
-
-
-
-
 
 }
