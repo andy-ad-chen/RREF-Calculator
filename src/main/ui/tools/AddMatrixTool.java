@@ -28,6 +28,7 @@ import ui.MatrixInserter;
  * 
  */
 
+// Tool to add a matrix
 public class AddMatrixTool extends Tool {
     private static MatrixGui mainGui;
 

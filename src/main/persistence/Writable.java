@@ -12,6 +12,7 @@ import org.json.JSONObject;
      * 
      */
 
+// Interface that all writable objects ought to implement
 public interface Writable {
     // EFFECTS: returns this as JSON object
     JSONObject toJson();

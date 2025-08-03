@@ -14,8 +14,6 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
-
-
 /*
  * 
  * This class is inspired by code provided by the UBC Department of Computer
@@ -24,8 +22,6 @@ import javax.swing.*;
  * Teller application, TellerApp class.
  * 
  */
-
-
 
 /*
 * 
@@ -36,6 +32,7 @@ import javax.swing.*;
 * 
 */
 
+// Console matrix app
 public class MatrixReducerApp extends JFrame {
 
     public static final int WIDTH = 1000;
@@ -51,7 +48,6 @@ public class MatrixReducerApp extends JFrame {
     public MatrixReducerApp() {
         runApp();
     }
-
 
     // MODIFIES: this
     // EFFECTS: processes user input

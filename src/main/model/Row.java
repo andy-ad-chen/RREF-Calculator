@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 
-
+// Row extending arraylist of floats.
 public class Row extends ArrayList<Float> implements Writable {
 
     // EFFECTS: constructs row

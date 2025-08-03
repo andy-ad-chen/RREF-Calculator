@@ -28,16 +28,9 @@ import ui.MatrixGui;
  * 
  */
 
+
+ // menu to see all matrices
 public class ViewSelectMenu {
-
-    // FOR TESTING START
-    protected RowList identity;
-    protected Row identityRow1;
-    protected Row identityRow2;
-    protected Row identityRow3;
-    protected Matrix identityMatrix;
-    // FOR TESTING END
-
     private MatrixList matrices;
     private static MatrixGui mainGui;
     private Matrix shownMatrix;
@@ -50,27 +43,6 @@ public class ViewSelectMenu {
         this.matrices = matrices;
         mainGui = Main.getMatrixGui();
 
-        // FOR TESTING START
-        identity = new RowList(3);
-        identityRow1 = new Row();
-        identityRow2 = new Row();
-        identityRow3 = new Row();
-        identityRow1.add(1.0f);
-        identityRow1.add(0.0f);
-        identityRow1.add(0.0f);
-        identityRow2.add(0.0f);
-        identityRow2.add(1.0f);
-        identityRow2.add(0.0f);
-        identityRow3.add(0.0f);
-        identityRow3.add(0.0f);
-        identityRow3.add(1.0f);
-        identity.add(identityRow1);
-        identity.add(identityRow2);
-        identity.add(identityRow3);
-        identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
-        // FOR TESTING END
-
-        shownMatrix = identityMatrix;
     }
 
     // MODIFIES: panel
@@ -81,7 +53,6 @@ public class ViewSelectMenu {
         confirmButton.setForeground(Color.GRAY);
         JPanel container = new JPanel(new BorderLayout());
 
-        // comboOfMatrices.addItem("- asdfs and View a Matrix -");
         addMatricesToComboBox(this.matrices);
         comboOfMatrices.addActionListener(new ComboHandler());
 
@@ -111,6 +82,8 @@ public class ViewSelectMenu {
 
     // RECALL originally intended to handle everything without the button
     // realized this was quite stupid or at least hard for me.
+
+    //
     private class ComboHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

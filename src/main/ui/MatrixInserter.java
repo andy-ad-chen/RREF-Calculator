@@ -13,6 +13,7 @@ import model.Matrix;
 import model.Row;
 import model.RowList;
 
+// table to specify a matrix
 public class MatrixInserter {
     private static MatrixGui mainGui;
     private String name;

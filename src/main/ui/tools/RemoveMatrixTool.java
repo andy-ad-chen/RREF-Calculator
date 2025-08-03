@@ -19,6 +19,8 @@ import ui.MatrixGui;
  * 
  */
 
+
+ // Tool to remove current matrix from file 
 public class RemoveMatrixTool extends Tool {
     private static MatrixGui mainGui;
 

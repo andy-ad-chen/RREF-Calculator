@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
  * 
  */
 
+
+ // Tool to load matrices from file 
 public class LoadTool extends Tool {
     private static MatrixGui mainGui;
 

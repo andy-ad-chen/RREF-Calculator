@@ -25,6 +25,7 @@ import java.io.IOException;
  * 
  */
 
+// GUI of matrix app
 public class MatrixGui extends JFrame {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 330;

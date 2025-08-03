@@ -13,6 +13,7 @@ import javax.swing.*;
  * 
  */
 
+// abstract tool class for all tools 
 public abstract class Tool {
 
     protected JButton button;

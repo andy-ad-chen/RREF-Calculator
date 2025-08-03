@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+// a list of Rows
 public class RowList extends ArrayList<Row> {
     private int columnNum;
 

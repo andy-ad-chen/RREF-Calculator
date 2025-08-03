@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
  * 
  */
 
+// Tool to saves matrices from file 
 public class SaveTool extends Tool {
     private static MatrixGui mainGui;
 

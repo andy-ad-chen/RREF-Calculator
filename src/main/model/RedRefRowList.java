@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+// RowList but representing the reduced row echelon form of a row list 
 public class RedRefRowList extends RowList {
 
     // EFFECTS: constructs a RedRefRowList
