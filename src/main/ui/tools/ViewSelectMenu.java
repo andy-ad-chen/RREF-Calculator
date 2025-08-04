@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -119,12 +120,15 @@ public class ViewSelectMenu {
         int width = shownMatrix.getWidth();
         RowList rowsMatrix = shownMatrix.getMatrixRows();
         RowList redRefMatrix = shownMatrix.getRedRefRows();
+        String desc = shownMatrix.getMatrixDesc();
 
         mainGui.resetCenter();
 
         JPanel container = new JPanel(new FlowLayout());
+        JTextArea descText = new JTextArea(desc);
         container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
         container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
+        container.add(descText);
 
         // TODO: display the description
 
