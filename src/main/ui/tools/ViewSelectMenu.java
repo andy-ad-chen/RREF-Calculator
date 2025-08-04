@@ -129,9 +129,6 @@ public class ViewSelectMenu {
         container.add(getMatrixPanel(rowsMatrix, width, height, "Unsolved"));
         container.add(getMatrixPanel(redRefMatrix, width, height, "RREF"));
         container.add(descText);
-
-        // TODO: display the description
-
         mainGui.add(container, BorderLayout.CENTER);
         mainGui.revalidate();
         mainGui.repaint();

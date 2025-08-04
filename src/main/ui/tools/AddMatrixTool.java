@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Matrix;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -17,7 +19,6 @@ import java.awt.event.ActionListener;
 import ui.Main;
 import ui.MatrixGui;
 import ui.MatrixInserter;
-
 
 /*
  * 
@@ -241,7 +242,16 @@ public class AddMatrixTool extends Tool {
 
         name = nameField.getText();
         desc = descField.getText();
+        for (Matrix m : mainGui.getMatrices().getMatrices()) {
+            if (m.getMatrixName().equals(name)) {
+                return false;
+            }
+        }
+        return checkValuesSimple();
+    }
 
+    // EFFECTS: chcks matrix values directly
+    private boolean checkValuesSimple() {
         if (name != null && desc != null && width > 0 && width < 15 && height > 0 && height < 15) {
             return true;
         } else {
