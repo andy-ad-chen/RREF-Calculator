@@ -1,8 +1,18 @@
-{"List of Matrices": [{
-    "Description": "This is a short description for my matrix",
-    "Invertibility": true,
-    "Matrix Rows in RREF": [{"row": [1]}],
-    "Matrix Rows": [{"row": [1]}],
-    "Width": 1,
-    "Name": "Name"
-}]}
+{"List of Matrices": [
+    {
+        "Description": "Description",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [{"row": [1]}],
+        "Matrix Rows": [{"row": [69]}],
+        "Width": 1,
+        "Name": "Name 2: electricBoogaloo"
+    },
+    {
+        "Description": "Description",
+        "Invertibility": true,
+        "Matrix Rows in RREF": [{"row": [1]}],
+        "Matrix Rows": [{"row": [1]}],
+        "Width": 1,
+        "Name": "Name3"
+    }
+]}
