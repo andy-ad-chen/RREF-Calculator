@@ -86,7 +86,7 @@ public class MatrixInserter {
             for (int i = 0; i < height; i++) {
                 for (int k = 0; k < width; k++) {
                     Object input = table.getValueAt(i, k);
-                    System.out.println(input.toString());
+                    // System.out.println(input.toString()); // USED FOR DEBUGGING
                     Float.parseFloat(input.toString());
                 }
             }

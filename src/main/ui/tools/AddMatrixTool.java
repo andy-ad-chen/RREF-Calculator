@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 import model.Matrix;
 
 import java.awt.BorderLayout;
@@ -159,7 +158,7 @@ public class AddMatrixTool extends Tool {
                 MatrixInserter adder = new MatrixInserter();
                 adder.adder(width, height, name, desc);
 
-                System.out.println("starting matrix value inserter");
+                // System.out.println("starting matrix value inserter"); //USED FOR DEBUGGING
 
                 // JOptionPane.showMessageDialog(null,
                 // "all OK now");
