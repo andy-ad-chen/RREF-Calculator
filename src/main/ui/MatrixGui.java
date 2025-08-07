@@ -13,6 +13,11 @@ import ui.tools.SaveTool;
 import ui.tools.ViewSelectMenu;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -70,9 +75,67 @@ public class MatrixGui extends JFrame {
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         createTools();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // changed
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // changed
+        addWindowListener();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    protected void addWindowListener() {
+        this.addWindowListener(new CloseWindowHandler());
+    }
+
+    // NOTE: uses WindowAdapter since I tried WindowListener (as I used
+    // ActionListener in all my buttons) and found that I had to implement many
+    // different window events' actions
+
+    /*
+     * 
+     * These below methods were previously necessarily implemented in this private
+     * class as this private class
+     * implemented the interface WindowListener
+     * 
+     * 
+     * @Override
+     * public void windowIconified(WindowEvent e) {
+     * }
+     * 
+     * @Override
+     * public void windowDeiconified(WindowEvent e) {
+     * }
+     * 
+     * @Override
+     * public void windowActivated(WindowEvent e) {
+     * }
+     * 
+     * @Override
+     * public void windowDeactivated(WindowEvent e) {
+     * }
+     * 
+     * @Override
+     * public void windowClosed(WindowEvent e) {
+     * }
+     * 
+     * @Override
+     * public void windowOpened(WindowEvent e) {
+     * }
+     * 
+     */
+
+    // EFFECTS: a handler for this button
+    // private class CloseWindowHandler implements WindowListener {
+    private class CloseWindowHandler extends WindowAdapter {
+        // MODIFIES: this
+        // EFFECTS: Closes window and prints log to console;
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("closed app");
+            dispose();
+            System.exit(0);
+        }
+
     }
 
     public void resetCenter() {
