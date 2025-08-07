@@ -25,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Further tests were added to achieve 100% coverage of the Event class.
 public class EventTest {
-    private Event e;
-    private Event a;
-    private Event b;
-    private Date d;
+    private Event event1;
+    private Event event2;
+    private Event event3;
+    private Date date;
 
     // NOTE: these tests might fail if time at which line (2) below is executed
     // is different from time that line (1) is executed. Lines (1) and (2) must
@@ -38,51 +38,51 @@ public class EventTest {
 
     @BeforeEach
     public void runBefore() {
-        e = new Event("you just lost THE GAME :3");
+        event1 = new Event("you just lost THE GAME :3");
 
-        d = new Date(999999);
-        a = new Event("yee yee ahh event");
-        b = new Event("yee yee ahh event");
+        date = new Date(999999);
+        event2 = new Event("yee yee ahh event");
+        event3 = new Event("yee yee ahh event");
     }
 
     @Test
     public void testEvent() {
-        assertEquals("you just lost THE GAME :3", e.getDescription());
+        assertEquals("you just lost THE GAME :3", event1.getDescription());
     }
 
     @Test
     public void testToString() {
-        assertNotEquals(d.toString() + "\n" + "you just lost THE GAME :3", e.toString());
-        assertEquals(e.getDate() + "\n" + "you just lost THE GAME :3", e.toString());
+        assertNotEquals(date.toString() + "\n" + "you just lost THE GAME :3", event1.toString());
+        assertEquals(event1.getDate() + "\n" + "you just lost THE GAME :3", event1.toString());
     }
 
     @Test
     public void testEquality() {
-        assertTrue(a.equals(b));
+        assertTrue(event2.equals(event3));
     }
 
     @Test
     public void testEqualityNot() {
-        assertFalse(a.equals(e));
+        assertFalse(event2.equals(event1));
     }
 
     @Test
     public void testEqualityNull() {
-        assertFalse(a.equals(null));
+        assertFalse(event2.equals(null));
     }
 
     @Test
     public void testEqualityWrongClass() {
-        assertFalse(a.equals("wrong ahh object"));
+        assertFalse(event2.equals("wrong ahh object"));
     }
 
     @Test
     public void testHash() {
-        assertEquals(a.hashCode(), b.hashCode());
+        assertEquals(event2.hashCode(), event3.hashCode());
     }
 
     @Test
     public void testHashNot() {
-        assertNotEquals(a.hashCode(), e.hashCode());
+        assertNotEquals(event2.hashCode(), event1.hashCode());
     }
 }

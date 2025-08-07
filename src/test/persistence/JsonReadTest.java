@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
@@ -21,13 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReadTest extends MethodsForTest {
     private MatrixList ml;
-    private Matrix m;
-
+    private Matrix matrix;
 
     @BeforeEach
     void setUp() {
         ml = new MatrixList();
-        m = new Matrix(typicalCase, 3, "name", "desc"); 
+        matrix = new Matrix(typicalCase, 3, "name", "desc");
     }
 
     @Test
@@ -40,19 +38,18 @@ public class JsonReadTest extends MethodsForTest {
             // pass
         }
     }
+
     @Test
     void testEmptyList() {
         JsonReader reader = new JsonReader("./data/testEmptyList.json");
         try {
             ml = reader.read();
-            ml.addMatrix(m);
+            ml.addMatrix(matrix);
             assertEquals(1, ml.getMatrices().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
-
-
 
     @Test
     void testGeneralList() {

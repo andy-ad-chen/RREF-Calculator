@@ -20,19 +20,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonWriterTest extends MethodsForTest {
     private MatrixList ml;
-    private Matrix m;
-
+    private Matrix matrix;
 
     @BeforeEach
     void setUp() {
         ml = new MatrixList();
-        m = new Matrix(typicalCase, 3, "name", "desc"); 
+        matrix = new Matrix(typicalCase, 3, "name", "desc");
     }
 
     @Test
     void testWriterInvalidFile() {
         try {
-            Matrix m = new Matrix(typicalCase, 3, "name", "desc"); 
+            Matrix m = new Matrix(typicalCase, 3, "name", "desc");
             ml.addMatrix(m);
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
@@ -52,19 +51,18 @@ public class JsonWriterTest extends MethodsForTest {
 
             JsonReader reader = new JsonReader("./data/testEmptyList.json");
             ml = reader.read();
-            ml.addMatrix(m);
+            ml.addMatrix(matrix);
             assertEquals(1, ml.getMatrices().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
-
     @Test
     void testGeneralList() {
         try {
-            ml.addMatrix(m);
-            ml.addMatrix(m);
+            ml.addMatrix(matrix);
+            ml.addMatrix(matrix);
             JsonWriter writer = new JsonWriter("./data/testGenList.json");
             writer.open();
             writer.write(ml);
@@ -77,8 +75,5 @@ public class JsonWriterTest extends MethodsForTest {
             fail("Exception should not have been thrown");
         }
     }
-
-
-
 
 }

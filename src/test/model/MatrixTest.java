@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class MatrixTest {
     protected Matrix testMatrix;
     protected Matrix identityMatrix;
@@ -33,23 +32,19 @@ public class MatrixTest {
 
     @BeforeEach
     void runBefore() {
-        typicalCase = new RowList(3);
-        typicalCaseRow1 = new Row();
-        typicalCaseRow2 = new Row();
-        typicalCaseRow3 = new Row();
-        typicalCaseRow1.add(1.0f);
-        typicalCaseRow1.add(2.0f);
-        typicalCaseRow1.add(0.0f);
-        typicalCaseRow2.add(0.0f);
-        typicalCaseRow2.add(2.0f);
-        typicalCaseRow2.add(4.0f);
-        typicalCaseRow3.add(0.0f);
-        typicalCaseRow3.add(0.0f);
-        typicalCaseRow3.add(0.0f);
-        typicalCase.add(typicalCaseRow1);
-        typicalCase.add(typicalCaseRow2);
-        typicalCase.add(typicalCaseRow3);
+        typicalCasePrep();
 
+        redrefPrep();
+
+        otherCasePrep();
+        identityPrep();
+
+        testMatrix = new Matrix(typicalCase, 3, "myMatrix", "desc");
+        identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
+
+    }
+
+    private void redrefPrep() {
         typicalCaseRedRef = new RowList(3);
         typicalCaseRow1RedRef = new Row();
         typicalCaseRow2RedRef = new Row();
@@ -66,20 +61,9 @@ public class MatrixTest {
         typicalCaseRedRef.add(typicalCaseRow1RedRef);
         typicalCaseRedRef.add(typicalCaseRow2RedRef);
         typicalCaseRedRef.add(typicalCaseRow3RedRef);
+    }
 
-        zero = new RowList(3);
-        zeroRow = new Row();
-        zeroRow.add(0f);
-        zeroRow.add(0f);
-        zeroRow.add(0f);
-        zero.add(zeroRow);
-        zero.add(zeroRow);
-        zero.add(zeroRow);
-
-        oneByOne = new RowList(1);
-        oneByOneRow = new Row();
-        oneByOneRow.add(1.0f);
-
+    private void identityPrep() {
         identity = new RowList(3);
         identityRow1 = new Row();
         identityRow2 = new Row();
@@ -96,9 +80,41 @@ public class MatrixTest {
         identity.add(identityRow1);
         identity.add(identityRow2);
         identity.add(identityRow3);
+    }
 
-        testMatrix = new Matrix(typicalCase, 3, "myMatrix", "desc");
-        identityMatrix = new Matrix(identity, 3, "myIDMatrix", "desc");
+    private void otherCasePrep() {
+        zero = new RowList(3);
+        zeroRow = new Row();
+        zeroRow.add(0f);
+        zeroRow.add(0f);
+        zeroRow.add(0f);
+        zero.add(zeroRow);
+        zero.add(zeroRow);
+        zero.add(zeroRow);
+
+        oneByOne = new RowList(1);
+        oneByOneRow = new Row();
+        oneByOneRow.add(1.0f);
+
+    }
+
+    private void typicalCasePrep() {
+        typicalCase = new RowList(3);
+        typicalCaseRow1 = new Row();
+        typicalCaseRow2 = new Row();
+        typicalCaseRow3 = new Row();
+        typicalCaseRow1.add(1.0f);
+        typicalCaseRow1.add(2.0f);
+        typicalCaseRow1.add(0.0f);
+        typicalCaseRow2.add(0.0f);
+        typicalCaseRow2.add(2.0f);
+        typicalCaseRow2.add(4.0f);
+        typicalCaseRow3.add(0.0f);
+        typicalCaseRow3.add(0.0f);
+        typicalCaseRow3.add(0.0f);
+        typicalCase.add(typicalCaseRow1);
+        typicalCase.add(typicalCaseRow2);
+        typicalCase.add(typicalCaseRow3);
 
     }
 
@@ -174,8 +190,6 @@ public class MatrixTest {
         testMatrix.changeMatrixDesc("yourmom");
         assertEquals(testMatrix.getMatrixDesc(), "yourmom");
     }
-
-
 
     @Test
     void testRowGet() {

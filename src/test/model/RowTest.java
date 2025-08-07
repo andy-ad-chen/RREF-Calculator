@@ -21,6 +21,12 @@ public class RowTest {
 
     @BeforeEach
     void runBefore() {
+        helper1();
+        helper2();
+
+    }
+
+    private void helper1() {
         testRow1 = new Row();
         testRow1.add(1.0f);
         testRow1.add(2.0f);
@@ -44,7 +50,9 @@ public class RowTest {
         testRow2Vals.add(7.0f);
         testRow2Vals.add(7.0f);
         testRow2Vals.add(7.0f);
+    }
 
+    private void helper2() {
         testRow3 = new Row();
         testRow3.add(4.0f);
         testRow3.add(6.0f);
@@ -69,7 +77,6 @@ public class RowTest {
         testRowSummed.add(7.0f + 7.0f);
         testRowSummed.add(7.0f + 7.0f);
         testRowSummed.add(7.0f + 7.0f);
-
     }
 
     @Test
@@ -78,7 +85,6 @@ public class RowTest {
         assertNotEquals(testRow1, testRow2);
         assertTrue(testRow1.size() == 3);
     }
-
 
     @Test
     void testConstructorCopyCollection() {
@@ -89,8 +95,6 @@ public class RowTest {
         assertEquals(testRow1, testRow2);
     }
 
-
-
     @Test
     void testConstructorCopyRow() {
         assertFalse(testRow1.size() == 5);
@@ -99,7 +103,6 @@ public class RowTest {
         assertTrue(testRow1.size() == 5);
         assertEquals(testRow1, testRow2);
     }
-
 
     @Test
     void testSumRow() {

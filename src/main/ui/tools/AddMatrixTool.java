@@ -96,7 +96,7 @@ public class AddMatrixTool extends Tool {
         // matrix
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked the add matrix tool");
+            // System.out.println("clicked the add matrix tool"); //USED FOR DEBUGGING
             mainGui = Main.getMatrixGui();
             addMatrixToList();
             mainGui.refreshComboBox();
