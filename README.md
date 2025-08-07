@@ -61,3 +61,20 @@ Removed matrix from working list: Joe's Matrix
 Wed Aug 06 20:40:38 PDT 2025
 List of matrices to view has been updated
 
+# Phase 4: Task 3
+
+Given more time, I would like to implement many changes to my project.
+
+Firstly, I notice from my UML diagram that I accidentally included many duplicates of the field containing a `MatrixGui` object in my `tools` package. All of the present tools extends the abstract `Tool`, which already contains a `MatrixGui` object. 
+
+Secondly, I did not realize at the time I started my project that there exists a data type that is a 2 dimensional array. This would make my representation of a matrix much simpler. I would still need 2 fields in the `Matrix` type for the matrix originally and then after it is reduced to RREF. 
+
+Thirdly, I think that my `ViewSelectMenu` class could also extend `Tool` as there is some common functionality, including having the need to access `MatrixGui`. Further, there is a button created inside `ViewSelectMenu` that I believe could be pulled out into its own class; it is a `JButton` that could be another extension on `Tool`. 
+
+I originally wrote most of the code in `model` before learning about abstraction and polymorphism. Thus, fourthly, I would've modified some classes in `model` to be extensions of lists built-in to java. I actually did carry out this modification earlier on in this project.
+
+Fifth, I would remove the `MatrixList` field in `ViewSelectMenu` as it can access it through `MatrixGui`. This increases cohesion.
+
+Sixth, I would make changes to the way many methods in `ui` were written, as there are many actions like `mainGui.add(...)`,`mainGui.revalidate()`, and `mainGui.repaint()` which could be refactored into one helper method.
+
+
