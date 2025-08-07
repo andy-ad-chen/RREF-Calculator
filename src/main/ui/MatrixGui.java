@@ -2,6 +2,9 @@ package ui;
 
 import javax.swing.*;
 
+
+import model.Event;
+import model.EventLog;
 import model.Matrix;
 import model.MatrixList;
 import persistence.JsonReader;
@@ -86,7 +89,7 @@ public class MatrixGui extends JFrame {
         this.addWindowListener(new CloseWindowHandler());
     }
 
-    // NOTE: uses WindowAdapter since I tried WindowListener (as I used
+    // NOTE: Next method uses WindowAdapter since I tried WindowListener (as I used
     // ActionListener in all my buttons) and found that I had to implement many
     // different window events' actions
 
@@ -123,20 +126,28 @@ public class MatrixGui extends JFrame {
      * 
      */
 
+
     // EFFECTS: a handler for this button
     // private class CloseWindowHandler implements WindowListener {
     private class CloseWindowHandler extends WindowAdapter {
         // MODIFIES: this
         // EFFECTS: Closes window and prints log to console;
-
         @Override
         public void windowClosing(WindowEvent e) {
-            System.out.println("closed app");
+            printLog(EventLog.getInstance());
             dispose();
             System.exit(0);
         }
 
     }
+
+    private void printLog(EventLog el) {
+        for (Event e: el) {
+            System.out.println(e.toString());
+        }
+    }
+
+
 
     public void resetCenter() {
         Container contentPane = getContentPane();
