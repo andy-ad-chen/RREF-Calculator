@@ -77,4 +77,7 @@ Fifth, I would remove the `MatrixList` field in `ViewSelectMenu` as it can acces
 
 Sixth, I would make changes to the way many methods in `ui` were written, as there are many actions like `mainGui.add(...)`,`mainGui.revalidate()`, and `mainGui.repaint()` which could be refactored into one helper method.
 
+Seventh, I find `MatrixInserter` in an odd position. It is only instantiated in `AddMatrixTool` and then uses methods in `Main` to find the `MatrixGui` (`Main.getMatrixGui()` which is static) to add a matrix. It then appends the matrix onto `MatrixGui`'s matrix list. To improve cohesion, it could just pass parameters into some method in `AddMatrixTool` which would mean removing the `Matrix` field, and making the association between `MatrixGui` and `AddMatrixTool` bidirectional.
+
+
 
