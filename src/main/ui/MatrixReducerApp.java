@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.*;
-
 /*
  * 
  * This class is inspired by code provided by the UBC Department of Computer
@@ -33,10 +31,7 @@ import javax.swing.*;
 */
 
 // Console matrix app
-public class MatrixReducerApp extends JFrame {
-
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+public class MatrixReducerApp {
 
     private MatrixList matrices = new MatrixList();
     private static final String JSON_STORE = "./data/matrices.json";

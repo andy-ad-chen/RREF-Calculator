@@ -13,9 +13,9 @@ public class Main {
         return mainGui; 
     }
 
-    // EFFECTS: runs console app when run as main
-    public static void mainConsole(String[] args) {
-        new MatrixReducerApp();
-    }
+    // // EFFECTS: runs console app when run as main
+    // public static void main(String[] args) {
+    //     new MatrixReducerApp();
+    // }
 }
 
