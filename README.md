@@ -20,4 +20,11 @@ Being a physics and maths student, this type of project interests me since it in
 * As a user, I want to be able to save my selection of matrices to a file, if I so choose.
 * As a user, I want to be able to load my selection of matrices from a file, if I so choose.
 
+# Instructions for End Users
 
+- Click the "Add a matrix" button on the bottom half of the window to start specifying a matrix. Enter values in all fields; click "Verify values and Continue" to continue. If your values are not valid, you wil be prompted to try again. A table will be generated in which you can enter the matrice's values, and you will have the option to "Very values and Continue" again.
+- To display all the loaded matrices, click the drop-down menu; all matrices will be there.
+- To compute the Reduced Row Echelon form of a matrix, select it from the drop-down menu and click the green "View" button.
+- To visualize a matrix, select a matrix from the drop-down menu and click the green "View" button. The values of a matrix will be drawn into an appropriately-sized matrix with an outline.
+- You can save the matrices list by clicking "Save and Write to File".
+- You can reload the matrices list by clicking "Load from File".
