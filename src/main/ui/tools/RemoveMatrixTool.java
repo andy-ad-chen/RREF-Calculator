@@ -72,6 +72,7 @@ public class RemoveMatrixTool extends Tool {
 
             // System.out.println("clicked the delete tool"); //USED FOR DEBUGGING
             mainGui = Main.getMatrixGui();
+            
             mainGui.removeActiveIndex();
             mainGui.refreshComboBox();
         }

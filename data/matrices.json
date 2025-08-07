@@ -1,8 +1,8 @@
 {"List of Matrices": [{
     "Description": "Description",
-    "Invertibility": true,
+    "Invertibility": false,
     "Matrix Rows in RREF": [{"row": [1]}],
-    "Matrix Rows": [{"row": [1]}],
+    "Matrix Rows": [{"row": [21]}],
     "Width": 1,
-    "Name": "Name"
+    "Name": "Joe's Matrix"
 }]}

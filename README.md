@@ -28,3 +28,36 @@ Being a physics and maths student, this type of project interests me since it in
 - To visualize a matrix, select a matrix from the drop-down menu and click the green "View" button. The values of a matrix will be drawn into an appropriately-sized matrix with an outline.
 - You can save the matrices list by clicking "Save and Write to File".
 - You can reload the matrices list by clicking "Load from File".
+
+# Phase 4: Task 2
+
+Wed Aug 06 20:40:17 PDT 2025
+List of matrices to view has been updated
+
+Wed Aug 06 20:40:18 PDT 2025
+The matrix: "Your Mum's Matrix" has had its RREF computed.
+
+Wed Aug 06 20:40:18 PDT 2025
+Added matrix to working list: Your Mum's Matrix
+
+Wed Aug 06 20:40:18 PDT 2025
+List of matrices to view has been updated
+
+Wed Aug 06 20:40:23 PDT 2025
+List of matrices to view has been updated
+
+Wed Aug 06 20:40:32 PDT 2025
+The matrix: "Joe's Matrix" has had its RREF computed.
+
+Wed Aug 06 20:40:32 PDT 2025
+Added matrix to working list: Joe's Matrix
+
+Wed Aug 06 20:40:32 PDT 2025
+List of matrices to view has been updated
+
+Wed Aug 06 20:40:38 PDT 2025
+Removed matrix from working list: Joe's Matrix
+
+Wed Aug 06 20:40:38 PDT 2025
+List of matrices to view has been updated
+

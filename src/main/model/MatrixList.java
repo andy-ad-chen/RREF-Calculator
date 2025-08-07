@@ -31,8 +31,12 @@ public class MatrixList implements Writable {
     // REQUIRES: 0 <= index < matrices.size() - 1
     // MODIFIES: this
     // EFFECTS: removes the correct index of the matrix of this list of matrices
+    // LOGS THIS EVENT!!!
     public void removeMatrix(int index) {
         matrices.remove(index);
+        EventLog.getInstance()
+                .logEvent(new Event("Removed matrix from working list: " + matrices.get(index).getMatrixName()));
+
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
