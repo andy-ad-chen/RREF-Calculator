@@ -138,9 +138,9 @@ public class MatrixGui extends JFrame {
             dispose();
             System.exit(0);
         }
-
     }
 
+    
     private void printLog(EventLog el) {
         for (Event e: el) {
             System.out.println(e.toString());
