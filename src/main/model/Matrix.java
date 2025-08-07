@@ -48,8 +48,10 @@ public class Matrix implements Writable {
     // MODIFIES: this
     // EFFECTS: computes the redref (Reduced Row Echelon Form) of a matrix as being
     // a list of rows.
+    // LOGS THIS EVENT!!!
     public void computeRedRef() {
         this.redrefRows.computeRedRef(columnNum, redrefRows.size());
+        EventLog.getInstance().logEvent(new Event("The matrix: \"" + this.getMatrixName() + "\" has had its RREF computed."));
     }
 
     // MODIFIES: this

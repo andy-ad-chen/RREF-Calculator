@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Event;
+import model.EventLog;
 import model.Matrix;
 
 import java.awt.BorderLayout;

@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 
-
 import model.Event;
 import model.EventLog;
 import model.Matrix;
@@ -16,11 +15,8 @@ import ui.tools.SaveTool;
 import ui.tools.ViewSelectMenu;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -126,8 +122,7 @@ public class MatrixGui extends JFrame {
      * 
      */
 
-
-    // EFFECTS: a handler for this button
+    // EFFECTS: a handler for window close
     // private class CloseWindowHandler implements WindowListener {
     private class CloseWindowHandler extends WindowAdapter {
         // MODIFIES: this
@@ -140,14 +135,12 @@ public class MatrixGui extends JFrame {
         }
     }
 
-    
+    // EFFECTS: prints log
     private void printLog(EventLog el) {
-        for (Event e: el) {
-            System.out.println(e.toString());
+        for (Event e : el) {
+            System.out.println(e.toString() + "\n");
         }
     }
-
-
 
     public void resetCenter() {
         Container contentPane = getContentPane();
@@ -236,6 +229,7 @@ public class MatrixGui extends JFrame {
     // EFFECTS: adds a matrix to this
     public void addCompletedMatrix(Matrix matrix) {
         matrices.addMatrix(matrix);
+        
     }
 
     // EFFECTS: saves the matrices to file

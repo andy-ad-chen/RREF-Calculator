@@ -168,6 +168,7 @@ public class ViewSelectMenu {
             String val = listOf.get(i).getMatrixName();
             comboOfMatrices.addItem(val);
         }
+        matrices.logView(); 
         comboOfMatrices.revalidate();
         comboOfMatrices.repaint();
     }

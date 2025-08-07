@@ -21,9 +21,11 @@ public class MatrixList implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a matrix to this list of matrices
+    // EFFECTS: adds a matrix to this list of matrices,
+    // LOGS THIS EVENT!!!
     public void addMatrix(Matrix m) {
         matrices.add(m);
+        EventLog.getInstance().logEvent(new Event("Added matrix to working list: " + m.getMatrixName()));
     }
 
     // REQUIRES: 0 <= index < matrices.size() - 1
@@ -58,7 +60,13 @@ public class MatrixList implements Writable {
     public String getMatrixDesc(int index) {
         return matrices.get(index).getMatrixDesc();
     }
-    
+
+    // EFFECTS: logs a view event
+    // LOGS THIS EVENT!!!
+    public void logView() {
+        EventLog.getInstance().logEvent(new Event("List of matrices to view has been updated"));
+    }
+
     // EFFECTS: retursn JSONObject of list of matrix
     @Override
     public JSONObject toJson() {
