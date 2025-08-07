@@ -50,7 +50,7 @@ public class LoadTool extends Tool {
         // EFFECTS: loads from file
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked the load tool");
+            // System.out.println("clicked the load tool"); //USED FOR DEBUGGING
             mainGui = Main.getMatrixGui();
             mainGui.loadMatrixList();
             mainGui.refreshComboBox();

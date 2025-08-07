@@ -49,7 +49,7 @@ public class SaveTool extends Tool {
         // EFFECTS: loads from file
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked the save tool");
+            // System.out.println("clicked the save tool"); //USED FOR DEBUGGING
             mainGui = Main.getMatrixGui();
             mainGui.saveMatrixList();
         }

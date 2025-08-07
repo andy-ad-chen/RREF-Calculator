@@ -229,7 +229,7 @@ public class MatrixGui extends JFrame {
     // EFFECTS: adds a matrix to this
     public void addCompletedMatrix(Matrix matrix) {
         matrices.addMatrix(matrix);
-        
+
     }
 
     // EFFECTS: saves the matrices to file
@@ -238,9 +238,11 @@ public class MatrixGui extends JFrame {
             jsonWriter.open();
             jsonWriter.write(matrices);
             jsonWriter.close();
-            System.out.println("Saved matrices " + " to " + JSON_STORE);
+            // System.out.println("Saved matrices " + " to " + JSON_STORE); //USED FOR
+            // DEBUGGING
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            // System.out.println("Unable to write to file: " + JSON_STORE); //USED FOR
+            // DEBUGGING
         }
     }
 
@@ -249,9 +251,9 @@ public class MatrixGui extends JFrame {
     public void loadMatrixList() {
         try {
             this.matrices = jsonReader.read();
-            System.out.println("Loaded matrices from" + JSON_STORE);
+            // System.out.println("Loaded matrices from" + JSON_STORE); //USED FOR DEBUGGING
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            // System.out.println("Unable to read from file: " + JSON_STORE); //USED FOR DEBUGGING
         }
     }
 

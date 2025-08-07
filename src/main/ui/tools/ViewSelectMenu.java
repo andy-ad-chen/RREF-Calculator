@@ -71,7 +71,7 @@ public class ViewSelectMenu {
         // EFFECTS: displays selected matrix
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked the confirm button");
+            // System.out.println("clicked the confirm button"); //USED FOR DEBUGGING
             int indexOfName = comboOfMatrices.getSelectedIndex() - 1;
             if (indexOfName >= 0) {
                 // I personally find this very funny
@@ -135,7 +135,7 @@ public class ViewSelectMenu {
 
     }
 
-    // EFFECTS: returns a JPanel of the matrix passed in. 
+    // EFFECTS: returns a JPanel of the matrix passed in.
     private JPanel getMatrixPanel(RowList rowList, int width, int height, String msg) {
         JPanel matrixSpace = new JPanel(new GridLayout(height, width, 2, 2));
 
@@ -163,12 +163,13 @@ public class ViewSelectMenu {
         comboOfMatrices.removeAllItems();
         comboOfMatrices.addItem("- Select and View a Matrix -");
         ArrayList<Matrix> listOf = matrices.getMatrices();
-        System.out.println("Size of matrix list to append: " + listOf.size());
+        // System.out.println("Size of matrix list to append: " + listOf.size()); //USED
+        // FOR DEBUGGING
         for (int i = 0; i < listOf.size(); i++) {
             String val = listOf.get(i).getMatrixName();
             comboOfMatrices.addItem(val);
         }
-        matrices.logView(); 
+        matrices.logView();
         comboOfMatrices.revalidate();
         comboOfMatrices.repaint();
     }

@@ -51,7 +51,8 @@ public class Matrix implements Writable {
     // LOGS THIS EVENT!!!
     public void computeRedRef() {
         this.redrefRows.computeRedRef(columnNum, redrefRows.size());
-        EventLog.getInstance().logEvent(new Event("The matrix: \"" + this.getMatrixName() + "\" has had its RREF computed."));
+        EventLog.getInstance()
+                .logEvent(new Event("The matrix: \"" + this.getMatrixName() + "\" has had its RREF computed."));
     }
 
     // MODIFIES: this

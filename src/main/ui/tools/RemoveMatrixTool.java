@@ -19,8 +19,7 @@ import ui.MatrixGui;
  * 
  */
 
-
- // Tool to remove current matrix from file 
+// Tool to remove current matrix from file 
 public class RemoveMatrixTool extends Tool {
     private static MatrixGui mainGui;
 
@@ -71,7 +70,7 @@ public class RemoveMatrixTool extends Tool {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("clicked the delete tool");
+            // System.out.println("clicked the delete tool"); //USED FOR DEBUGGING
             mainGui = Main.getMatrixGui();
             mainGui.removeActiveIndex();
             mainGui.refreshComboBox();

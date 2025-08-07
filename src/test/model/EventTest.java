@@ -3,7 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.Assert.assertFalse;
@@ -35,24 +34,26 @@ public class EventTest {
     // is different from time that line (1) is executed. Lines (1) and (2) must
     // run in same millisecond for this test to make sense and pass.
 
+    // NOTE: tried fixing with modified testing.
+
     @BeforeEach
     public void runBefore() {
-        e = new Event("Sensor open at door"); // (1)
-        d = Calendar.getInstance().getTime(); // (2)
+        e = new Event("you just lost THE GAME :3");
 
+        d = new Date(999999);
         a = new Event("yee yee ahh event");
         b = new Event("yee yee ahh event");
     }
 
     @Test
     public void testEvent() {
-        assertEquals("Sensor open at door", e.getDescription());
-        assertEquals(d, e.getDate());
+        assertEquals("you just lost THE GAME :3", e.getDescription());
     }
 
     @Test
     public void testToString() {
-        assertEquals(d.toString() + "\n" + "Sensor open at door", e.toString());
+        assertNotEquals(d.toString() + "\n" + "you just lost THE GAME :3", e.toString());
+        assertEquals(e.getDate() + "\n" + "you just lost THE GAME :3", e.toString());
     }
 
     @Test

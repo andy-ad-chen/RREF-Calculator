@@ -7,8 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.Event;
-import model.EventLog;
+
 import model.Matrix;
 
 import java.awt.BorderLayout;
@@ -227,19 +226,18 @@ public class AddMatrixTool extends Tool {
 
     // MODIFIES: this
     // EFFECTS: checks the matrix for valid values, returns true if OK.
-    // TODO: prevent same names from passing.
     private boolean valuesOk() {
         try {
             String input = widthField.getText();
             width = Integer.parseInt(input);
         } catch (Exception f) {
-            System.out.println("did not except non-number");
+            // System.out.println("did not except non-number"); //USED FOR DEBUGGING
         }
         try {
             String input = heightField.getText();
             height = Integer.parseInt(input);
         } catch (Exception f) {
-            System.out.println("did not except non-number");
+            // System.out.println("did not except non-number"); //USED FOR DEBUGGING
         }
 
         name = nameField.getText();

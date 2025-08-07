@@ -106,7 +106,7 @@ public class MatrixInserter {
             Row row = new Row();
             for (int k = 0; k < width; k++) {
                 Object input = table.getValueAt(i, k);
-                System.out.println(input.toString());
+                // System.out.println(input.toString()); //USED FOR DEBUGGING
                 Float f = Float.parseFloat(input.toString());
                 row.add(f);
             }
