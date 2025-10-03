@@ -29,7 +29,7 @@ Being a physics and maths student, this type of project interests me since it in
 - You can save the matrices list by clicking "Save and Write to File".
 - You can reload the matrices list by clicking "Load from File".
 
-# Phase 4: Task 2
+# Sample Event Logs
 
 Wed Aug 06 20:40:17 PDT 2025
 List of matrices to view has been updated
@@ -61,7 +61,7 @@ Removed matrix from working list: Joe's Matrix
 Wed Aug 06 20:40:38 PDT 2025
 List of matrices to view has been updated
 
-# Phase 4: Task 3
+# Reflection
 
 Given more time, I would like to implement many changes to my project.
 
